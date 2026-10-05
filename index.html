@@ -3,11 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tu negocio en internet, listo para vender — Lester Manzano</title>
+<title>New Age Professional Services — Páginas web para negocios</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:'Segoe UI', Arial, sans-serif; background:#0c0e13; color:#f2eee6; line-height:1.55; }
   .wrap { max-width:680px; margin:0 auto; }
+  nav.topnav { position:sticky; top:0; z-index:50; background:#0c0e13; border-bottom:1px solid #2c2f38;
+    display:flex; justify-content:center; gap:8px; padding:10px 12px; flex-wrap:wrap; }
+  nav.topnav a { color:#f2eee6; text-decoration:none; font-size:.85rem; font-weight:700;
+    padding:8px 16px; border-radius:20px; border:1px solid #2c2f38; }
+  nav.topnav a:hover { border-color:#e0bb60; color:#e2bd62; }
+  section { scroll-margin-top:60px; }
   header.hero { text-align:center; padding:38px 20px 30px;
     background:radial-gradient(circle at 50% 0%, rgba(208,165,75,.22), transparent 55%), linear-gradient(180deg,#10131a,#0c0e13); }
   .badge { display:inline-block; background:#e0bb60; color:#17130a; font-weight:800; font-size:.8rem;
@@ -65,6 +71,18 @@
   .contacto .name { font-size:1.3rem; font-weight:800; color:#e2bd62; }
   .contacto .phone { font-size:1.8rem; font-weight:800; letter-spacing:1px; margin:6px 0 14px; }
   .contacto .phone a { color:#fff; text-decoration:none; }
+  .demos-sec { margin-bottom:26px; }
+  .demos-sec h3 { text-align:center; color:#e2bd62; font-size:1.15rem; margin-bottom:12px; letter-spacing:.5px; }
+  .demo-card { display:block; background:#14171e; border:1px solid #2c2f38; border-left:4px solid #e0bb60;
+    border-radius:12px; padding:18px; text-decoration:none; color:#f2eee6; margin-bottom:12px; }
+  .demo-card:hover { border-color:#e0bb60; }
+  .demo-card .tag { font-size:.68rem; font-weight:800; letter-spacing:1px; color:#e2bd62; text-transform:uppercase; }
+  .demo-card h3 { font-size:1.02rem; margin:6px 0 4px; color:#f2eee6; text-align:left; }
+  .demo-card p { font-size:.82rem; color:#a9a49a; }
+  .demo-card .url { font-size:.72rem; color:#e2bd62; margin-top:8px; word-break:break-all; }
+  .demo-card .go { font-size:.82rem; color:#e2bd62; font-weight:700; margin-top:6px; display:block; }
+  .demos-empty { background:#14171e; border:1px dashed #2c2f38; border-radius:12px; padding:18px;
+    text-align:center; color:#6f6c66; font-size:.85rem; margin-bottom:12px; }
   footer { text-align:center; padding:22px 16px 30px; font-size:.78rem; color:#6f6c66; }
   footer a { color:#c9a227; text-decoration:none; }
 </style>
@@ -73,7 +91,7 @@
 <div class="wrap">
 
 <header class="hero">
-  <div class="badge">OFERTA LIMITADA · PRIMEROS 10 NEGOCIOS</div>
+  <div class="badge">NEW AGE PROFESSIONAL SERVICES</div>
   <h1>TU NEGOCIO EN INTERNET, <span class="gold">LISTO PARA VENDER</span></h1>
   <p class="sub">Página web + menú online + códigos QR + pedidos y delivery.<br>Nosotros lo hacemos todo por ti.</p>
   <div class="btns">
@@ -82,7 +100,14 @@
   </div>
 </header>
 
-<section>
+<nav class="topnav">
+  <a href="#servicios">Servicios</a>
+  <a href="#planes">Planes</a>
+  <a href="#demos">Demos</a>
+  <a href="#contacto">Contacto</a>
+</nav>
+
+<section id="servicios">
   <h2>🚀 CÓMO FUNCIONA</h2>
   <p class="lede">De la llamada a tu página en línea, en 3 pasos</p>
   <div class="servs" style="grid-template-columns:1fr;">
@@ -92,7 +117,7 @@
   </div>
 </section>
 
-<section>
+<section id="servicios-detalle">
   <h2>🛠️ TODO LO QUE HACEMOS POR TI</h2>
   <p class="lede">Un solo proveedor, cero dolores de cabeza</p>
   <div class="servs">
@@ -115,7 +140,7 @@
 
 <div class="anchor">Una agencia tradicional cobra <span>$3,000–$5,000</span> por un sitio web así. Aquí empiezas desde <span>$499</span>.</div>
 
-<section>
+<section id="planes">
   <h2>💰 PLANES</h2>
   <p class="lede">Compara y elige cómo empezar</p>
   <div class="plans">
@@ -200,24 +225,153 @@
 
 <div class="anchor">🏪 ¿Tienes <span>varias sucursales</span> o un catálogo grande? Te hacemos <span>cotización personalizada</span> a tu medida. <a href="https://wa.me/18132353313?text=Hola%20Lester%2C%20tengo%20varias%20sucursales%20y%20quiero%20una%20cotizaci%C3%B3n" style="color:#e2bd62;font-weight:800;">Escríbeme →</a></div>
 
-<section>
-  <h2>👀 MIRA EJEMPLOS REALES</h2>
-  <p class="lede">Páginas de muestra que ya preparamos para negocios de Tampa</p>
-  <div class="demos">
-    <a class="demo" href="https://lmanzano86-ui.github.io/demo-taqueria/"><h3>🌮 Taquería El Faro</h3><p>Restaurante mexicano</p><span class="go">Ver demo →</span></a>
-    <a class="demo" href="https://lmanzano86-ui.github.io/demo-hacienda/"><h3>🇨🇴 Restaurante La Hacienda</h3><p>Comida colombiana</p><span class="go">Ver demo →</span></a>
-    <a class="demo" href="https://lmanzano86-ui.github.io/demo-caribbeantwist/"><h3>🍗 Caribbean Twist</h3><p>Cocina cubana-dominicana</p><span class="go">Ver demo →</span></a>
-    <a class="demo" href="https://lmanzano86-ui.github.io/demo-borinquen/"><h3>🥩 El Famoso Borinquen</h3><p>Mercado latino</p><span class="go">Ver demo →</span></a>
-    <a class="demo" href="https://lmanzano86-ui.github.io/demo-bravo/"><h3>🛒 Bravo Supermarkets</h3><p>Supermercado</p><span class="go">Ver demo →</span></a>
-    <a class="demo" href="https://lmanzano86-ui.github.io/demo-inkbass/"><h3>✒️ Inkbass-Tattoo Studio</h3><p>Estudio de tatuajes</p><span class="go">Ver demo →</span></a>
+<section id="demos">
+  <h2>🎬 DEMOS</h2>
+  <p class="lede">Ejemplos reales de páginas que hemos creado para negocios</p>
+  <div class="demos-sec">
+    <h3>🇺🇸 Nuestros trabajos</h3>
+    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-taqueria/">
+    <div class="tag">Demo para cliente</div>
+    <h3>Demo — Taquería El Faro</h3>
+    <p>Ejemplo de página web para vender el paquete a restaurantes.</p>
+    <div class="url">lmanzano86-ui.github.io/demo-taqueria</div>
+    <span class="go">Ver demo →</span>
+    </a>
+    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-hacienda/">
+    <div class="tag">Demo para cliente</div>
+    <h3>Demo — Restaurante La Hacienda</h3>
+    <p>Ejemplo de página web con datos reales del restaurante colombiano.</p>
+    <div class="url">lmanzano86-ui.github.io/demo-hacienda</div>
+    <span class="go">Ver demo →</span>
+    </a>
+    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-caribbeantwist/">
+    <div class="tag">Demo web</div>
+    <h3>Demo Caribbean Twist</h3>
+    <p>Restaurante cubano-dominicano en Tampa: demo moderna con fotos reales, menú, catering y QR.</p>
+    <div class="url">lmanzano86-ui.github.io/demo-caribbeantwist</div>
+    <span class="go">Ver demo →</span>
+    </a>
+    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-borinquen/">
+    <div class="tag">Demo para cliente</div>
+    <h3>Demo El Famoso Borinquen</h3>
+    <p>Tienda latina en Tampa: comida caliente, carnicería y abarrotes.</p>
+    <div class="url">lmanzano86-ui.github.io/demo-borinquen</div>
+    <span class="go">Ver demo →</span>
+    </a>
+    <a class="demo-card" href="https://lmanzano86-ui.github.io/bravo-supermarkets/">
+    <div class="tag">Demo para cliente</div>
+    <h3>Bravo Supermarkets</h3>
+    <p>Supermercado latino en Tampa: especiales semanales y circular.</p>
+    <div class="url">lmanzano86-ui.github.io/bravo-supermarkets</div>
+    <span class="go">Ver demo →</span>
+    </a>
+    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-inkbass/">
+    <div class="tag">Demo para cliente</div>
+    <h3>Demo Inkbass Tattoo</h3>
+    <p>Estudio de tatuajes en Tampa: estilos, artista y reservas.</p>
+    <div class="url">lmanzano86-ui.github.io/demo-inkbass</div>
+    <span class="go">Ver demo →</span>
+    </a>
+    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-caribbeanclub/">
+    <div class="tag">DEMO</div>
+    <h3>Caribbean Club Market</h3>
+    <p>Demo bilingüe ES/EN con especiales y ofertas</p>
+    <div class="url">lmanzano86-ui.github.io/demo-caribbeanclub</div>
+    <span class="go">Ver demo →</span>
+    </a>
+    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-ultrajewelry/">
+    <div class="tag">DEMO</div>
+    <h3>Ultra Jewelry</h3>
+    <p>Demo elegante marfil y dorado, bilingüe ES/EN</p>
+    <div class="url">lmanzano86-ui.github.io/demo-ultrajewelry</div>
+    <span class="go">Ver demo →</span>
+    </a>
+    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-latinfresh/">
+    <div class="tag">Mercado</div>
+    <h3>Latin Fresh Market</h3>
+    <p>Mercado latino · Tampa y Riverview</p>
+    <div class="url">lmanzano86-ui.github.io/demo-latinfresh</div>
+    <span class="go">Ver demo →</span>
+    </a>
+    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-lalasthreading/">
+    <div class="tag">Salón de belleza</div>
+    <h3>Lala&#x27;s Threading &amp; Beauty Salon</h3>
+    <p>Demo elegante: threading, cejas, maquillaje y más — Tampa FL</p>
+    <div class="url">lmanzano86-ui.github.io/demo-lalasthreading</div>
+    <span class="go">Ver demo →</span>
+    </a>
+    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-willibarbershop/">
+    <div class="tag">Barbería</div>
+    <h3>Willi Barbershop</h3>
+    <p>Demo moderna: reserva en Booksy, precios reales — Tampa FL</p>
+    <div class="url">lmanzano86-ui.github.io/demo-willibarbershop</div>
+    <span class="go">Ver demo →</span>
+    </a>
+    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-maikelsbakery/">
+    <div class="tag">PANADERÍA</div>
+    <h3>Maikel&#x27;s Florida Bakery</h3>
+    <p>Demo moderna: pastelitos, sándwich cubano, cakes de encargo — Tampa FL</p>
+    <div class="url">lmanzano86-ui.github.io/demo-maikelsbakery</div>
+    <span class="go">Ver demo →</span>
+    </a>
+    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-kvconstruction/">
+    <div class="tag">CONTRATISTA</div>
+    <h3>KV Home Construction</h3>
+    <p>Demo moderna: construcción, remodelaciones y piscinas — Tampa FL</p>
+    <div class="url">lmanzano86-ui.github.io/demo-kvconstruction</div>
+    <span class="go">Ver demo →</span>
+    </a>
+    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-senortacos/">
+    <div class="tag">restaurante</div>
+    <h3>El Señor de los Tacos</h3>
+    <p>Demo moderna con pedidos por Square, fotos reales, menú y redes</p>
+    <div class="url">lmanzano86-ui.github.io/demo-senortacos</div>
+    <span class="go">Ver demo →</span>
+    </a>
+    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-mvbbarbershop/">
+    <div class="tag">barberia</div>
+    <h3>MVB Barbershop</h3>
+    <p>Demo deportiva con equipo de 3 barberos, reservas en Booksy y fotos reales</p>
+    <div class="url">lmanzano86-ui.github.io/demo-mvbbarbershop</div>
+    <span class="go">Ver demo →</span>
+    </a>
+    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-zuripetshop/">
+    <div class="tag">Tienda de mascotas</div>
+    <h3>Zuri Palomas Pet Shop</h3>
+    <p>Demo colorida para tienda de mascotas en Tampa</p>
+    <div class="url">lmanzano86-ui.github.io/demo-zuripetshop</div>
+    <span class="go">Ver demo →</span>
+    </a>
+  </div>
+  <div class="demos-sec">
+    <h3>🇪🇸 España</h3>
+    <div class="demos-empty">Próximamente — estamos preparando demos para esta región.</div>
+  </div>
+  <div class="demos-sec">
+    <h3>🇧🇷 Brasil</h3>
+    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-panedefacci/">
+    <div class="tag">Padaria</div>
+    <h3>Pane Defacci Padaria e Confeitaria</h3>
+    <p>Demo trilingüe (PT/ES/EN) para padaria em Foz do Iguaçu, Brasil.</p>
+    <div class="url">lmanzano86-ui.github.io/demo-panedefacci</div>
+    <span class="go">Ver demo →</span>
+    </a>
+    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-casadomel/">
+    <div class="tag">Produtos naturais</div>
+    <h3>Casa do Mel Foz do Iguaçu</h3>
+    <p>Demo trilingüe (PT/ES/EN) para loja de produtos naturais em Foz do Iguaçu, Brasil.</p>
+    <div class="url">lmanzano86-ui.github.io/demo-casadomel</div>
+    <span class="go">Ver demo →</span>
+    </a>
   </div>
 </section>
 
 <section>
-  <div class="garant">✅ Garantía de 30 días: si no te gusta, te devolvemos la instalación.</div>
+  <div class="garant">✅ Garantía de 30 días: si no te gusta el diseño propuesto, te devolvemos el 100% de la instalación — siempre que la página aún no se haya publicado.</div>
 </section>
 
-<section class="contacto">
+
+<section class="contacto" id="contacto">
   <h2>📲 HABLA CONMIGO DIRECTO</h2>
   <p class="lede">Sin formularios eternos, sin vendedores</p>
   <div class="name">LESTER MANZANO</div>
@@ -229,7 +383,7 @@
 </section>
 
 <footer>
-  <a href="tel:+18132353313">Lester Manzano · 813 235 3313</a><br>
+  <a href="tel:+18132353313">New Age Professional Services · Lester Manzano · 813 235 3313</a><br>
   El alta en Uber Eats y DoorDash está sujeta a aprobación y condiciones de cada plataforma.<br>
   Comisiones, tarifas y cargos de terceros no están incluidos.
 </footer>
