@@ -65,6 +65,22 @@
   .anchor { text-align:center; font-size:.95rem; color:#f2d98a; font-weight:700; border:1px solid #68552d;
     border-radius:12px; padding:12px 16px; background:rgba(224,187,96,.07); margin:0 20px; }
   .anchor span { color:#fff; }
+  .coupon-box { max-width:520px; margin:0 auto 22px; background:#14171e; border:1px dashed #c9a227;
+    border-radius:14px; padding:18px; text-align:center; }
+  .coupon-box h3 { color:#e2bd62; font-size:1rem; margin-bottom:4px; }
+  .coupon-box p { font-size:.82rem; color:#a9a49a; margin-bottom:12px; }
+  .coupon-row { display:flex; gap:8px; }
+  .coupon-row input { flex:1; padding:12px 14px; border-radius:30px; border:1px solid #2c2f38;
+    background:#0e1013; color:#fff; font-size:.95rem; text-transform:uppercase; text-align:center;
+    letter-spacing:1px; }
+  .coupon-row input:focus { outline:none; border-color:#c9a227; }
+  .coupon-row button { padding:12px 22px; border-radius:30px; border:none; background:#c9a227; color:#141210;
+    font-weight:800; font-size:.9rem; cursor:pointer; }
+  .coupon-msg { margin-top:10px; font-size:.85rem; font-weight:700; min-height:1.2em; }
+  .coupon-msg.ok { color:#7dd87d; }
+  .coupon-msg.err { color:#ff8a8a; }
+  .coupon-remove { display:none; margin-top:8px; background:none; border:none; color:#a9a49a;
+    font-size:.78rem; text-decoration:underline; cursor:pointer; }
   .demos { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
   .demo { background:#14171e; border:1px solid #2c2f38; border-radius:14px; padding:16px; text-decoration:none; color:#f2eee6; }
   .demo h3 { font-size:.95rem; color:#e2bd62; margin-bottom:4px; }
@@ -148,6 +164,18 @@
 <section id="planes">
   <h2>💰 PLANES</h2>
   <p class="lede">Compara y elige cómo empezar</p>
+
+  <div class="coupon-box">
+    <h3>🎟️ ¿Tienes un cupón de descuento?</h3>
+    <p>Escríbelo aquí y se aplicará a tu pago con tarjeta.</p>
+    <div class="coupon-row">
+      <input id="coupon-input" type="text" placeholder="TU CÓDIGO" maxlength="30" autocomplete="off">
+      <button id="coupon-apply" type="button">Aplicar</button>
+    </div>
+    <div id="coupon-msg" class="coupon-msg"></div>
+    <button id="coupon-remove" class="coupon-remove" type="button">Quitar cupón</button>
+  </div>
+
   <div class="plans">
 
     <div class="plan">
@@ -168,7 +196,7 @@
       </ul>
       <p class="note">A cambio de un testimonio y fotos de antes y después.</p>
       <a class="cta" href="https://wa.me/18132353313?text=Hola%20Lester%2C%20quiero%20el%20Plan%20Lanzamiento%20%28%24499%29">Quiero este plan</a>
-      <a class="pay" href="https://buy.stripe.com/6oU00k7M60vndQh6151gs00">💳 Pagar con tarjeta</a>
+      <a class="pay" data-plan="lanzamiento" href="https://buy.stripe.com/6oU00k7M60vndQh6151gs00">💳 Pagar con tarjeta</a>
     </div>
 
     <div class="plan featured">
@@ -187,7 +215,7 @@
       </ul>
       <p class="note">La opción completa para vender en internet desde el día uno.</p>
       <a class="cta" href="https://wa.me/18132353313?text=Hola%20Lester%2C%20quiero%20el%20Plan%20Profesional%20%28%24699%29">Quiero este plan</a>
-      <a class="pay" href="https://buy.stripe.com/4gMeVe0jE3Hz3bDgFJ1gs01">💳 Pagar con tarjeta</a>
+      <a class="pay" data-plan="profesional" href="https://buy.stripe.com/4gMeVe0jE3Hz3bDgFJ1gs01">💳 Pagar con tarjeta</a>
     </div>
 
     <div class="plan">
@@ -204,7 +232,7 @@
       </ul>
       <p class="note">Contrato de 12 meses.</p>
       <a class="cta" href="https://wa.me/18132353313?text=Hola%20Lester%2C%20quiero%20el%20Plan%20Sin%20Entrada%20%28%240%29">Quiero este plan</a>
-      <a class="pay" href="https://buy.stripe.com/aFa14o8Qa5PHdQh1KP1gs02">💳 Pagar con tarjeta</a>
+      <a class="pay" data-plan="sinentrada" href="https://buy.stripe.com/aFa14o8Qa5PHdQh1KP1gs02">💳 Pagar con tarjeta</a>
     </div>
 
   </div>
@@ -222,8 +250,8 @@
       <li><span class="ic">✓</span>Hosting dedicado a tu negocio, no compartido</li>
     </ul>
     <p class="note"><strong>Esencial — $25/mes:</strong> 5 correos, respaldos semanales.<br><strong>Plus — $45/mes:</strong> 15 correos, respaldos diarios, dominio renovado incluido.</p>
-    <a class="pay" href="https://buy.stripe.com/bJe5kE5DY1zrdQhfBF1gs03">💳 Hosting Esencial — $25/mes</a>
-    <a class="pay" href="https://buy.stripe.com/5kQ5kE4zU7XPh2t7591gs04" style="margin-top:10px;">💳 Hosting Plus — $45/mes</a>
+    <a class="pay" data-plan="hosting-esencial" href="https://buy.stripe.com/bJe5kE5DY1zrdQhfBF1gs03">💳 Hosting Esencial — $25/mes</a>
+    <a class="pay" data-plan="hosting-plus" href="https://buy.stripe.com/5kQ5kE4zU7XPh2t7591gs04" style="margin-top:10px;">💳 Hosting Plus — $45/mes</a>
     <a class="cta" href="https://wa.me/18132353313?text=Hola%20Lester%2C%20me%20interesa%20el%20hosting%20privado%20para%20mi%20negocio">Pedir cotización</a>
   </div>
 </section>
@@ -354,13 +382,6 @@
     <div class="url">lmanzano86-ui.github.io/demo-petes-place-north</div>
     <span class="go">Ver demo →</span>
     </a>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-qualitynetwork/">
-    <div class="tag">TECNOLOGÍA</div>
-    <h3>Quality Network Technologies</h3>
-    <p>Integrador de bajo voltaje en Tampa — demo tecnológica bilingüe ES/EN</p>
-    <div class="url">lmanzano86-ui.github.io/demo-qualitynetwork</div>
-    <span class="go">Ver demo →</span>
-    </a>
   </div>
   <div class="demos-sec">
     <h3>🇪🇸 España</h3>
@@ -432,5 +453,81 @@
 </footer>
 
 </div>
+<script>
+/* ============================================================
+   CUPONES DE DESCUENTO — configuración de Lester
+   Cómo agregar un cupón nuevo:
+   1. En tu Stripe crea el cupón y los enlaces de pago con el
+      descuento aplicado (uno por cada plan al que aplique).
+   2. Agrega aquí una entrada con el CÓDIGO (en mayúsculas),
+      la descripción que verá el cliente y los enlaces.
+   Los planes disponibles: lanzamiento, profesional, sinentrada,
+   hosting-esencial, hosting-plus
+   ============================================================ */
+const CUPONES = {
+  "BIENVENIDA10": {
+    descripcion: "10% de descuento en tu instalación",
+    enlaces: {
+      "lanzamiento": "https://buy.stripe.com/6oU00k7M60vndQh6151gs00",
+      "profesional": "https://buy.stripe.com/4gMeVe0jE3Hz3bDgFJ1gs01"
+    }
+  }
+};
+
+(function () {
+  const input = document.getElementById("coupon-input");
+  const applyBtn = document.getElementById("coupon-apply");
+  const msg = document.getElementById("coupon-msg");
+  const removeBtn = document.getElementById("coupon-remove");
+  if (!input) return;
+
+  // Guarda los enlaces originales para poder restaurar
+  const originales = {};
+  document.querySelectorAll("a.pay[data-plan]").forEach(a => {
+    originales[a.dataset.plan] = a.href;
+  });
+
+  function aplicar() {
+    const codigo = input.value.trim().toUpperCase();
+    const cupon = CUPONES[codigo];
+    if (!cupon) {
+      msg.textContent = "❌ Ese código no es válido. Revísalo e intenta de nuevo.";
+      msg.className = "coupon-msg err";
+      return;
+    }
+    let aplicados = 0;
+    document.querySelectorAll("a.pay[data-plan]").forEach(a => {
+      const link = cupon.enlaces[a.dataset.plan];
+      if (link) { a.href = link; aplicados++; }
+    });
+    if (!aplicados) {
+      msg.textContent = "❌ Ese cupón no aplica a estos planes.";
+      msg.className = "coupon-msg err";
+      return;
+    }
+    msg.textContent = "✅ ¡Cupón aplicado! " + cupon.descripcion + ".";
+    msg.className = "coupon-msg ok";
+    removeBtn.style.display = "inline-block";
+    applyBtn.disabled = true;
+    input.disabled = true;
+  }
+
+  function quitar() {
+    document.querySelectorAll("a.pay[data-plan]").forEach(a => {
+      a.href = originales[a.dataset.plan];
+    });
+    input.value = "";
+    input.disabled = false;
+    applyBtn.disabled = false;
+    msg.textContent = "";
+    msg.className = "coupon-msg";
+    removeBtn.style.display = "none";
+  }
+
+  applyBtn.addEventListener("click", aplicar);
+  removeBtn.addEventListener("click", quitar);
+  input.addEventListener("keydown", e => { if (e.key === "Enter") aplicar(); });
+})();
+</script>
 </body>
 </html>
