@@ -3,545 +3,234 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>New Age Professional Services — Páginas web para negocios</title>
+<title>Mis páginas — Lester Manzano</title>
+<link rel="apple-touch-icon" href="icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Mis páginas">
+<meta name="theme-color" content="#141414">
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Segoe UI', Arial, sans-serif; background:#0c0e13; color:#f2eee6; line-height:1.55; }
-  .wrap { max-width:680px; margin:0 auto; }
-  nav.topnav { position:sticky; top:0; z-index:50; background:#0c0e13; border-bottom:1px solid #2c2f38;
-    display:flex; justify-content:center; gap:8px; padding:10px 12px; flex-wrap:wrap; }
-  nav.topnav a { color:#f2eee6; text-decoration:none; font-size:.85rem; font-weight:700;
-    padding:8px 16px; border-radius:20px; border:1px solid #2c2f38; }
-  nav.topnav a:hover { border-color:#e0bb60; color:#e2bd62; }
-  nav.topnav a.agent-login { position:absolute; right:12px; top:50%; transform:translateY(-50%);
-    background:#e0bb60; color:#17130a; border-color:#e0bb60; }
-  nav.topnav a.agent-login:hover { background:#e2bd62; color:#17130a; }
-  @media (max-width:560px) { nav.topnav a.agent-login { position:static; transform:none; } }
-  section { scroll-margin-top:60px; }
-  header.hero { text-align:center; padding:38px 20px 30px;
-    background:radial-gradient(circle at 50% 0%, rgba(208,165,75,.22), transparent 55%), linear-gradient(180deg,#10131a,#0c0e13); }
-  .badge { display:inline-block; background:#e0bb60; color:#17130a; font-weight:800; font-size:.8rem;
-    border-radius:99px; padding:6px 16px; letter-spacing:.5px; margin-bottom:14px; }
-  header.hero h1 { font-size:2rem; line-height:1.15; letter-spacing:.5px; }
-  header.hero h1 .gold { color:#e2bd62; }
-  header.hero .sub { margin-top:10px; color:#cfc9bc; font-size:1.02rem; }
-  .btns { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:18px; }
-  .btn { display:inline-block; padding:13px 24px; border-radius:30px; text-decoration:none; font-weight:800; font-size:1rem; }
-  .btn.wa { background:#25d366; color:#0b3d1f; }
-  .btn.call { background:transparent; color:#f2d98a; border:2px solid #e0bb60; }
-  section { padding:28px 20px; }
-  section h2 { color:#e2bd62; font-size:1.5rem; margin-bottom:6px; text-align:center; letter-spacing:.5px; }
-  section .lede { text-align:center; color:#a9a49a; margin-bottom:18px; font-size:.95rem; }
-  .servs { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-  .srv { background:#14171e; border:1px solid #2c2f38; border-radius:14px; padding:14px; }
-  .srv .ic { font-size:1.6rem; }
-  .srv h3 { font-size:.92rem; margin:6px 0 4px; color:#f2eee6; }
-  .srv p { font-size:.8rem; color:#a9a49a; }
-  .plans { display:grid; gap:16px; }
-  .plan { background:#f8f2e3; color:#211d13; border-radius:16px; padding:22px 20px; position:relative;
-    border:1px solid #d9c48a; box-shadow:0 6px 18px rgba(0,0,0,.35); }
-  .plan.featured { border:2.5px solid #e0bb60; box-shadow:0 8px 26px rgba(224,187,96,.25); }
-  .plan .ribbon { position:absolute; top:-13px; left:50%; transform:translateX(-50%); background:#e0bb60;
-    color:#17130a; font-size:.75rem; font-weight:800; letter-spacing:.5px; border-radius:99px;
-    padding:5px 16px; white-space:nowrap; }
-  .plan h3 { text-align:center; color:#8a6d1f; font-size:1.15rem; letter-spacing:.5px; margin-top:6px; }
-  .plan .price { text-align:center; margin:8px 0 2px; }
-  .plan .price strong { font-size:2rem; color:#141210; }
-  .plan .price span { display:block; font-size:.82rem; color:#6b6250; }
-  .plan .per { text-align:center; font-size:1.05rem; font-weight:800; color:#8a6d1f; margin-bottom:10px; }
-  .plan .per small { font-size:.8rem; font-weight:400; color:#6b6250; }
-  .plan ul { list-style:none; margin:0; padding:0; }
-  .plan li { position:relative; padding-left:28px; font-size:.9rem; color:#2b2718; margin-bottom:9px; line-height:1.35; }
-  .plan li .ic { position:absolute; left:0; top:1px; width:20px; height:20px; border-radius:50%;
-    background:#c9a227; color:#fff; font-size:11px; text-align:center; line-height:20px; font-weight:700; }
-  .plan li.star { font-weight:700; color:#141210; }
-  .plan li.star .ic { background:#8a6d1f; }
-  .plan .note { margin-top:12px; border-top:1px solid #ddd0ac; padding-top:10px; text-align:center;
-    font-size:.82rem; color:#6b6250; font-style:italic; }
-  .plan .cta { display:block; text-align:center; margin-top:14px; background:#141210; color:#f2d98a;
-    text-decoration:none; font-weight:800; border-radius:30px; padding:12px; }
-  .plan .pay { display:block; text-align:center; margin-top:10px; background:#635bff; color:#fff;
-    text-decoration:none; font-weight:800; border-radius:30px; padding:12px; }
-  .anchor { text-align:center; font-size:.95rem; color:#f2d98a; font-weight:700; border:1px solid #68552d;
-    border-radius:12px; padding:12px 16px; background:rgba(224,187,96,.07); margin:0 20px; }
-  .anchor span { color:#fff; }
-  .coupon-box { max-width:520px; margin:0 auto 22px; background:#14171e; border:1px dashed #c9a227;
-    border-radius:14px; padding:18px; text-align:center; }
-  .coupon-box h3 { color:#e2bd62; font-size:1rem; margin-bottom:4px; }
-  .coupon-box p { font-size:.82rem; color:#a9a49a; margin-bottom:12px; }
-  .coupon-row { display:flex; gap:8px; }
-  .coupon-row input { flex:1; padding:12px 14px; border-radius:30px; border:1px solid #2c2f38;
-    background:#0e1013; color:#fff; font-size:.95rem; text-transform:uppercase; text-align:center;
-    letter-spacing:1px; }
-  .coupon-row input:focus { outline:none; border-color:#c9a227; }
-  .coupon-row button { padding:12px 22px; border-radius:30px; border:none; background:#c9a227; color:#141210;
-    font-weight:800; font-size:.9rem; cursor:pointer; }
-  .coupon-msg { margin-top:10px; font-size:.85rem; font-weight:700; min-height:1.2em; }
-  .coupon-msg.ok { color:#7dd87d; }
-  .coupon-msg.err { color:#ff8a8a; }
-  .coupon-remove { display:none; margin-top:8px; background:none; border:none; color:#a9a49a;
-    font-size:.78rem; text-decoration:underline; cursor:pointer; }
-  .demos { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-  .demo { background:#14171e; border:1px solid #2c2f38; border-radius:14px; padding:16px; text-decoration:none; color:#f2eee6; }
-  .demo h3 { font-size:.95rem; color:#e2bd62; margin-bottom:4px; }
-  .demo p { font-size:.8rem; color:#a9a49a; }
-  .demo .go { font-size:.8rem; color:#e2bd62; font-weight:700; margin-top:6px; display:block; }
-  .garant { background:#14171e; border-left:4px solid #e2bd62; border-radius:0 14px 14px 0; padding:18px; font-size:1.05rem; font-weight:700; }
-  .contacto { text-align:center; }
-  .contacto .name { font-size:1.3rem; font-weight:800; color:#e2bd62; }
-  .contacto .phone { font-size:1.8rem; font-weight:800; letter-spacing:1px; margin:6px 0 14px; }
-  .contacto .phone a { color:#fff; text-decoration:none; }
-  .demos-sec { margin-bottom:26px; }
-  .demos-sec h3 { text-align:center; color:#e2bd62; font-size:1.15rem; margin-bottom:12px; letter-spacing:.5px; }
-  .demo-card { display:block; background:#14171e; border:1px solid #2c2f38; border-left:4px solid #e0bb60;
-    border-radius:12px; padding:18px; text-decoration:none; color:#f2eee6; margin-bottom:12px; }
-  .demo-card:hover { border-color:#e0bb60; }
-  .demo-card .tag { font-size:.68rem; font-weight:800; letter-spacing:1px; color:#e2bd62; text-transform:uppercase; }
-  .demo-card h3 { font-size:1.02rem; margin:6px 0 4px; color:#f2eee6; text-align:left; }
-  .demo-card p { font-size:.82rem; color:#a9a49a; }
-  .demo-card .url { font-size:.72rem; color:#e2bd62; margin-top:8px; word-break:break-all; }
-  .demo-card .go { font-size:.82rem; color:#e2bd62; font-weight:700; margin-top:6px; display:block; }
-  .demos-empty { background:#14171e; border:1px dashed #2c2f38; border-radius:12px; padding:18px;
-    text-align:center; color:#6f6c66; font-size:.85rem; margin-bottom:12px; }
-  footer { text-align:center; padding:22px 16px 30px; font-size:.78rem; color:#6f6c66; }
-  footer a { color:#c9a227; text-decoration:none; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#141414;color:#f5f5f5;line-height:1.55;min-height:100vh}
+.demo-bar{background:#000;color:#f5c542;text-align:center;font-size:12px;padding:8px 12px;letter-spacing:1px;font-weight:bold}
+header{text-align:center;padding:40px 20px 10px}
+header h1{font-size:30px;letter-spacing:1px}
+header h1 span{color:#f5c542}
+header p{color:#b9a86a;margin-top:8px;font-size:15px}
+.topnav{position:sticky;top:0;z-index:50;background:#0d0d0d;border-bottom:1px solid #3a3a3a;display:flex;justify-content:center;gap:8px;padding:10px 12px;flex-wrap:wrap}
+.topnav a{color:#f5f5f5;text-decoration:none;font-size:14px;font-weight:bold;padding:8px 16px;border-radius:20px;border:1px solid #3a3a3a}
+.topnav a:hover{border-color:#f5c542}
+.seccion{scroll-margin-top:70px}
+html{scroll-behavior:smooth}
+main{max-width:640px;margin:0 auto;padding:24px 20px 40px}
+.seccion{margin-bottom:36px}
+.sec-head{text-align:center;margin-bottom:16px}
+.sec-head h2{font-size:22px;letter-spacing:.5px}
+.sec-head p{color:#8a7a4a;font-size:13px;margin-top:2px}
+.seccion .card, .seccion .empty{margin-bottom:14px}
+.empty{background:#1a1a1a;border:1px dashed #4a4a4a;border-radius:12px;padding:18px;text-align:center;color:#8a8a8a;font-size:14px}
+.card{background:#1f1f1f;border:1px solid #3a3a3a;border-left:4px solid #f5c542;border-radius:12px;padding:20px;text-decoration:none;color:inherit;display:block}
+.card:hover{border-color:#f5c542}
+.card .tag{font-size:11px;font-weight:bold;letter-spacing:1px;color:#f5c542;text-transform:uppercase}
+.card h2{font-size:19px;margin:6px 0 4px}
+.card p{font-size:14px;color:#c9c9c9}
+.card .url{font-size:12px;color:#f5c542;margin-top:10px;word-break:break-all}
+footer{text-align:center;padding:24px;font-size:13px;color:#8a7a4a}
+footer b{color:#f5c542}
 </style>
 </head>
 <body>
-<div class="wrap">
-
-<header class="hero">
-  <div class="badge">NEW AGE PROFESSIONAL SERVICES</div>
-  <h1>TU NEGOCIO EN INTERNET, <span class="gold">LISTO PARA VENDER</span></h1>
-  <p class="sub">Página web + menú online + códigos QR + pedidos y delivery.<br>Nosotros lo hacemos todo por ti.</p>
-  <div class="btns">
-    <a class="btn wa" href="https://wa.me/18132353313?text=Hola%20Lester%2C%20me%20interesa%20la%20p%C3%A1gina%20web%20para%20mi%20negocio">💬 Escríbeme por WhatsApp</a>
-    <a class="btn call" href="tel:+18132353313">📞 813 235 3313</a>
-  </div>
+<div class="demo-bar">&#9733; PANEL PRIVADO &mdash; SOLO PARA TI &#9733;</div>
+<header>
+<h1>MIS <span>P&Aacute;GINAS</span></h1>
+<p>Todos tus sitios publicados en un solo lugar</p>
 </header>
-
 <nav class="topnav">
-  <a href="#servicios">Servicios</a>
-  <a href="#planes">Planes</a>
-  <a href="#demos">Demos</a>
-  <a href="#contacto">Contacto</a>
-  <a class="agent-login" href="https://lmanzano86-ui.github.io/portal-agentes/">🔑 Agent Login</a>
+<a href="#sec-lester">🇺🇸 Mis páginas</a><a href="#sec-espana">🇪🇸 España</a><a href="#sec-brasil">🇧🇷 Brasil</a><a href="#sec-paises_bajos">🇳🇱 Países Bajos</a>
 </nav>
+<main>
+<div class="seccion" id="sec-lester">
 
-<section id="servicios">
-  <h2>🚀 CÓMO FUNCIONA</h2>
-  <p class="lede">De la llamada a tu página en línea, en 3 pasos</p>
-  <div class="servs" style="grid-template-columns:1fr;">
-    <div class="srv"><div class="ic">1️⃣</div><h3>Me escribes por WhatsApp</h3><p>Me cuentas de tu negocio y elegimos el plan ideal para ti.</p></div>
-    <div class="srv"><div class="ic">2️⃣</div><h3>La construimos juntos</h3><p>Fotos, menú, textos y diseño con el estilo de tu negocio.</p></div>
-    <div class="srv"><div class="ic">3️⃣</div><h3>La publicamos</h3><p>Tu página en línea, tus QR listos y a recibir clientes.</p></div>
-  </div>
-</section>
-
-<section id="servicios-detalle">
-  <h2>🛠️ TODO LO QUE HACEMOS POR TI</h2>
-  <p class="lede">Un solo proveedor, cero dolores de cabeza</p>
-  <div class="servs">
-    <div class="srv"><div class="ic">📱</div><h3>Página web profesional</h3><p>Optimizada para teléfono, con el estilo de tu negocio.</p></div>
-    <div class="srv"><div class="ic">🍽️</div><h3>Menú online</h3><p>Tu menú o lista de servicios, actualizable cuando quieras.</p></div>
-    <div class="srv"><div class="ic">📞</div><h3>Llamada y WhatsApp</h3><p>Botones directos para que te contacten en un toque.</p></div>
-    <div class="srv"><div class="ic">📍</div><h3>Mapa y horario</h3><p>Dirección, horario y cómo llegar, siempre visibles.</p></div>
-    <div class="srv"><div class="ic">⭐</div><h3>Reseñas de Google</h3><p>Sección de reseñas + código QR para recibir más.</p></div>
-    <div class="srv"><div class="ic">🔍</div><h3>Google Business Profile</h3><p>Damos de alta y optimizamos tu perfil de Google.</p></div>
-    <div class="srv"><div class="ic">🛵</div><h3>Uber Eats y DoorDash</h3><p>Alta y configuración de tu negocio en delivery.</p></div>
-    <div class="srv"><div class="ic">🛒</div><h3>Pedidos en línea</h3><p>Sistema de pedidos o reservas directo en tu página.</p></div>
-    <div class="srv"><div class="ic">📸</div><h3>Fotos profesionales</h3><p>Sesión de fotos de tu negocio, tu equipo y tus platos.</p></div>
-    <div class="srv"><div class="ic">📣</div><h3>Especiales en redes</h3><p>Publicamos tus ofertas en tus redes sociales.</p></div>
-    <div class="srv"><div class="ic">💬</div><h3>Gestión de reseñas</h3><p>Respondemos tus reseñas de Google por ti.</p></div>
-    <div class="srv"><div class="ic">📈</div><h3>Reporte mensual</h3><p>Cuántas visitas recibe tu página, cada mes.</p></div>
-    <div class="srv"><div class="ic">🎧</div><h3>Soporte prioritario</h3><p>Atención directa por WhatsApp cuando lo necesites.</p></div>
-    <div class="srv"><div class="ic">🔧</div><h3>Hosting y mantenimiento</h3><p>Tu página siempre en línea y actualizada, sin que te preocupes.</p></div>
-  </div>
-</section>
-
-<div class="anchor">Una agencia tradicional cobra <span>$3,000–$5,000</span> por un sitio web así. Aquí empiezas desde <span>$499</span>.</div>
-
-<section id="planes">
-  <h2>💰 PLANES</h2>
-  <p class="lede">Compara y elige cómo empezar</p>
-
-  <div class="coupon-box">
-    <h3>🎟️ ¿Tienes un cupón de descuento?</h3>
-    <p>Escríbelo aquí y se aplicará a tu pago con tarjeta.</p>
-    <div class="coupon-row">
-      <input id="coupon-input" type="text" placeholder="TU CÓDIGO" maxlength="30" autocomplete="off">
-      <button id="coupon-apply" type="button">Aplicar</button>
-    </div>
-    <div id="coupon-msg" class="coupon-msg"></div>
-    <button id="coupon-remove" class="coupon-remove" type="button">Quitar cupón</button>
-  </div>
-
-  <div class="plans">
-
-    <div class="plan">
-      <div class="ribbon">OFERTA LIMITADA · PRIMEROS 10 NEGOCIOS</div>
-      <h3>PLAN LANZAMIENTO</h3>
-      <div class="price"><strong>$499</strong><span>pago único de instalación</span></div>
-      <div class="per">$69 <small>AL MES</small></div>
-      <ul>
-        <li><span class="ic">✓</span>Página web profesional optimizada para teléfono</li>
-        <li><span class="ic">✓</span>Botón de llamada y WhatsApp, mapa, horario y dirección</li>
-        <li><span class="ic">✓</span>Menú online o lista de servicios actualizable</li>
-        <li><span class="ic">✓</span>Códigos QR: página, menú y reseñas de Google</li>
-        <li><span class="ic">✓</span>Sección de reseñas de Google dentro de la página</li>
-        <li><span class="ic">✓</span>Alta en Google Business Profile optimizada</li>
-        <li><span class="ic">✓</span>Dominio .com, hosting y certificado SSL incluidos</li>
-        <li><span class="ic">✓</span>Correo corporativo (info@tunegocio.com)</li>
-        <li><span class="ic">✓</span>Mantenimiento y actualizaciones incluidos</li>
-      </ul>
-      <p class="note">A cambio de un testimonio y fotos de antes y después.</p>
-      <a class="cta" href="https://wa.me/18132353313?text=Hola%20Lester%2C%20quiero%20el%20Plan%20Lanzamiento%20%28%24499%29">Quiero este plan</a>
-      <a class="pay" data-plan="lanzamiento" href="https://buy.stripe.com/6oU00k7M60vndQh6151gs00">💳 Pagar con tarjeta</a>
-    </div>
-
-    <div class="plan featured">
-      <div class="ribbon">EL MÁS ELEGIDO</div>
-      <h3>PLAN PROFESIONAL</h3>
-      <div class="price"><strong>$699</strong><span>pago único de instalación</span></div>
-      <div class="per">$69 <small>AL MES</small></div>
-      <ul>
-        <li class="star"><span class="ic">★</span>Todo lo del Plan Lanzamiento, más:</li>
-        <li><span class="ic">✓</span>Pedidos en línea o sistema de reservas</li>
-        <li><span class="ic">✓</span>Alta y configuración en Uber Eats y DoorDash</li>
-        <li><span class="ic">✓</span>Sesión de fotos profesionales de tu negocio</li>
-        <li><span class="ic">✓</span>Publicamos tus especiales en tus redes sociales</li>
-        <li><span class="ic">✓</span>Respondemos tus reseñas de Google por ti</li>
-        <li><span class="ic">✓</span>Reporte mensual de visitas y soporte prioritario por WhatsApp</li>
-      </ul>
-      <p class="note">La opción completa para vender en internet desde el día uno.</p>
-      <a class="cta" href="https://wa.me/18132353313?text=Hola%20Lester%2C%20quiero%20el%20Plan%20Profesional%20%28%24699%29">Quiero este plan</a>
-      <a class="pay" data-plan="profesional" href="https://buy.stripe.com/4gMeVe0jE3Hz3bDgFJ1gs01">💳 Pagar con tarjeta</a>
-    </div>
-
-    <div class="plan">
-      <div class="ribbon">EMPIEZA HOY SIN PAGAR NADA</div>
-      <h3>PLAN SIN ENTRADA</h3>
-      <div class="price"><strong>$0</strong><span>de instalación</span></div>
-      <div class="per">$149 <small>AL MES</small></div>
-      <ul>
-        <li class="star"><span class="ic">★</span>Todo lo del Plan Profesional</li>
-        <li><span class="ic">✓</span>$0 de pago inicial — empieza hoy mismo</li>
-        <li><span class="ic">✓</span>Una sola mensualidad, todo incluido</li>
-        <li><span class="ic">✓</span>Ideal si prefieres no descapitalizarte</li>
-        <li><span class="ic">✓</span>Hosting, mantenimiento y actualizaciones incluidos</li>
-      </ul>
-      <p class="note">Contrato de 12 meses.</p>
-      <a class="cta" href="https://wa.me/18132353313?text=Hola%20Lester%2C%20quiero%20el%20Plan%20Sin%20Entrada%20%28%240%29">Quiero este plan</a>
-      <a class="pay" data-plan="sinentrada" href="https://buy.stripe.com/aFa14o8Qa5PHdQh1KP1gs02">💳 Pagar con tarjeta</a>
-    </div>
-
-  </div>
-</section>
-
-<section>
-  <h2>🖥️ HOSTING PRIVADO</h2>
-  <p class="lede">Para negocios que quieren su propio espacio en internet</p>
-  <div class="plan">
-    <ul>
-      <li><span class="ic">✓</span>Dominio propio (.com) a nombre de tu negocio</li>
-      <li><span class="ic">✓</span>Correos corporativos: info@, ventas@tunegocio.com</li>
-      <li><span class="ic">✓</span>Certificado de seguridad SSL</li>
-      <li><span class="ic">✓</span>Respaldos automáticos de tu página</li>
-      <li><span class="ic">✓</span>Hosting dedicado a tu negocio, no compartido</li>
-    </ul>
-    <p class="note"><strong>Esencial — $25/mes:</strong> 5 correos, respaldos semanales.<br><strong>Plus — $45/mes:</strong> 15 correos, respaldos diarios, dominio renovado incluido.</p>
-    <a class="pay" data-plan="hosting-esencial" href="https://buy.stripe.com/bJe5kE5DY1zrdQhfBF1gs03">💳 Hosting Esencial — $25/mes</a>
-    <a class="pay" data-plan="hosting-plus" href="https://buy.stripe.com/5kQ5kE4zU7XPh2t7591gs04" style="margin-top:10px;">💳 Hosting Plus — $45/mes</a>
-    <a class="cta" href="https://wa.me/18132353313?text=Hola%20Lester%2C%20me%20interesa%20el%20hosting%20privado%20para%20mi%20negocio">Pedir cotización</a>
-  </div>
-</section>
-
-<div class="anchor">🏪 ¿Tienes <span>varias sucursales</span> o un catálogo grande? Te hacemos <span>cotización personalizada</span> a tu medida. <a href="https://wa.me/18132353313?text=Hola%20Lester%2C%20tengo%20varias%20sucursales%20y%20quiero%20una%20cotizaci%C3%B3n" style="color:#e2bd62;font-weight:800;">Escríbeme →</a></div>
-
-<section id="demos">
-  <h2>🎬 DEMOS</h2>
-  <p class="lede">Ejemplos reales de páginas que hemos creado para negocios</p>
-  <div class="demos-sec">
-    <h3>🇺🇸 Nuestros trabajos</h3>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-taqueria/">
-    <div class="tag">Demo para cliente</div>
-    <h3>Demo — Taquería El Faro</h3>
-    <p>Ejemplo de página web para vender el paquete a restaurantes.</p>
-    <div class="url">lmanzano86-ui.github.io/demo-taqueria</div>
-    <span class="go">Ver demo →</span>
-    </a>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-hacienda/">
-    <div class="tag">Demo para cliente</div>
-    <h3>Demo — Restaurante La Hacienda</h3>
-    <p>Ejemplo de página web con datos reales del restaurante colombiano.</p>
-    <div class="url">lmanzano86-ui.github.io/demo-hacienda</div>
-    <span class="go">Ver demo →</span>
-    </a>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-caribbeantwist/">
-    <div class="tag">Demo web</div>
-    <h3>Demo Caribbean Twist</h3>
-    <p>Restaurante cubano-dominicano en Tampa: demo moderna con fotos reales, menú, catering y QR.</p>
-    <div class="url">lmanzano86-ui.github.io/demo-caribbeantwist</div>
-    <span class="go">Ver demo →</span>
-    </a>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-borinquen/">
-    <div class="tag">Demo para cliente</div>
-    <h3>Demo El Famoso Borinquen</h3>
-    <p>Tienda latina en Tampa: comida caliente, carnicería y abarrotes.</p>
-    <div class="url">lmanzano86-ui.github.io/demo-borinquen</div>
-    <span class="go">Ver demo →</span>
-    </a>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/bravo-supermarkets/">
-    <div class="tag">Demo para cliente</div>
-    <h3>Bravo Supermarkets</h3>
-    <p>Supermercado latino en Tampa: especiales semanales y circular.</p>
-    <div class="url">lmanzano86-ui.github.io/bravo-supermarkets</div>
-    <span class="go">Ver demo →</span>
-    </a>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-inkbass/">
-    <div class="tag">Demo para cliente</div>
-    <h3>Demo Inkbass Tattoo</h3>
-    <p>Estudio de tatuajes en Tampa: estilos, artista y reservas.</p>
-    <div class="url">lmanzano86-ui.github.io/demo-inkbass</div>
-    <span class="go">Ver demo →</span>
-    </a>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-caribbeanclub/">
-    <div class="tag">DEMO</div>
-    <h3>Caribbean Club Market</h3>
-    <p>Demo bilingüe ES/EN con especiales y ofertas</p>
-    <div class="url">lmanzano86-ui.github.io/demo-caribbeanclub</div>
-    <span class="go">Ver demo →</span>
-    </a>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-ultrajewelry/">
-    <div class="tag">DEMO</div>
-    <h3>Ultra Jewelry</h3>
-    <p>Demo elegante marfil y dorado, bilingüe ES/EN</p>
-    <div class="url">lmanzano86-ui.github.io/demo-ultrajewelry</div>
-    <span class="go">Ver demo →</span>
-    </a>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-latinfresh/">
-    <div class="tag">Mercado</div>
-    <h3>Latin Fresh Market</h3>
-    <p>Mercado latino · Tampa y Riverview</p>
-    <div class="url">lmanzano86-ui.github.io/demo-latinfresh</div>
-    <span class="go">Ver demo →</span>
-    </a>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-lalasthreading/">
-    <div class="tag">Salón de belleza</div>
-    <h3>Lala&#x27;s Threading &amp; Beauty Salon</h3>
-    <p>Demo elegante: threading, cejas, maquillaje y más — Tampa FL</p>
-    <div class="url">lmanzano86-ui.github.io/demo-lalasthreading</div>
-    <span class="go">Ver demo →</span>
-    </a>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-willibarbershop/">
-    <div class="tag">Barbería</div>
-    <h3>Willi Barbershop</h3>
-    <p>Demo moderna: reserva en Booksy, precios reales — Tampa FL</p>
-    <div class="url">lmanzano86-ui.github.io/demo-willibarbershop</div>
-    <span class="go">Ver demo →</span>
-    </a>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-maikelsbakery/">
-    <div class="tag">PANADERÍA</div>
-    <h3>Maikel&#x27;s Florida Bakery</h3>
-    <p>Demo moderna: pastelitos, sándwich cubano, cakes de encargo — Tampa FL</p>
-    <div class="url">lmanzano86-ui.github.io/demo-maikelsbakery</div>
-    <span class="go">Ver demo →</span>
-    </a>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-kvconstruction/">
-    <div class="tag">CONTRATISTA</div>
-    <h3>KV Home Construction</h3>
-    <p>Demo moderna: construcción, remodelaciones y piscinas — Tampa FL</p>
-    <div class="url">lmanzano86-ui.github.io/demo-kvconstruction</div>
-    <span class="go">Ver demo →</span>
-    </a>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-senortacos/">
-    <div class="tag">restaurante</div>
-    <h3>El Señor de los Tacos</h3>
-    <p>Demo moderna con pedidos por Square, fotos reales, menú y redes</p>
-    <div class="url">lmanzano86-ui.github.io/demo-senortacos</div>
-    <span class="go">Ver demo →</span>
-    </a>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-mvbbarbershop/">
-    <div class="tag">barberia</div>
-    <h3>MVB Barbershop</h3>
-    <p>Demo deportiva con equipo de 3 barberos, reservas en Booksy y fotos reales</p>
-    <div class="url">lmanzano86-ui.github.io/demo-mvbbarbershop</div>
-    <span class="go">Ver demo →</span>
-    </a>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-zuripetshop/">
-    <div class="tag">Tienda de mascotas</div>
-    <h3>Zuri Palomas Pet Shop</h3>
-    <p>Demo colorida para tienda de mascotas en Tampa</p>
-    <div class="url">lmanzano86-ui.github.io/demo-zuripetshop</div>
-    <span class="go">Ver demo →</span>
-    </a>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-petes-place-north/">
-    <div class="tag">eeuu</div>
-    <h3>Pete&#x27;s Place North &amp; Liquor Store</h3>
-    <p>Bar y licorera en Tampa — demo bilingüe ES/EN</p>
-    <div class="url">lmanzano86-ui.github.io/demo-petes-place-north</div>
-    <span class="go">Ver demo →</span>
-    </a>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-fenix-tattoo/">
-    <div class="tag">eeuu</div>
-    <h3>Fenix Tattoo Gallery</h3>
-    <p>Estudio de tatuajes en Tampa — propuesta de rediseño bilingüe ES/EN</p>
-    <div class="url">lmanzano86-ui.github.io/demo-fenix-tattoo</div>
-    <span class="go">Ver demo →</span>
-    </a>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-lemarques/">
-    <div class="tag">eeuu</div>
-    <h3>Le Marqués Hair &amp; Beauty</h3>
-    <p>Salón de belleza premium en Tampa — demo de lujo bilingüe ES/EN con sistema de reservas</p>
-    <div class="url">lmanzano86-ui.github.io/demo-lemarques</div>
-    <span class="go">Ver demo →</span>
-    </a>
-  </div>
-  <div class="demos-sec">
-    <h3>🇪🇸 España</h3>
-    <div class="demos-empty">Próximamente — estamos preparando demos para esta región.</div>
-  </div>
-  <div class="demos-sec">
-    <h3>🇧🇷 Brasil</h3>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-panedefacci/">
-    <div class="tag">Padaria</div>
-    <h3>Pane Defacci Padaria e Confeitaria</h3>
-    <p>Demo trilingüe (PT/ES/EN) para padaria em Foz do Iguaçu, Brasil.</p>
-    <div class="url">lmanzano86-ui.github.io/demo-panedefacci</div>
-    <span class="go">Ver demo →</span>
-    </a>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-casadomel/">
-    <div class="tag">Produtos naturais</div>
-    <h3>Casa do Mel Foz do Iguaçu</h3>
-    <p>Demo trilingüe (PT/ES/EN) para loja de produtos naturais em Foz do Iguaçu, Brasil.</p>
-    <div class="url">lmanzano86-ui.github.io/demo-casadomel</div>
-    <span class="go">Ver demo →</span>
-    </a>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-academia-plena-forma/">
-    <div class="tag">brasil</div>
-    <h3>Academia Plena Forma</h3>
-    <p>Gimnasio en Foz do Iguaçu — demo trilingüe PT/ES/EN</p>
-    <div class="url">lmanzano86-ui.github.io/demo-academia-plena-forma</div>
-    <span class="go">Ver demo →</span>
-    </a>
-  </div>
-  <div class="demos-sec">
-    <h3>🇳🇱 Países Bajos</h3>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-van-der-linde/">
-    <div class="tag">Demo Países Bajos</div>
-    <h3>Demo — Banketbakkerij Van der Linde</h3>
-    <p>Pastelería/heladería icónica de Ámsterdam (desde 1937). Demo en neerlandés.</p>
-    <div class="url">lmanzano86-ui.github.io/demo-van-der-linde</div>
-    <span class="go">Ver demo →</span>
-    </a>
-    <a class="demo-card" href="https://lmanzano86-ui.github.io/demo-phone-more/">
-    <div class="tag">Países Bajos</div>
-    <h3>Phone &amp; more</h3>
-    <p>Demo trilingüe (NL/ES/EN) — tienda de móviles, Damrak/Dam, Ámsterdam</p>
-    <div class="url">lmanzano86-ui.github.io/demo-phone-more</div>
-    <span class="go">Ver demo →</span>
-    </a>
-  </div>
-</section>
-
-<section>
-  <div class="garant">✅ Garantía de 30 días: si no te gusta el diseño propuesto, te devolvemos el 100% de la instalación — siempre que la página aún no se haya publicado.</div>
-</section>
-
-
-<section class="contacto" id="contacto">
-  <h2>📲 HABLA CONMIGO DIRECTO</h2>
-  <p class="lede">Sin formularios eternos, sin vendedores</p>
-  <div class="name">LESTER MANZANO</div>
-  <div class="phone"><a href="tel:+18132353313">813 235 3313</a></div>
-  <div class="btns">
-    <a class="btn wa" href="https://wa.me/18132353313?text=Hola%20Lester%2C%20me%20interesa%20la%20p%C3%A1gina%20web%20para%20mi%20negocio">💬 WhatsApp</a>
-    <a class="btn call" href="tel:+18132353313">📞 Llamar</a>
-  </div>
-</section>
-
-<footer>
-  <a href="tel:+18132353313">New Age Professional Services · Lester Manzano · 813 235 3313</a><br>
-  El alta en Uber Eats y DoorDash está sujeta a aprobación y condiciones de cada plataforma.<br>
-  Comisiones, tarifas y cargos de terceros no están incluidos.
-</footer>
-
+<a class="card" href="https://lmanzano86-ui.github.io/formulario-rhp/formulario-registro-rhp.html">
+<div class="tag">Herramienta de ventas</div>
+<h2>Formulario de registro RHP</h2>
+<p>Registro de prospectos en mercados y eventos, con rifa y exportación a CSV.</p>
+<div class="url">lmanzano86-ui.github.io/formulario-rhp/formulario-registro-rhp.html</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/carriers-equipo/">
+<div class="tag">Herramienta de equipo</div>
+<h2>Carriers del equipo</h2>
+<p>Directorio de carriers y enlaces de contratación para tu equipo de agentes.</p>
+<div class="url">lmanzano86-ui.github.io/carriers-equipo/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-taqueria/">
+<div class="tag">Demo para cliente</div>
+<h2>Demo — Taquería El Faro</h2>
+<p>Ejemplo de página web para vender el paquete a restaurantes.</p>
+<div class="url">lmanzano86-ui.github.io/demo-taqueria/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-hacienda/">
+<div class="tag">Demo para cliente</div>
+<h2>Demo — Restaurante La Hacienda</h2>
+<p>Ejemplo de página web con datos reales del restaurante colombiano.</p>
+<div class="url">lmanzano86-ui.github.io/demo-hacienda/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-caribbeantwist/">
+<div class="tag">Demo web</div>
+<h2>Demo Caribbean Twist</h2>
+<p>Restaurante cubano-dominicano en Tampa: demo moderna con fotos reales, menú, catering y QR.</p>
+<div class="url">lmanzano86-ui.github.io/demo-caribbeantwist/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-borinquen/">
+<div class="tag">Demo para cliente</div>
+<h2>Demo El Famoso Borinquen</h2>
+<p>Tienda latina en Tampa: comida caliente, carnicería y abarrotes.</p>
+<div class="url">lmanzano86-ui.github.io/demo-borinquen/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/bravo-supermarkets/">
+<div class="tag">Demo para cliente</div>
+<h2>Bravo Supermarkets</h2>
+<p>Supermercado latino en Tampa: especiales semanales y circular.</p>
+<div class="url">lmanzano86-ui.github.io/bravo-supermarkets/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-inkbass/">
+<div class="tag">Demo para cliente</div>
+<h2>Demo Inkbass Tattoo</h2>
+<p>Estudio de tatuajes en Tampa: estilos, artista y reservas.</p>
+<div class="url">lmanzano86-ui.github.io/demo-inkbass/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/paginas-web/">
+<div class="tag">Mi negocio</div>
+<h2>Páginas web para negocios</h2>
+<p>Presentación de mi servicio: planes, hosting privado y ejemplos.</p>
+<div class="url">lmanzano86-ui.github.io/paginas-web/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-caribbeanclub/">
+<div class="tag">DEMO</div>
+<h2>Caribbean Club Market</h2>
+<p>Demo bilingüe ES/EN con especiales y ofertas</p>
+<div class="url">lmanzano86-ui.github.io/demo-caribbeanclub/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-ultrajewelry/">
+<div class="tag">DEMO</div>
+<h2>Ultra Jewelry</h2>
+<p>Demo elegante marfil y dorado, bilingüe ES/EN</p>
+<div class="url">lmanzano86-ui.github.io/demo-ultrajewelry/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-latinfresh/">
+<div class="tag">Mercado</div>
+<h2>Latin Fresh Market</h2>
+<p>Mercado latino · Tampa y Riverview</p>
+<div class="url">lmanzano86-ui.github.io/demo-latinfresh/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-lalasthreading/">
+<div class="tag">Salón de belleza</div>
+<h2>Lala&#x27;s Threading &amp; Beauty Salon</h2>
+<p>Demo elegante: threading, cejas, maquillaje y más — Tampa FL</p>
+<div class="url">lmanzano86-ui.github.io/demo-lalasthreading/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-willibarbershop/">
+<div class="tag">Barbería</div>
+<h2>Willi Barbershop</h2>
+<p>Demo moderna: reserva en Booksy, precios reales — Tampa FL</p>
+<div class="url">lmanzano86-ui.github.io/demo-willibarbershop/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-maikelsbakery/">
+<div class="tag">PANADERÍA</div>
+<h2>Maikel&#x27;s Florida Bakery</h2>
+<p>Demo moderna: pastelitos, sándwich cubano, cakes de encargo — Tampa FL</p>
+<div class="url">lmanzano86-ui.github.io/demo-maikelsbakery/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-kvconstruction/">
+<div class="tag">CONTRATISTA</div>
+<h2>KV Home Construction</h2>
+<p>Demo moderna: construcción, remodelaciones y piscinas — Tampa FL</p>
+<div class="url">lmanzano86-ui.github.io/demo-kvconstruction/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-senortacos/">
+<div class="tag">restaurante</div>
+<h2>El Señor de los Tacos</h2>
+<p>Demo moderna con pedidos por Square, fotos reales, menú y redes</p>
+<div class="url">lmanzano86-ui.github.io/demo-senortacos/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-mvbbarbershop/">
+<div class="tag">barberia</div>
+<h2>MVB Barbershop</h2>
+<p>Demo deportiva con equipo de 3 barberos, reservas en Booksy y fotos reales</p>
+<div class="url">lmanzano86-ui.github.io/demo-mvbbarbershop/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-zuripetshop/">
+<div class="tag">Tienda de mascotas</div>
+<h2>Zuri Palomas Pet Shop</h2>
+<p>Demo colorida para tienda de mascotas en Tampa</p>
+<div class="url">lmanzano86-ui.github.io/demo-zuripetshop/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-petes-place-north/">
+<div class="tag">eeuu</div>
+<h2>Pete&#x27;s Place North &amp; Liquor Store</h2>
+<p>Bar y licorera en Tampa — demo bilingüe ES/EN</p>
+<div class="url">lmanzano86-ui.github.io/demo-petes-place-north/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-fenix-tattoo/">
+<div class="tag">eeuu</div>
+<h2>Fenix Tattoo Gallery</h2>
+<p>Estudio de tatuajes en Tampa — propuesta de rediseño bilingüe ES/EN</p>
+<div class="url">lmanzano86-ui.github.io/demo-fenix-tattoo/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-lemarques/">
+<div class="tag">eeuu</div>
+<h2>Le Marqués Hair &amp; Beauty</h2>
+<p>Salón de belleza premium en Tampa — demo de lujo bilingüe ES/EN con sistema de reservas</p>
+<div class="url">lmanzano86-ui.github.io/demo-lemarques/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-lemarques-2/">
+<div class="tag">eeuu</div>
+<h2>Le Marqués Hair &amp; Beauty — versión oscura</h2>
+<p>Segunda propuesta: negro y dorado con el logo original + sistema de reservas</p>
+<div class="url">lmanzano86-ui.github.io/demo-lemarques-2/</div>
+</a>
 </div>
-<script>
-/* ============================================================
-   CUPONES DE DESCUENTO — configuración de Lester
-   Cómo agregar un cupón nuevo:
-   1. En tu Stripe crea el cupón y los enlaces de pago con el
-      descuento aplicado (uno por cada plan al que aplique).
-   2. Agrega aquí una entrada con el CÓDIGO (en mayúsculas),
-      la descripción que verá el cliente y los enlaces.
-   Los planes disponibles: lanzamiento, profesional, sinentrada,
-   hosting-esencial, hosting-plus
-   ============================================================ */
-const CUPONES = {
-  "BIENVENIDA10": {
-    descripcion: "10% de descuento en tu instalación",
-    enlaces: {
-      "lanzamiento": "https://buy.stripe.com/6oU00k7M60vndQh6151gs00",
-      "profesional": "https://buy.stripe.com/4gMeVe0jE3Hz3bDgFJ1gs01"
-    }
-  }
-};
-
-(function () {
-  const input = document.getElementById("coupon-input");
-  const applyBtn = document.getElementById("coupon-apply");
-  const msg = document.getElementById("coupon-msg");
-  const removeBtn = document.getElementById("coupon-remove");
-  if (!input) return;
-
-  // Guarda los enlaces originales para poder restaurar
-  const originales = {};
-  document.querySelectorAll("a.pay[data-plan]").forEach(a => {
-    originales[a.dataset.plan] = a.href;
-  });
-
-  function aplicar() {
-    const codigo = input.value.trim().toUpperCase();
-    const cupon = CUPONES[codigo];
-    if (!cupon) {
-      msg.textContent = "❌ Ese código no es válido. Revísalo e intenta de nuevo.";
-      msg.className = "coupon-msg err";
-      return;
-    }
-    let aplicados = 0;
-    document.querySelectorAll("a.pay[data-plan]").forEach(a => {
-      const link = cupon.enlaces[a.dataset.plan];
-      if (link) { a.href = link; aplicados++; }
-    });
-    if (!aplicados) {
-      msg.textContent = "❌ Ese cupón no aplica a estos planes.";
-      msg.className = "coupon-msg err";
-      return;
-    }
-    msg.textContent = "✅ ¡Cupón aplicado! " + cupon.descripcion + ".";
-    msg.className = "coupon-msg ok";
-    removeBtn.style.display = "inline-block";
-    applyBtn.disabled = true;
-    input.disabled = true;
-  }
-
-  function quitar() {
-    document.querySelectorAll("a.pay[data-plan]").forEach(a => {
-      a.href = originales[a.dataset.plan];
-    });
-    input.value = "";
-    input.disabled = false;
-    applyBtn.disabled = false;
-    msg.textContent = "";
-    msg.className = "coupon-msg";
-    removeBtn.style.display = "none";
-  }
-
-  applyBtn.addEventListener("click", aplicar);
-  removeBtn.addEventListener("click", quitar);
-  input.addEventListener("keydown", e => { if (e.key === "Enter") aplicar(); });
-})();
-</script>
+<div class="seccion" id="sec-espana">
+<div class="sec-head"><h2>🇪🇸 Agente España</h2><p>Páginas del agente en España</p></div>
+<div class="empty">Sin páginas todavía &mdash; se agregan automáticamente al publicar.</div>
+</div>
+<div class="seccion" id="sec-brasil">
+<div class="sec-head"><h2>🇧🇷 Agente Brasil</h2><p>Páginas del agente en Brasil</p></div>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-panedefacci/">
+<div class="tag">Padaria</div>
+<h2>Pane Defacci Padaria e Confeitaria</h2>
+<p>Demo trilingüe (PT/ES/EN) para padaria em Foz do Iguaçu, Brasil.</p>
+<div class="url">lmanzano86-ui.github.io/demo-panedefacci/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-casadomel/">
+<div class="tag">Produtos naturais</div>
+<h2>Casa do Mel Foz do Iguaçu</h2>
+<p>Demo trilingüe (PT/ES/EN) para loja de produtos naturais em Foz do Iguaçu, Brasil.</p>
+<div class="url">lmanzano86-ui.github.io/demo-casadomel/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-academia-plena-forma/">
+<div class="tag">brasil</div>
+<h2>Academia Plena Forma</h2>
+<p>Gimnasio en Foz do Iguaçu — demo trilingüe PT/ES/EN</p>
+<div class="url">lmanzano86-ui.github.io/demo-academia-plena-forma/</div>
+</a>
+</div>
+<div class="seccion" id="sec-paises_bajos">
+<div class="sec-head"><h2>🇳🇱 Agente Países Bajos</h2><p>Páginas del agente en Países Bajos</p></div>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-van-der-linde/">
+<div class="tag">Demo Países Bajos</div>
+<h2>Demo — Banketbakkerij Van der Linde</h2>
+<p>Pastelería/heladería icónica de Ámsterdam (desde 1937). Demo en neerlandés.</p>
+<div class="url">lmanzano86-ui.github.io/demo-van-der-linde/</div>
+</a>
+<a class="card" href="https://lmanzano86-ui.github.io/demo-phone-more/">
+<div class="tag">Países Bajos</div>
+<h2>Phone &amp; more</h2>
+<p>Demo trilingüe (NL/ES/EN) — tienda de móviles, Damrak/Dam, Ámsterdam</p>
+<div class="url">lmanzano86-ui.github.io/demo-phone-more/</div>
+</a>
+</div>
+</main>
+<footer><b>LESTER MANZANO</b> &middot; 813 235 3313</footer>
 </body>
 </html>
