@@ -62,7 +62,7 @@
     text-decoration:none; font-weight:800; border-radius:30px; padding:12px; }
   .plan .pay { display:block; text-align:center; margin-top:10px; background:#635bff; color:#fff;
     text-decoration:none; font-weight:800; border-radius:30px; padding:12px; }
-  .anchor { text-align:center; font-size:.95rem; color:#f2f98a; font-weight:700; border:1px solid #68552d;
+  .anchor { text-align:center; font-size:.95rem; color:#f2d98a; font-weight:700; border:1px solid #68552d;
     border-radius:12px; padding:12px 16px; background:rgba(224,187,96,.07); margin:0 20px; }
   .anchor span { color:#fff; }
   .coupon-box { max-width:520px; margin:0 auto 22px; background:#14171e; border:1px dashed #c9a227;
@@ -270,7 +270,7 @@
   const EXCLUIR = new Set(["Herramienta de equipo","Herramienta de ventas","Mi negocio"]);
   const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const root = document.getElementById('demos-root');
-  fetch(U + "/rest/v1/demo_secciones?select=*,demo_paginas(*)&order=orden.asc&demo_paginas.order=orden.asc",
+  fetch(U + "/rest/v1/demo_secciones?select=*,demo_paginas(*)&demo_paginas.estado=eq.terminado&order=orden.asc&demo_paginas.order=orden.asc",
     { headers: { apikey: K, Authorization: "Bearer " + K } })
     .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
     .then(secs => {
@@ -307,7 +307,7 @@
   <div class="phone"><a href="tel:+18132353313">813 235 3313</a></div>
   <div class="btns">
     <a class="btn wa" href="https://wa.me/18132353313?text=Hola%20Lester%2C%20me%20interesa%20la%20p%C3%A1gina%20web%20para%20mi%20negocio">💬 WhatsApp</a>
-    <a class="btn call" href="tel:+18132353313">📞 813 235 3313</a>
+    <a class="btn call" href="tel:+18132353313">📞 Llamar</a>
   </div>
 </section>
 
