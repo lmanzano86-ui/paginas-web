@@ -270,7 +270,7 @@
   const EXCLUIR = new Set(["Herramienta de equipo","Herramienta de ventas","Mi negocio"]);
   const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const root = document.getElementById('demos-root');
-  fetch(U + "/rest/v1/demo_secciones?select=*,demo_paginas(*)&demo_paginas.estado=eq.terminado&order=orden.asc&demo_paginas.order=orden.asc",
+  fetch(U + "/rest/v1/demo_secciones?select=*,demo_paginas(*)&demo_paginas.estado=eq.terminado&demo_paginas.visible=eq.true&order=orden.asc&demo_paginas.order=orden.asc",
     { headers: { apikey: K, Authorization: "Bearer " + K } })
     .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
     .then(secs => {
