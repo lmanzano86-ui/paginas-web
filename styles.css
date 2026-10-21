@@ -258,3 +258,12 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0 110px;margin-top:40p
 .steps.five{grid-template-columns:repeat(5,1fr)}
 @media(max-width:1000px){.steps.five{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.steps.five{grid-template-columns:1fr}}
+
+/* ---------- sistemas propios ---------- */
+.sys-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:800px){.sys-grid{grid-template-columns:1fr}}
+.sys{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px}
+.sys .st{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.6px;padding:3px 10px;border-radius:999px;background:rgba(52,211,153,.14);color:#34d399;margin-bottom:12px}
+.sys h3{font-size:1.2rem;margin-bottom:8px}
+.sys p{color:var(--muted);font-size:.94rem;margin-bottom:12px}
+.sys a{color:var(--cyan);font-weight:600;font-size:.94rem}
