@@ -267,3 +267,7 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0 110px;margin-top:40p
 .sys h3{font-size:1.2rem;margin-bottom:8px}
 .sys p{color:var(--muted);font-size:.94rem;margin-bottom:12px}
 .sys a{color:var(--cyan);font-weight:600;font-size:.94rem}
+
+.sys .st.dev{background:rgba(232,161,58,.16);color:#e8a13a}
+.sys.wide{grid-column:span 2}
+@media(max-width:800px){.sys.wide{grid-column:span 1}}
