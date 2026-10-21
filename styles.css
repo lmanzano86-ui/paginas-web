@@ -253,3 +253,8 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0 110px;margin-top:40p
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 
 .agent-link{color:var(--gold)!important;font-weight:600}
+
+/* ---------- infraestructura (5 pasos) ---------- */
+.steps.five{grid-template-columns:repeat(5,1fr)}
+@media(max-width:1000px){.steps.five{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.steps.five{grid-template-columns:1fr}}
