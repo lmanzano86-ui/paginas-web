@@ -24,6 +24,7 @@
       <button class="nav-item" data-panel="panel-sistema" id="nav-sistema" style="display:none">⚙️ Usuarios de sistema</button>
       <button class="nav-item" data-panel="panel-demos" id="nav-demos" style="display:none">🎬 Demos</button>
       <button class="nav-item" data-panel="panel-diseno" id="nav-diseno" style="display:none">🎨 Diseño</button>
+      <button class="nav-item" data-panel="panel-publicadas" id="nav-publicadas" style="display:none">🌐 Páginas publicadas</button>
     </nav>
     <div class="sidebar-user">
       <div class="sidebar-nombre" id="nombre-agente"></div>
@@ -361,6 +362,16 @@
       <div id="error-temas" class="error" style="display:none"></div>
       <p class="muted small" style="margin-top:16px">Cuando se cree un diseño nuevo, se agregará aquí como plantilla automáticamente.</p>
     </section>
+    <section class="panel" id="panel-publicadas" style="display:none">
+      <h2>🌐 Páginas publicadas</h2>
+      <p class="muted">Las páginas de clientes ya publicadas y terminadas: su día de pago del mantenimiento y si están en línea. Solo visible para ti.</p>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:12px 0">
+        <button class="btn-linea" id="btn-revisar-publicadas" type="button">↻ Revisar estado ahora</button>
+        <span class="muted small" id="publicadas-revision"></span>
+      </div>
+      <div id="lista-publicadas" class="lista"></div>
+      <p class="muted small" style="margin-top:16px">Para agregar una página nueva a esta lista, pídela y se carga con su día de pago.</p>
+    </section>
   </main>
 </div>
 
@@ -407,6 +418,55 @@
     if (esAdminTotal(sesion)) {
       document.getElementById('nav-demos').style.display = 'flex';
       document.getElementById('nav-diseno').style.display = 'flex';
+      document.getElementById('nav-publicadas').style.display = 'flex';
+      /* === Páginas publicadas (clientes): día de pago y estado en línea === */
+      const PAGINAS_PUBLICADAS = [
+        { negocio: 'La Semilla Bakery', url: 'https://semillabakerytampa.com/', diaPago: 21, mantenimiento: 50 },
+      ];
+      const MESES_PUB = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+      let publicadasRevisadas = false;
+      function proximoPagoPub(dia) {
+        const hoy = new Date(); hoy.setHours(0, 0, 0, 0);
+        let f = new Date(hoy.getFullYear(), hoy.getMonth(), dia);
+        if (f < hoy) f = new Date(hoy.getFullYear(), hoy.getMonth() + 1, dia);
+        return { fecha: f, dias: Math.round((f - hoy) / 86400000) };
+      }
+      function pintarPublicadas() {
+        document.getElementById('lista-publicadas').innerHTML = PAGINAS_PUBLICADAS.map((p, i) => {
+          const prox = proximoPagoPub(p.diaPago);
+          const cuando = prox.dias === 0 ? '¡es hoy!' : prox.dias === 1 ? 'mañana' : 'en ' + prox.dias + ' días';
+          const fechaTxt = prox.fecha.getDate() + ' de ' + MESES_PUB[prox.fecha.getMonth()] + ' de ' + prox.fecha.getFullYear();
+          return `<div class="tarjeta" style="margin-bottom:16px">`
+            + `<div class="sol-head"><strong style="font-size:17px">${esc(p.negocio)}</strong>`
+            + `<span class="estado" id="pub-estado-${i}">⚪ Sin revisar</span></div>`
+            + `<div class="muted small">🔗 <a href="${esc(p.url)}" target="_blank" rel="noopener" style="color:var(--dorado-claro);word-break:break-all">${esc(p.url)}</a></div>`
+            + `<div class="muted small" style="margin-top:6px">💵 Mantenimiento: <b>US$${p.mantenimiento}/mes</b> · Día de pago: <b>${p.diaPago} de cada mes</b></div>`
+            + `<div class="muted small">📅 Próximo pago: <b>${fechaTxt}</b> — ${cuando}</div>`
+            + `</div>`;
+        }).join('');
+      }
+      async function revisarPublicada(i) {
+        const el = document.getElementById('pub-estado-' + i);
+        if (!el) return;
+        el.className = 'estado estado-azul'; el.removeAttribute('style'); el.textContent = '⏳ Revisando…';
+        let ok = false;
+        try {
+          const ctrl = new AbortController();
+          const t = setTimeout(() => ctrl.abort(), 9000);
+          await fetch(PAGINAS_PUBLICADAS[i].url, { mode: 'no-cors', cache: 'no-store', signal: ctrl.signal });
+          clearTimeout(t); ok = true;
+        } catch (e) { ok = false; }
+        if (ok) { el.className = 'estado estado-verde'; el.textContent = '🟢 En línea'; }
+        else { el.className = 'estado'; el.style.background = 'rgba(192,57,43,.12)'; el.style.borderColor = '#c0392b'; el.style.color = '#e74c3c'; el.textContent = '🔴 No responde'; }
+      }
+      function revisarPublicadas() {
+        publicadasRevisadas = true;
+        PAGINAS_PUBLICADAS.forEach((p, i) => revisarPublicada(i));
+        document.getElementById('publicadas-revision').textContent = 'Última revisión: ' + new Date().toLocaleTimeString('es-US', { hour: 'numeric', minute: '2-digit' });
+      }
+      pintarPublicadas();
+      document.getElementById('btn-revisar-publicadas').onclick = revisarPublicadas;
+      document.getElementById('nav-publicadas').addEventListener('click', () => { if (!publicadasRevisadas) revisarPublicadas(); });
       initFormDemos();
       try { await cargarDemos(); }
       catch (e) {
