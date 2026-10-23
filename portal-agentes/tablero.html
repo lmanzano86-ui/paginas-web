@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<!-- Sección interna del portal de agentes («Tablero del equipo», solo admin total).
-     Los datos del tablero se guardan en el navegador de cada usuario (localStorage);
-     usa Exportar/Importar para compartir el estado con el equipo. -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tablero vivo del equipo · New Age</title>
+<!-- Sección interna del portal de agentes. v2: datos COMPARTIDOS en Supabase
+     (tabla tablero_tareas) con actualización en tiempo real para todo el equipo.
+     Si la tabla aún no está activada, funciona en modo local con la semilla. -->
 <style>
 :root{--fondo:#10151d;--panel:#161d29;--tarjeta:#1f2939;--borde:#242f42;--texto:#e8edf4;--suave:#93a1b3;--dorado:#e8a13a;--verde:#3fb968;--rojo:#e5534b;--azul:#7dd3fc}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -14,6 +14,8 @@ body{font-family:'Segoe UI',Helvetica,Arial,sans-serif;background:var(--fondo);c
 header{display:flex;flex-wrap:wrap;align-items:baseline;gap:14px}
 h1{font-size:27px} h1 span{color:var(--dorado)}
 .sub{color:var(--suave);font-size:13.5px}
+.estado-vivo{font-size:13px;font-weight:700}
+.estado-vivo.ok{color:var(--verde)} .estado-vivo.local{color:var(--dorado)}
 .regla{margin:12px 0 14px;background:#182030;border-left:4px solid var(--dorado);padding:9px 14px;font-size:14px;color:#c9d4e2;border-radius:0 8px 8px 0}
 .barra{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
 .barra .lbl{color:var(--suave);font-size:13px;margin-right:2px}
@@ -31,9 +33,11 @@ input[type=search]{background:var(--panel);border:1px solid var(--borde);color:v
 .col h2{font-size:14px;letter-spacing:1.1px;text-transform:uppercase;padding-bottom:10px;border-bottom:2px solid var(--borde);margin-bottom:12px;color:#aebdd1;display:flex;justify-content:space-between;align-items:center}
 .col h2 b{background:var(--borde);border-radius:12px;padding:1px 9px;font-size:12.5px;color:#fff}
 .col.si{border-color:var(--dorado)} .col.si h2{color:var(--dorado)}
-.card{background:var(--tarjeta);border-radius:10px;padding:11px 12px;margin-bottom:11px;border-left:4px solid #4a5a74;cursor:grab}
+.card{background:var(--tarjeta);border-radius:10px;padding:11px 12px;margin-bottom:11px;border-left:4px solid #4a5a74;cursor:grab;position:relative}
 .card:active{cursor:grabbing}
-.card .tag{font-size:10.5px;color:var(--azul);font-weight:700;letter-spacing:.6px;text-transform:uppercase}
+.card .x{position:absolute;top:5px;right:8px;color:#55677f;background:none;border:0;font-size:14px;cursor:pointer;line-height:1;padding:2px}
+.card .x:hover{color:var(--rojo)}
+.card .tag{font-size:10.5px;color:var(--azul);font-weight:700;letter-spacing:.6px;text-transform:uppercase;padding-right:16px}
 .card .t{font-size:15px;font-weight:600;line-height:1.3;margin-top:2px}
 .card .n{font-size:12.5px;color:var(--suave);margin-top:5px;line-height:1.4}
 .card .pie{display:flex;align-items:center;gap:7px;margin-top:8px;flex-wrap:wrap}
@@ -56,8 +60,9 @@ dialog .fila{display:flex;gap:9px;justify-content:flex-end;margin-top:18px}
 <header>
   <h1>Tablero vivo del equipo <span>· New Age</span></h1>
   <div class="sub" id="fecha-hoy"></div>
+  <div class="estado-vivo local" id="estado-vivo">Conectando…</div>
 </header>
-<div class="regla"><b>La regla de oro:</b> ninguna tarjeta llega a «Entregado» sin pasar por QA, y nada sale al cliente sin entrar primero a la bandeja de Lester. Las tarjetas se arrastran entre columnas; cada movimiento queda guardado en este navegador.</div>
+<div class="regla"><b>La regla de oro:</b> ninguna tarjeta llega a «Entregado» sin pasar por QA, y nada sale al cliente sin entrar primero a la bandeja de Lester. Arrastra las tarjetas entre columnas: en la v2 el movimiento se guarda en la base compartida y se ve al instante en todos los paneles.</div>
 
 <div class="barra">
   <span class="lbl">Ver de:</span>
@@ -70,7 +75,7 @@ dialog .fila{display:flex;gap:9px;justify-content:flex-end;margin-top:18px}
   <button class="abtn" id="btn-exportar">⬇ Exportar</button>
   <button class="abtn" id="btn-importar">⬆ Importar</button>
   <input type="file" id="file-importar" accept="application/json" hidden>
-  <button class="abtn" id="btn-semilla">↺ Datos de ejemplo</button>
+  <button class="abtn" id="btn-semilla">↺ Restablecer ejemplos</button>
   <button class="abtn fuerte" id="btn-nueva">＋ Nueva tarjeta</button>
 </div>
 
@@ -98,7 +103,11 @@ dialog .fila{display:flex;gap:9px;justify-content:flex-end;margin-top:18px}
   </form>
 </dialog>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+const SUPABASE_URL = "https://ildviocjmqcyfknzlyrm.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_b6X_FUcoooXAvUWI6UXT-g_Zu4ZHi0g";
+
 const COLUMNAS = [
   {id:'por-hacer', nombre:'Por hacer'},
   {id:'en-curso', nombre:'En curso'},
@@ -118,59 +127,101 @@ const SEMILLA = [
   {titulo:'Paquete entregado hoy', negocio:'Taqueria La Leyenda', dueno:'Tiky', estado:'entregado', nota:'Demo en vivo, propuesta y contrato a $250 + $50/mes, sin garantía. QA 9.9/10.', fecha:'2026-10-23'},
   {titulo:'Sitio oficial en vivo', negocio:'La Semilla Bakery', dueno:'Tiky', estado:'entregado', nota:'semillabakerytampa.com — auditoría final 10.0/10. Primer cliente de New Age.', fecha:'2026-10-22'}
 ];
-const CLAVE = 'tablero-vivo-v1';
-let tareas = cargar();
+
+let supa = null, compartido = false;
+let tareas = [];
 let filtroDueno = '', filtroTexto = '';
 
-function cargar(){
+function hoy(){ return new Date().toLocaleDateString('en-CA'); }
+function diasDesde(f){ return Math.round((new Date(hoy()) - new Date(f)) / 86400000); }
+function esc(t){ return String(t ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function setEstadoVivo(){
+  const el = document.getElementById('estado-vivo');
+  if(compartido){ el.textContent = '🟢 En vivo — compartido con todo el equipo'; el.className = 'estado-vivo ok'; }
+  else { el.textContent = '🟡 Modo local — falta activar la tabla compartida (SQL de activación)'; el.className = 'estado-vivo local'; }
+}
+
+/* ---------- datos locales (respaldo) ---------- */
+const CLAVE = 'tablero-vivo-v2-local';
+function localCargar(){
   try{ const d = JSON.parse(localStorage.getItem(CLAVE)); if(Array.isArray(d) && d.length) return d; }catch(e){}
   return JSON.parse(JSON.stringify(SEMILLA));
 }
-function guardar(){ localStorage.setItem(CLAVE, JSON.stringify(tareas)); }
-function hoy(){ return new Date().toLocaleDateString('en-CA'); }
-function diasDesde(f){ const ms = new Date(hoy()) - new Date(f); return Math.round(ms/86400000); }
-function esc(t){ return String(t??'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function localGuardar(){ localStorage.setItem(CLAVE, JSON.stringify(tareas)); }
 
-function visibles(t){
-  if(filtroDueno && t.dueno !== filtroDueno) return false;
-  if(filtroTexto){ const q = (t.titulo+' '+t.negocio+' '+t.nota).toLowerCase(); if(!q.includes(filtroTexto)) return false; }
-  return true;
+/* ---------- datos compartidos (Supabase) ---------- */
+async function compartidoCargar(){
+  const {data, error} = await supa.from('tablero_tareas').select('*').order('id', {ascending:true});
+  if(error) throw error;
+  tareas = data;
+}
+let recargaPendiente = null;
+function recargar(){
+  if(recargaPendiente) return;
+  recargaPendiente = setTimeout(async () => {
+    recargaPendiente = null;
+    try{ await compartidoCargar(); pintar(); }catch(e){}
+  }, 250);
+}
+function suscribir(){
+  supa.channel('tablero-vivo')
+    .on('postgres_changes', {event:'*', schema:'public', table:'tablero_tareas'}, recargar)
+    .subscribe();
 }
 
+/* ---------- pintar ---------- */
+function visibles(t){
+  if(filtroDueno && t.dueno !== filtroDueno) return false;
+  if(filtroTexto && !(t.titulo + ' ' + t.negocio + ' ' + (t.nota || '')).toLowerCase().includes(filtroTexto)) return false;
+  return true;
+}
 function pintar(){
   const board = document.getElementById('board');
   board.innerHTML = '';
   for(const col of COLUMNAS){
-    const lista = tareas.map((t,i)=>({t,i})).filter(x => x.t.estado === col.id && visibles(x.t));
+    const lista = tareas.map((t, i) => ({t, i})).filter(x => x.t.estado === col.id && visibles(x.t));
     const div = document.createElement('div');
     div.className = 'col' + (col.si ? ' si' : '');
-    div.dataset.estado = col.id;
-    div.innerHTML = `<h2>${col.nombre} <b>${lista.length}</b></h2>` +
-      (lista.length ? '' : '<div class="vacio">Sin tarjetas</div>');
-    for(const {t,i} of lista){
+    div.innerHTML = `<h2>${col.nombre} <b>${lista.length}</b></h2>` + (lista.length ? '' : '<div class="vacio">Sin tarjetas</div>');
+    for(const {t, i} of lista){
       const dias = diasDesde(t.fecha);
       const est = (col.id !== 'entregado' && dias >= 3) ? `<span class="estancada">⏰ ${dias} días sin moverse</span>` : '';
       const card = document.createElement('div');
-      card.className = 'card'; card.draggable = true; card.dataset.idx = i;
-      card.innerHTML = `<div class="tag">${esc(t.negocio)}</div><div class="t">${esc(t.titulo)}</div>` +
+      card.className = 'card'; card.draggable = true;
+      card.innerHTML = `<button class="x" title="Borrar tarjeta">✕</button>` +
+        `<div class="tag">${esc(t.negocio)}</div><div class="t">${esc(t.titulo)}</div>` +
         (t.nota ? `<div class="n">${esc(t.nota)}</div>` : '') +
-        `<div class="pie"><span class="chip ${esc(t.dueno.toLowerCase())}">${esc(t.dueno.toUpperCase())}</span><span class="fecha">${esc(t.fecha)}</span>${est}</div>`;
+        `<div class="pie"><span class="chip ${esc(String(t.dueno).toLowerCase())}">${esc(String(t.dueno).toUpperCase())}</span><span class="fecha">${esc(t.fecha)}</span>${est}</div>`;
       card.addEventListener('dragstart', e => { e.dataTransfer.setData('text/plain', String(i)); });
+      card.querySelector('.x').addEventListener('click', async () => {
+        if(!confirm('¿Borrar esta tarjeta?')) return;
+        if(compartido && t.id){
+          await supa.from('tablero_tareas').delete().eq('id', t.id);
+          recargar();
+        } else {
+          tareas.splice(i, 1); localGuardar(); pintar();
+        }
+      });
       div.appendChild(card);
     }
     div.addEventListener('dragover', e => { e.preventDefault(); div.classList.add('encima'); });
     div.addEventListener('dragleave', () => div.classList.remove('encima'));
-    div.addEventListener('drop', e => {
+    div.addEventListener('drop', async e => {
       e.preventDefault(); div.classList.remove('encima');
       const i = Number(e.dataTransfer.getData('text/plain'));
-      if(!Number.isNaN(i) && tareas[i] && tareas[i].estado !== col.id){
-        tareas[i].estado = col.id; tareas[i].fecha = hoy(); guardar(); pintar();
-      }
+      if(Number.isNaN(i) || !tareas[i] || tareas[i].estado === col.id) return;
+      const t = tareas[i];
+      t.estado = col.id; t.fecha = hoy(); pintar();
+      if(compartido && t.id){
+        const {error} = await supa.from('tablero_tareas').update({estado: col.id, fecha: hoy()}).eq('id', t.id);
+        if(error) recargar();
+      } else localGuardar();
     });
     board.appendChild(div);
   }
 }
 
+/* ---------- barra de herramientas ---------- */
 document.querySelectorAll('.fbtn').forEach(b => b.addEventListener('click', () => {
   document.querySelectorAll('.fbtn').forEach(x => x.classList.remove('on'));
   b.classList.add('on'); filtroDueno = b.dataset.dueno; pintar();
@@ -181,18 +232,23 @@ const dlg = document.getElementById('dlg');
 const selEstado = document.getElementById('f-estado');
 selEstado.innerHTML = COLUMNAS.map(c => `<option value="${c.id}">${c.nombre}</option>`).join('');
 document.getElementById('btn-nueva').addEventListener('click', () => dlg.showModal());
-document.getElementById('f-crear').addEventListener('click', e => {
+document.getElementById('f-crear').addEventListener('click', async e => {
   const titulo = document.getElementById('f-titulo').value.trim();
   const negocio = document.getElementById('f-negocio').value.trim();
-  if(!titulo || !negocio){ return; }
+  if(!titulo || !negocio) return;
   e.preventDefault();
-  tareas.push({titulo, negocio, dueno: document.getElementById('f-dueno').value,
-    estado: selEstado.value, nota: document.getElementById('f-nota').value.trim(), fecha: hoy()});
-  guardar(); dlg.close(); pintar();
+  const nueva = {titulo, negocio, dueno: document.getElementById('f-dueno').value,
+    estado: selEstado.value, nota: document.getElementById('f-nota').value.trim(), fecha: hoy()};
+  dlg.close();
+  if(compartido){
+    const {error} = await supa.from('tablero_tareas').insert(nueva);
+    if(error){ tareas.push(nueva); localGuardar(); pintar(); } else recargar();
+  } else { tareas.push(nueva); localGuardar(); pintar(); }
 });
 
 document.getElementById('btn-exportar').addEventListener('click', () => {
-  const blob = new Blob([JSON.stringify(tareas, null, 2)], {type:'application/json'});
+  const limpio = tareas.map(({titulo, negocio, dueno, estado, nota, fecha}) => ({titulo, negocio, dueno, estado, nota, fecha}));
+  const blob = new Blob([JSON.stringify(limpio, null, 2)], {type:'application/json'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob); a.download = 'tablero-vivo.json'; a.click();
   URL.revokeObjectURL(a.href);
@@ -201,20 +257,43 @@ const fileImp = document.getElementById('file-importar');
 document.getElementById('btn-importar').addEventListener('click', () => fileImp.click());
 fileImp.addEventListener('change', () => {
   const f = fileImp.files[0]; if(!f) return;
-  f.text().then(txt => {
-    try{ const d = JSON.parse(txt); if(Array.isArray(d)){ tareas = d; guardar(); pintar(); } }catch(e){ alert('Archivo no válido'); }
+  f.text().then(async txt => {
+    let d; try{ d = JSON.parse(txt); }catch(e){ alert('Archivo no válido'); return; }
+    if(!Array.isArray(d)) { alert('Archivo no válido'); return; }
+    if(!confirm('Importar reemplaza TODAS las tarjetas actuales. ¿Seguro?')) return;
+    const limpio = d.map(({titulo, negocio, dueno, estado, nota, fecha}) =>
+      ({titulo: titulo || 'Sin título', negocio: negocio || '—', dueno: dueno || 'Tiky', estado: estado || 'por-hacer', nota: nota || '', fecha: fecha || hoy()}));
+    if(compartido){
+      await supa.from('tablero_tareas').delete().neq('id', 0);
+      const {error} = await supa.from('tablero_tareas').insert(limpio);
+      if(error){ alert('No se pudo importar en la base compartida'); return; }
+      recargar();
+    } else { tareas = limpio; localGuardar(); pintar(); }
   });
 });
-document.getElementById('btn-semilla').addEventListener('click', () => {
-  if(confirm('¿Volver a los datos de ejemplo? Se reemplaza el tablero actual de este navegador.')){
-    tareas = JSON.parse(JSON.stringify(SEMILLA)); guardar(); pintar();
-  }
+document.getElementById('btn-semilla').addEventListener('click', async () => {
+  if(!confirm('¿Restablecer las tarjetas de ejemplo? Se reemplaza el tablero actual.')) return;
+  if(compartido){
+    await supa.from('tablero_tareas').delete().neq('id', 0);
+    const {error} = await supa.from('tablero_tareas').insert(JSON.parse(JSON.stringify(SEMILLA)));
+    if(error){ alert('No se pudo restablecer en la base compartida'); return; }
+    recargar();
+  } else { tareas = JSON.parse(JSON.stringify(SEMILLA)); localGuardar(); pintar(); }
 });
 
+/* ---------- arranque ---------- */
 document.getElementById('fecha-hoy').textContent =
-  new Date().toLocaleDateString('es-US', {weekday:'long', day:'numeric', month:'long', year:'numeric'}) +
-  ' — los datos viven en este navegador; exporta el JSON para compartir el estado con el equipo';
-pintar();
+  new Date().toLocaleDateString('es-US', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
+(async function iniciar(){
+  tareas = localCargar(); pintar();
+  try{
+    supa = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    await compartidoCargar();
+    compartido = true; setEstadoVivo(); pintar(); suscribir();
+  }catch(e){
+    compartido = false; setEstadoVivo();
+  }
+})();
 </script>
 </body>
 </html>
