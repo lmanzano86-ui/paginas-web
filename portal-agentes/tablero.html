@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Sección interna del portal de agentes («Tablero del equipo», solo admin total).
+     Los datos del tablero se guardan en el navegador de cada usuario (localStorage);
+     usa Exportar/Importar para compartir el estado con el equipo. -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tablero vivo del equipo · New Age</title>
+<style>
+:root{--fondo:#10151d;--panel:#161d29;--tarjeta:#1f2939;--borde:#242f42;--texto:#e8edf4;--suave:#93a1b3;--dorado:#e8a13a;--verde:#3fb968;--rojo:#e5534b;--azul:#7dd3fc}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Helvetica,Arial,sans-serif;background:var(--fondo);color:var(--texto);padding:20px 22px 30px}
+header{display:flex;flex-wrap:wrap;align-items:baseline;gap:14px}
+h1{font-size:27px} h1 span{color:var(--dorado)}
+.sub{color:var(--suave);font-size:13.5px}
+.regla{margin:12px 0 14px;background:#182030;border-left:4px solid var(--dorado);padding:9px 14px;font-size:14px;color:#c9d4e2;border-radius:0 8px 8px 0}
+.barra{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+.barra .lbl{color:var(--suave);font-size:13px;margin-right:2px}
+.fbtn{background:var(--panel);color:var(--suave);border:1px solid var(--borde);border-radius:16px;padding:5px 13px;font-size:13px;cursor:pointer;font-weight:600}
+.fbtn.on{color:#fff;border-color:var(--dorado);background:#2a2118}
+.fbtn:hover{color:#fff}
+input[type=search]{background:var(--panel);border:1px solid var(--borde);color:var(--texto);border-radius:8px;padding:6px 11px;font-size:13.5px;min-width:210px}
+.sp{flex:1}
+.abtn{background:var(--panel);color:var(--texto);border:1px solid var(--borde);border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer}
+.abtn:hover{border-color:var(--dorado)}
+.abtn.fuerte{background:var(--dorado);color:#171106;font-weight:700;border-color:var(--dorado)}
+.board{display:flex;gap:13px;align-items:flex-start;overflow-x:auto;padding-bottom:8px}
+.col{flex:1 0 230px;background:var(--panel);border-radius:12px;padding:12px;min-height:420px;border:2px solid transparent}
+.col.encima{border-color:#3b82f6}
+.col h2{font-size:14px;letter-spacing:1.1px;text-transform:uppercase;padding-bottom:10px;border-bottom:2px solid var(--borde);margin-bottom:12px;color:#aebdd1;display:flex;justify-content:space-between;align-items:center}
+.col h2 b{background:var(--borde);border-radius:12px;padding:1px 9px;font-size:12.5px;color:#fff}
+.col.si{border-color:var(--dorado)} .col.si h2{color:var(--dorado)}
+.card{background:var(--tarjeta);border-radius:10px;padding:11px 12px;margin-bottom:11px;border-left:4px solid #4a5a74;cursor:grab}
+.card:active{cursor:grabbing}
+.card .tag{font-size:10.5px;color:var(--azul);font-weight:700;letter-spacing:.6px;text-transform:uppercase}
+.card .t{font-size:15px;font-weight:600;line-height:1.3;margin-top:2px}
+.card .n{font-size:12.5px;color:var(--suave);margin-top:5px;line-height:1.4}
+.card .pie{display:flex;align-items:center;gap:7px;margin-top:8px;flex-wrap:wrap}
+.chip{font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;letter-spacing:.4px}
+.doky{background:#3b2f63;color:#c9bfff}.tiky{background:#14532d;color:#a7e8bb}.blacky{background:#4a2c14;color:#ffd9ad}.equipo{background:#374151;color:#e5e7eb}
+.fecha{font-size:11px;color:#66788f}
+.estancada{font-size:11px;font-weight:700;color:#fff;background:var(--rojo);border-radius:10px;padding:2px 8px}
+.vacio{color:#55677f;font-size:13px;text-align:center;padding:16px 6px;border:1.5px dashed var(--borde);border-radius:10px}
+footer{margin-top:12px;color:#66788f;font-size:13px;text-align:center}
+dialog{background:var(--panel);color:var(--texto);border:1px solid var(--borde);border-radius:14px;padding:22px;width:min(440px,92vw)}
+dialog::backdrop{background:rgba(0,0,0,.6)}
+dialog h3{margin-bottom:14px;font-size:18px}
+dialog label{display:block;font-size:12.5px;color:var(--suave);margin:10px 0 4px}
+dialog input,dialog select{width:100%;background:var(--fondo);border:1px solid var(--borde);color:var(--texto);border-radius:8px;padding:8px 10px;font-size:14px}
+dialog .fila{display:flex;gap:9px;justify-content:flex-end;margin-top:18px}
+@media (max-width:900px){.board{flex-direction:column}.col{width:100%;min-height:0}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Tablero vivo del equipo <span>· New Age</span></h1>
+  <div class="sub" id="fecha-hoy"></div>
+</header>
+<div class="regla"><b>La regla de oro:</b> ninguna tarjeta llega a «Entregado» sin pasar por QA, y nada sale al cliente sin entrar primero a la bandeja de Lester. Las tarjetas se arrastran entre columnas; cada movimiento queda guardado en este navegador.</div>
+
+<div class="barra">
+  <span class="lbl">Ver de:</span>
+  <button class="fbtn on" data-dueno="">Todos</button>
+  <button class="fbtn" data-dueno="Doky">Doky</button>
+  <button class="fbtn" data-dueno="Tiky">Tiky</button>
+  <button class="fbtn" data-dueno="Blacky">Blacky</button>
+  <input type="search" id="buscar" placeholder="Buscar negocio o tarea…">
+  <div class="sp"></div>
+  <button class="abtn" id="btn-exportar">⬇ Exportar</button>
+  <button class="abtn" id="btn-importar">⬆ Importar</button>
+  <input type="file" id="file-importar" accept="application/json" hidden>
+  <button class="abtn" id="btn-semilla">↺ Datos de ejemplo</button>
+  <button class="abtn fuerte" id="btn-nueva">＋ Nueva tarjeta</button>
+</div>
+
+<div class="board" id="board"></div>
+
+<footer>Cada tarjeta nace de la bitácora compartida. Quien mueve su tarjeta actualiza también la bitácora; QA no audita lo suyo; Coordinación cuida que nadie se quede sin siguiente paso.</footer>
+
+<dialog id="dlg">
+  <form method="dialog" id="form-nueva">
+    <h3>Nueva tarjeta</h3>
+    <label>Título de la tarea</label>
+    <input id="f-titulo" required maxlength="90" placeholder="Ej.: Enviar propuesta a…">
+    <label>Negocio / área</label>
+    <input id="f-negocio" required maxlength="40" placeholder="Ej.: Taqueria La Leyenda">
+    <label>Dueño</label>
+    <select id="f-dueno"><option>Doky</option><option selected>Tiky</option><option>Blacky</option><option>Equipo</option></select>
+    <label>Columna</label>
+    <select id="f-estado"></select>
+    <label>Siguiente paso / nota</label>
+    <input id="f-nota" maxlength="140" placeholder="Qué falta para moverla">
+    <div class="fila">
+      <button class="abtn" value="cancel" formnovalidate>Cancelar</button>
+      <button class="abtn fuerte" id="f-crear" value="ok">Crear tarjeta</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+const COLUMNAS = [
+  {id:'por-hacer', nombre:'Por hacer'},
+  {id:'en-curso', nombre:'En curso'},
+  {id:'revision', nombre:'En revisión · QA'},
+  {id:'esperando-si', nombre:'Esperando tu Sí', si:true},
+  {id:'entregado', nombre:'Entregado'}
+];
+const SEMILLA = [
+  {titulo:'Cargar el menú de desayuno real', negocio:'Taqueria La Leyenda', dueno:'Tiky', estado:'por-hacer', nota:'Falta que el dueño confirme platillos y precios (hoy va de ejemplo).', fecha:'2026-10-23'},
+  {titulo:'Sumar demos de Tampa Burger y La Leyenda al panel', negocio:'New Age · Panel', dueno:'Tiky', estado:'por-hacer', nota:'Demos ya publicadas; falta registrarlas en paginas-web.', fecha:'2026-10-23'},
+  {titulo:'Datos reales de Maya Travel', negocio:'ViajeReady', dueno:'Doky', estado:'por-hacer', nota:'Flota, zonas, tarifas y contacto — esperando a Lester.', fecha:'2026-10-15'},
+  {titulo:'Restablecer acceso y clave del superadmin', negocio:'CitasPro', dueno:'Doky', estado:'en-curso', nota:'La API falla intermitente (502) y la clave del seed ya no entra. Pedido pasado por el canal.', fecha:'2026-10-23'},
+  {titulo:'Recuperar el dominio hackeado de GoDaddy', negocio:'La Semilla Bakery', dueno:'Tiky', estado:'en-curso', nota:'Se hace con el dueño presente: restablecer su cuenta y cambiar nameservers.', fecha:'2026-10-22'},
+  {titulo:'Copia de la auditoría para el cliente', negocio:'La Semilla Bakery', dueno:'Blacky', estado:'revision', nota:'Versión en lenguaje simple (segundos, clientes y dinero), con marca New Age.', fecha:'2026-10-22'},
+  {titulo:'Enviar la propuesta al negocio', negocio:'Tampa Burger', dueno:'Tiky', estado:'esperando-si', nota:'Paquete completo en Drive y demo en vivo. Solo falta la orden de envío.', fecha:'2026-10-23'},
+  {titulo:'Llevar la app instalable (PWA) a ViajeReady y CitasPro', negocio:'Sistemas', dueno:'Equipo', estado:'esperando-si', nota:'Ya funciona en MesaReady. ¿Se aplica a los otros dos?', fecha:'2026-10-23'},
+  {titulo:'Paquete entregado hoy', negocio:'Taqueria La Leyenda', dueno:'Tiky', estado:'entregado', nota:'Demo en vivo, propuesta y contrato a $250 + $50/mes, sin garantía. QA 9.9/10.', fecha:'2026-10-23'},
+  {titulo:'Sitio oficial en vivo', negocio:'La Semilla Bakery', dueno:'Tiky', estado:'entregado', nota:'semillabakerytampa.com — auditoría final 10.0/10. Primer cliente de New Age.', fecha:'2026-10-22'}
+];
+const CLAVE = 'tablero-vivo-v1';
+let tareas = cargar();
+let filtroDueno = '', filtroTexto = '';
+
+function cargar(){
+  try{ const d = JSON.parse(localStorage.getItem(CLAVE)); if(Array.isArray(d) && d.length) return d; }catch(e){}
+  return JSON.parse(JSON.stringify(SEMILLA));
+}
+function guardar(){ localStorage.setItem(CLAVE, JSON.stringify(tareas)); }
+function hoy(){ return new Date().toLocaleDateString('en-CA'); }
+function diasDesde(f){ const ms = new Date(hoy()) - new Date(f); return Math.round(ms/86400000); }
+function esc(t){ return String(t??'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+function visibles(t){
+  if(filtroDueno && t.dueno !== filtroDueno) return false;
+  if(filtroTexto){ const q = (t.titulo+' '+t.negocio+' '+t.nota).toLowerCase(); if(!q.includes(filtroTexto)) return false; }
+  return true;
+}
+
+function pintar(){
+  const board = document.getElementById('board');
+  board.innerHTML = '';
+  for(const col of COLUMNAS){
+    const lista = tareas.map((t,i)=>({t,i})).filter(x => x.t.estado === col.id && visibles(x.t));
+    const div = document.createElement('div');
+    div.className = 'col' + (col.si ? ' si' : '');
+    div.dataset.estado = col.id;
+    div.innerHTML = `<h2>${col.nombre} <b>${lista.length}</b></h2>` +
+      (lista.length ? '' : '<div class="vacio">Sin tarjetas</div>');
+    for(const {t,i} of lista){
+      const dias = diasDesde(t.fecha);
+      const est = (col.id !== 'entregado' && dias >= 3) ? `<span class="estancada">⏰ ${dias} días sin moverse</span>` : '';
+      const card = document.createElement('div');
+      card.className = 'card'; card.draggable = true; card.dataset.idx = i;
+      card.innerHTML = `<div class="tag">${esc(t.negocio)}</div><div class="t">${esc(t.titulo)}</div>` +
+        (t.nota ? `<div class="n">${esc(t.nota)}</div>` : '') +
+        `<div class="pie"><span class="chip ${esc(t.dueno.toLowerCase())}">${esc(t.dueno.toUpperCase())}</span><span class="fecha">${esc(t.fecha)}</span>${est}</div>`;
+      card.addEventListener('dragstart', e => { e.dataTransfer.setData('text/plain', String(i)); });
+      div.appendChild(card);
+    }
+    div.addEventListener('dragover', e => { e.preventDefault(); div.classList.add('encima'); });
+    div.addEventListener('dragleave', () => div.classList.remove('encima'));
+    div.addEventListener('drop', e => {
+      e.preventDefault(); div.classList.remove('encima');
+      const i = Number(e.dataTransfer.getData('text/plain'));
+      if(!Number.isNaN(i) && tareas[i] && tareas[i].estado !== col.id){
+        tareas[i].estado = col.id; tareas[i].fecha = hoy(); guardar(); pintar();
+      }
+    });
+    board.appendChild(div);
+  }
+}
+
+document.querySelectorAll('.fbtn').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.fbtn').forEach(x => x.classList.remove('on'));
+  b.classList.add('on'); filtroDueno = b.dataset.dueno; pintar();
+}));
+document.getElementById('buscar').addEventListener('input', e => { filtroTexto = e.target.value.trim().toLowerCase(); pintar(); });
+
+const dlg = document.getElementById('dlg');
+const selEstado = document.getElementById('f-estado');
+selEstado.innerHTML = COLUMNAS.map(c => `<option value="${c.id}">${c.nombre}</option>`).join('');
+document.getElementById('btn-nueva').addEventListener('click', () => dlg.showModal());
+document.getElementById('f-crear').addEventListener('click', e => {
+  const titulo = document.getElementById('f-titulo').value.trim();
+  const negocio = document.getElementById('f-negocio').value.trim();
+  if(!titulo || !negocio){ return; }
+  e.preventDefault();
+  tareas.push({titulo, negocio, dueno: document.getElementById('f-dueno').value,
+    estado: selEstado.value, nota: document.getElementById('f-nota').value.trim(), fecha: hoy()});
+  guardar(); dlg.close(); pintar();
+});
+
+document.getElementById('btn-exportar').addEventListener('click', () => {
+  const blob = new Blob([JSON.stringify(tareas, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'tablero-vivo.json'; a.click();
+  URL.revokeObjectURL(a.href);
+});
+const fileImp = document.getElementById('file-importar');
+document.getElementById('btn-importar').addEventListener('click', () => fileImp.click());
+fileImp.addEventListener('change', () => {
+  const f = fileImp.files[0]; if(!f) return;
+  f.text().then(txt => {
+    try{ const d = JSON.parse(txt); if(Array.isArray(d)){ tareas = d; guardar(); pintar(); } }catch(e){ alert('Archivo no válido'); }
+  });
+});
+document.getElementById('btn-semilla').addEventListener('click', () => {
+  if(confirm('¿Volver a los datos de ejemplo? Se reemplaza el tablero actual de este navegador.')){
+    tareas = JSON.parse(JSON.stringify(SEMILLA)); guardar(); pintar();
+  }
+});
+
+document.getElementById('fecha-hoy').textContent =
+  new Date().toLocaleDateString('es-US', {weekday:'long', day:'numeric', month:'long', year:'numeric'}) +
+  ' — los datos viven en este navegador; exporta el JSON para compartir el estado con el equipo';
+pintar();
+</script>
+</body>
+</html>

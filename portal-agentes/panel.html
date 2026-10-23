@@ -25,6 +25,7 @@
       <button class="nav-item" data-panel="panel-demos" id="nav-demos" style="display:none">🎬 Demos</button>
       <button class="nav-item" data-panel="panel-diseno" id="nav-diseno" style="display:none">🎨 Diseño</button>
       <button class="nav-item" data-panel="panel-publicadas" id="nav-publicadas" style="display:none">🌐 Páginas publicadas</button>
+      <button class="nav-item" data-panel="panel-tablero" id="nav-tablero" style="display:none">📋 Tablero del equipo</button>
     </nav>
     <div class="sidebar-user">
       <div class="sidebar-nombre" id="nombre-agente"></div>
@@ -372,6 +373,11 @@
       <div id="lista-publicadas" class="lista"></div>
       <p class="muted small" style="margin-top:16px">Para agregar una página nueva a esta lista, pídela y se carga con su día de pago.</p>
     </section>
+    <section class="panel" id="panel-tablero" style="display:none">
+      <h2>📋 Tablero del equipo</h2>
+      <p class="muted">El trabajo del equipo en cinco columnas: Por hacer, En curso, En revisión (QA), Esperando tu Sí y Entregado. Solo visible para ti.</p>
+      <iframe src="tablero.html" title="Tablero vivo del equipo" style="width:100%;height:calc(100vh - 180px);min-height:700px;border:0;border-radius:12px;background:#10151d"></iframe>
+    </section>
   </main>
 </div>
 
@@ -419,6 +425,7 @@
       document.getElementById('nav-demos').style.display = 'flex';
       document.getElementById('nav-diseno').style.display = 'flex';
       document.getElementById('nav-publicadas').style.display = 'flex';
+      document.getElementById('nav-tablero').style.display = 'flex';
       /* === Páginas publicadas (clientes): día de pago y estado en línea === */
       const PAGINAS_PUBLICADAS = [
         { negocio: 'La Semilla Bakery', url: 'https://semillabakerytampa.com/', diaPago: 21, mantenimiento: 50 },
