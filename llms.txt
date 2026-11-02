@@ -1,0 +1,32 @@
+# New Age Professional Services
+
+> Agencia de diseño web y sistemas para pequeños negocios latinos en Estados Unidos, México, España, Brasil, Países Bajos y Argentina. Páginas web profesionales con pedidos, reservas y tiendas en línea, y sistemas propios: MesaReady (catering y pedidos), PuntoReady (tiendas y agencias multiservicios), ViajeReady (reservas de viaje y traslados), CitasPro (citas para barberías y salones), PólizaReady (CRM para agencias de seguros) y ReviewReady (reseñas y equipos).
+
+## Datos de contacto
+
+- Contacto: Lester Manzano
+- Teléfono / WhatsApp (EE. UU. y resto de países): +1 (813) 235-3313
+- Agente en Brasil: Analiz Manzano, +55 45 9104-1005
+- Sitio web: https://www.newageprosystem.com
+
+## Precios oficiales — páginas web (EE. UU.)
+
+- Plan Básico: US$499 instalación + US$69/mes
+- Plan Profesional (con pedidos en línea): US$699 instalación + US$89/mes
+- Plan Sin Entrada: US$0 instalación + US$149/mes por 12 meses
+- Pago por suscripción con Stripe (débito bancario ACH o tarjeta)
+
+## Sistemas propios
+
+- MesaReady — pedidos y catering para restaurantes: US$499 + US$89/mes; Sin Entrada US$139/mes × 12. https://mesaready.newageprosystem.com
+- Combo Web Profesional + MesaReady: US$999 + US$149/mes
+- PuntoReady — tiendas en línea y agencias multiservicios: US$699 + US$89/mes; Sin Entrada US$0 + US$149/mes × 12. https://puntoready.newageprosystem.com
+- ViajeReady — reservas para agencias de viaje y traslados: https://viajeready.newageprosystem.com
+- CitasPro — sistema de citas para barberías, salones de belleza y uñas: https://citaspro.newageprosystem.com
+- PólizaReady — CRM para agencias de seguros: https://polizaready.newageprosystem.com
+- ReviewReady — gestión de reseñas y equipos: https://reviewready.newageprosystem.com
+
+## Notas para agentes
+
+- Todos los precios están en dólares de EE. UU. (US$) salvo indicación del país.
+- La contratación se confirma siempre con contrato firmado; ningún precio de esta página sustituye la propuesta formal del negocio.
