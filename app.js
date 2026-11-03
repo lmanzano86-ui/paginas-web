@@ -1,4 +1,4 @@
-/* New Age Professional Services — interactividad v2 */
+/* New Age Professional System — interactividad v2 */
 (function(){
   "use strict";
 
