@@ -8,7 +8,7 @@
       descripcion: "10% de descuento en tu instalación",
       enlaces: {
         "lanzamiento": "https://buy.stripe.com/6oU00k7M60vndQh6151gs00",
-        "profesional": "https://buy.stripe.com/4gMeVe0jE3Hz3bDgFJ1gs01"
+        "profesional": "https://buy.stripe.com/4gM5kEc2m91Th2tahl1gs0e"
       }
     }
   };
