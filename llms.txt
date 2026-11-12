@@ -19,11 +19,13 @@
 ## Sistemas propios
 
 - MesaReady — pedidos y catering para restaurantes: US$499 + US$89/mes; Sin Entrada US$139/mes × 12. https://mesaready.newageprosystem.com
-- Combo Web Profesional + MesaReady: US$1,000 de instalación + US$150/mes (con descuento por combo: 25% en la instalación, regular US$1,333; 15% en la mensualidad, regular US$176)
+- Combo Web Profesional + MesaReady: US$1,000 de instalación + US$150/mes (con descuento por combo: 25% en la instalación, regular US$1,333; 15% en la mensualidad, regular US$176); Sin Entrada US$250/mes × 12 y luego US$150/mes
 - PuntoReady — tiendas en línea y agencias multiservicios: US$699 + US$89/mes; Sin Entrada US$0 + US$149/mes × 12. https://puntoready.newageprosystem.com
+- Combo Web Profesional + PuntoReady: US$1,100 de instalación + US$150/mes; Sin Entrada US$250/mes × 12 y luego US$150/mes
 - ViajeReady — reservas para agencias de viaje y traslados: https://viajeready.newageprosystem.com
 - CitasPro — sistema de citas para barberías, salones de belleza y uñas: https://citaspro.newageprosystem.com
 - PólizaReady — CRM para agencias de seguros: https://polizaready.newageprosystem.com
+- CréditoReady — reparación de crédito con sistema propio: https://credito.newageprosystem.com
 - ReviewReady — gestión de reseñas y equipos: https://reviewready.newageprosystem.com
 
 ## Notas para agentes
