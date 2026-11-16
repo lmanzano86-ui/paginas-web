@@ -577,5 +577,31 @@ input,select,textarea{background:#0A0E13;color:var(--texto);border-color:var(--f
 <a class="wa" href="https://wa.me/18132353313?text=Hola%2C%20quiero%20informaci%C3%B3n%20para%20mi%20negocio" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">WhatsApp</a>
 <script src="app.js" defer></script>
 <script>document.getElementById('anio').textContent=new Date().getFullYear();</script>
+<!-- ===== Setter web de New Age (preview local) — se agrega sin tocar ninguna sección ===== -->
+<button id="setter-burbuja" class="setter-burbuja" type="button" aria-label="Abrir el asistente de New Age">
+  <span class="setter-punto" aria-hidden="true"></span>
+  <span>¿Te ayudo?</span>
+</button>
+<section id="setter-panel" class="setter-panel" aria-label="Asistente de New Age">
+  <header class="setter-cabeza">
+    <div class="setter-avatar" aria-hidden="true">N</div>
+    <div>
+      <h2>Asistente de New Age</h2>
+      <p><span class="enlinea">● En línea</span> · Respondo y te agendo con Lester</p>
+    </div>
+    <button id="setter-cerrar" class="setter-cerrar" type="button" aria-label="Cerrar el asistente">×</button>
+  </header>
+  <div id="setter-mensajes" class="setter-mensajes" aria-live="polite"></div>
+  <form id="setter-form" class="setter-form">
+    <input id="setter-input" type="text" placeholder="Escribe tu pregunta…" autocomplete="off" aria-label="Escribe tu pregunta">
+    <button class="setter-enviar" type="submit">Enviar</button>
+  </form>
+  <div class="setter-pie">Asistente virtual de New Age · Si prefieres, directo con Lester: <a href="https://wa.me/18132353313" target="_blank" rel="noopener">WhatsApp (813) 235-3313</a></div>
+</section>
+<link rel="stylesheet" href="setter.css">
+<script>window.SETTER_API_BASE = "https://setter.newageprosystem.com";</script>
+<script src="setter-real.js" defer></script>
+<!-- ===== Fin del setter web ===== -->
+
 </body>
 </html>

@@ -1,0 +1,101 @@
+/* Setter web de New Age — widget autocontenido (preview local).
+   No modifica ninguna sección de la página: solo agrega la burbuja y el panel.
+   Colores: los de la página principal (azul predominante, celeste, violeta, coral). */
+:root{
+  --setter-azul:#2563eb; --setter-azul-oscuro:#1e3a8a; --setter-celeste:#38bdf8;
+  --setter-violeta:#8b5cf6; --setter-coral:#fb7185; --setter-tinta:#0f172a;
+  --setter-fondo:#f8fafc; --setter-borde:#e2e8f0;
+}
+.setter-burbuja{
+  position:fixed; right:18px; bottom:18px; z-index:9990;
+  display:flex; align-items:center; gap:10px;
+  background:linear-gradient(135deg,var(--setter-azul),var(--setter-violeta));
+  color:#fff; border:none; cursor:pointer;
+  padding:13px 18px 13px 14px; border-radius:999px;
+  font:600 15px/1.1 system-ui,-apple-system,"Segoe UI",sans-serif;
+  box-shadow:0 10px 28px rgba(30,58,138,.4);
+}
+.setter-burbuja .setter-punto{
+  width:10px; height:10px; border-radius:50%;
+  background:var(--setter-coral); flex:none;
+  box-shadow:0 0 0 3px rgba(251,113,133,.35);
+}
+.setter-burbuja:hover{ filter:brightness(1.07); }
+.setter-burbuja:focus-visible{ outline:3px solid var(--setter-celeste); outline-offset:2px; }
+
+.setter-panel{
+  position:fixed; right:18px; bottom:18px; z-index:9991;
+  width:min(384px,calc(100vw - 24px)); height:min(600px,calc(100dvh - 36px));
+  background:#fff; border-radius:18px; overflow:hidden;
+  display:none; flex-direction:column;
+  box-shadow:0 24px 60px rgba(15,23,42,.35);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif; color:var(--setter-tinta);
+}
+.setter-panel.abierto{ display:flex; }
+.setter-cabeza{
+  background:linear-gradient(135deg,var(--setter-azul-oscuro),var(--setter-azul) 55%,var(--setter-violeta));
+  color:#fff; padding:14px 16px; display:flex; align-items:center; gap:12px; flex:none;
+}
+.setter-avatar{
+  width:42px; height:42px; border-radius:50%; flex:none;
+  background:rgba(255,255,255,.16); border:2px solid var(--setter-celeste);
+  display:flex; align-items:center; justify-content:center;
+  font-weight:800; font-size:19px; color:#fff;
+}
+.setter-cabeza > div{ flex:1; min-width:0; }
+.setter-cabeza h2{ margin:0; font-size:16px; line-height:1.2; text-wrap:balance; }
+.setter-cabeza p{ margin:2px 0 0; font-size:12px; color:#bae6fd; }
+.setter-cabeza p .enlinea{ color:#4ade80; }
+.setter-cerrar{
+  margin-left:auto; background:transparent; border:none; color:#fff;
+  font-size:22px; cursor:pointer; line-height:1; padding:4px 6px; flex:none;
+}
+.setter-mensajes{
+  flex:1; overflow-y:auto; padding:14px 12px; background:var(--setter-fondo);
+  display:flex; flex-direction:column; gap:8px;
+}
+.setter-msg{
+  max-width:86%; padding:9px 12px; border-radius:14px;
+  font-size:14px; line-height:1.45; overflow-wrap:break-word;
+}
+.setter-msg.bot{
+  background:#fff; border:1px solid var(--setter-borde);
+  border-bottom-left-radius:4px; align-self:flex-start;
+}
+.setter-msg.user{
+  background:var(--setter-azul); color:#fff;
+  border-bottom-right-radius:4px; align-self:flex-end;
+}
+.setter-msg strong{ font-weight:700; }
+.setter-chips{ display:flex; flex-wrap:wrap; gap:6px; align-self:flex-start; }
+.setter-chip{
+  background:#fff; border:1.5px solid var(--setter-azul); color:var(--setter-azul-oscuro);
+  border-radius:999px; padding:6px 12px; font-size:13px; font-weight:600; cursor:pointer;
+}
+.setter-chip:hover{ background:#eff6ff; }
+.setter-chip.corales{ border-color:var(--setter-coral); color:#be123c; }
+.setter-form{
+  flex:none; display:flex; gap:8px; padding:10px; background:#fff;
+  border-top:1px solid var(--setter-borde);
+}
+.setter-form input{
+  flex:1; min-width:0; border:1.5px solid var(--setter-borde); border-radius:999px;
+  padding:10px 14px; font-size:14px; font-family:inherit;
+}
+.setter-form input:focus{ outline:2px solid var(--setter-celeste); border-color:transparent; }
+.setter-enviar{
+  background:var(--setter-azul); color:#fff; border:none; cursor:pointer;
+  border-radius:999px; padding:10px 16px; font-weight:700; font-size:14px; flex:none;
+}
+.setter-pie{
+  flex:none; text-align:center; font-size:11px; color:#64748b;
+  padding:6px 10px 9px; background:#fff;
+}
+.setter-pie a{ color:var(--setter-azul-oscuro); font-weight:700; text-decoration:none; }
+@media (max-width:480px){
+  .setter-burbuja{ right:12px; bottom:12px; }
+  .setter-panel{ right:12px; bottom:12px; }
+}
+@media (prefers-reduced-motion:reduce){
+  .setter-burbuja,.setter-chip{ transition:none; }
+}
