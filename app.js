@@ -2,45 +2,6 @@
 (function(){
   "use strict";
 
-  /* ---------- cupones (configuración de Lester) ---------- */
-  var CUPONES = {
-    "BIENVENIDA10": {
-      descripcion: "10% de descuento en tu instalación",
-      enlaces: {
-        "lanzamiento": "https://buy.stripe.com/6oU00k7M60vndQh6151gs00",
-        "profesional": "https://buy.stripe.com/4gM5kEc2m91Th2tahl1gs0e"
-      }
-    }
-  };
-  var input = document.getElementById("coupon-input"),
-      applyBtn = document.getElementById("coupon-apply"),
-      msg = document.getElementById("coupon-msg"),
-      removeBtn = document.getElementById("coupon-remove");
-  if (input) {
-    var originales = {};
-    document.querySelectorAll("a.pay[data-plan]").forEach(function(a){ originales[a.dataset.plan] = a.href; });
-    function aplicar(){
-      var codigo = input.value.trim().toUpperCase(), cupon = CUPONES[codigo];
-      if (!cupon) { msg.textContent = "Ese código no es válido. Revísalo e intenta de nuevo."; msg.className = "coupon-msg err"; return; }
-      var n = 0;
-      document.querySelectorAll("a.pay[data-plan]").forEach(function(a){
-        var link = cupon.enlaces[a.dataset.plan];
-        if (link) { a.href = link; n++; }
-      });
-      if (!n) { msg.textContent = "Ese cupón no aplica a estos planes."; msg.className = "coupon-msg err"; return; }
-      msg.textContent = "¡Cupón aplicado! " + cupon.descripcion + "."; msg.className = "coupon-msg ok";
-      removeBtn.style.display = "inline-block"; applyBtn.disabled = true; input.disabled = true;
-    }
-    function quitar(){
-      document.querySelectorAll("a.pay[data-plan]").forEach(function(a){ a.href = originales[a.dataset.plan]; });
-      input.value = ""; input.disabled = false; applyBtn.disabled = false;
-      msg.textContent = ""; msg.className = "coupon-msg"; removeBtn.style.display = "none";
-    }
-    applyBtn.addEventListener("click", aplicar);
-    removeBtn.addEventListener("click", quitar);
-    input.addEventListener("keydown", function(e){ if (e.key === "Enter") aplicar(); });
-  }
-
   /* ---------- FAQ acordeón ---------- */
   document.querySelectorAll(".faq-item").forEach(function(item){
     var q = item.querySelector(".faq-q"), a = item.querySelector(".faq-a");

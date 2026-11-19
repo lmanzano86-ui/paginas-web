@@ -145,11 +145,6 @@ nav.principal a:hover{color:var(--verde)}
 .plan ul li::before{content:"✓ ";color:var(--verde);font-weight:800}
 .plan .btn{margin-top:auto;justify-content:center}
 .sello{align-self:flex-start;background:var(--celeste);color:var(--tinta);font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:.25rem .7rem;margin-bottom:.8rem}
-.cupon{margin-top:1.4rem;background:var(--panel);border:1px dashed var(--filete-claro);border-radius:var(--r-precio);padding:1.1rem 1.3rem;display:flex;flex-wrap:wrap;gap:.7rem;align-items:center}
-.cupon label{font-weight:700}
-.cupon input{background:var(--noche);border:1px solid var(--filete-claro);border-radius:8px;color:var(--texto);padding:.6rem .8rem;font:inherit;font-size:.95rem;min-height:44px}
-.cupon button{background:var(--panel-2);color:var(--texto);border:1px solid var(--filete-claro);border-radius:999px;padding:.55rem 1.1rem;font:inherit;font-weight:700;cursor:pointer;min-height:44px}
-#coupon-msg{color:var(--verde);font-weight:600}
 .nota{color:var(--tenue);font-size:.9rem;margin-top:1rem}
 /* combos */
 .combos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:2.2rem}
@@ -477,13 +472,6 @@ input,select,textarea{background:#0A0E13;color:var(--texto);border-color:var(--f
         <a class="btn btn-contorno pay" data-plan="sinentrada" href="https://buy.stripe.com/aFa14o8Qa5PHdQh1KP1gs02" target="_blank" rel="noopener">Pagar con tarjeta</a>
       </article>
     </div>
-    <div class="cupon">
-      <label for="coupon-input">¿Tienes un cupón?</label>
-      <input id="coupon-input" type="text" placeholder="Código del cupón" autocomplete="off">
-      <button id="coupon-apply" type="button">Aplicar</button>
-      <button id="coupon-remove" type="button" hidden>Quitar</button>
-      <span id="coupon-msg" role="status"></span>
-    </div>
     <p class="nota">Cambios de diseño en los primeros 30 días: si no estás conforme con el diseño, te lo cambiamos sin costo adicional. Ni la instalación ni las mensualidades ya pagadas son reembolsables.</p>
   </div>
 </section>
@@ -502,7 +490,7 @@ input,select,textarea{background:#0A0E13;color:var(--texto);border-color:var(--f
       </article>
       <article class="combo">
         <h3>Web Profesional + PuntoReady</h3>
-        <p><span class="tachado">$1,398</span> <span class="grande">$1,100</span> de instalación · <span class="tachado">$178</span> <strong>$150/mes</strong></p>
+        <p><span class="tachado">$1,467</span> <span class="grande">$1,100</span> de instalación · <span class="tachado">$176</span> <strong>$150/mes</strong></p>
         <ul><li>Todo lo del plan Profesional</li><li>PuntoReady: envíos, tienda, viajes y trámites de tu agencia en un solo sistema</li><li>Tu tienda en línea con tu marca y tus clientes</li><li>Sin Entrada: $250/mes por 12 meses, luego $150/mes</li></ul>
         <a class="btn btn-verde" href="https://wa.me/18132353313?text=Hola%2C%20quiero%20el%20combo%20Web%20%2B%20PuntoReady" target="_blank" rel="noopener">Quiero este combo</a>
       </article>
