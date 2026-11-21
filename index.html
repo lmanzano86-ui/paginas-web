@@ -25,16 +25,12 @@
 </script>
 <style>
 :root{
-  --noche:#274156; --panel:#2e4e69; --panel-2:#335672; --filete:#486a86; --filete-claro:#5d84a5;
-  --verde:#38bdf8; --verde-oscuro:#155e75; --celeste:#a78bfa; --coral:#fb923c; --tinta:#101828;
-  --grad:linear-gradient(92deg,var(--verde),var(--celeste));
-  --brillo:0 10px 30px rgba(56,189,248,.28);
-  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
-  --texto:#eef4fa; --suave:#c3d3e2; --tenue:#93a9bd;
-  --blanco:#ffffff; --peligro:#f87171;
+  --noche:#0C0F14; --panel:#10161F; --panel-2:#16202E; --azul:#14344D; --azul-borde:#2E5F85;
+  --filete:#22344A; --filete-claro:#3D4856;
+  --texto:#E8EDF3; --suave:#A9B7C6; --tenue:#7E93A9;
+  --celeste:#7FB2D9; --coral:#FF6B4A; --verde:#4ADE80; --amarillo:#FBBF24; --rojo:#F87171;
   --display:"Space Grotesk",system-ui,sans-serif; --cuerpo:"Inter",system-ui,sans-serif;
-  --sombra-wa:0 8px 24px rgba(0,0,0,.45);
-  --r-tarjeta:14px; --r-precio:10px; --ancho:1180px;
+  --r:14px; --ancho:1120px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -42,84 +38,182 @@ html,body{overflow-x:clip}
 body{background:var(--noche);color:var(--texto);font-family:var(--cuerpo);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
 img,svg{display:block;max-width:100%}
 a{color:var(--celeste)}
-h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.12;letter-spacing:-.01em}
-h1{font-size:clamp(2.3rem,5.2vw,3.7rem);font-weight:700}
-h2{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:700;margin-bottom:.55em}
-h3{font-size:1.18rem;font-weight:600}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.15;letter-spacing:-.01em}
+h1{font-size:clamp(2.2rem,5vw,3.55rem);font-weight:700}
+h2{font-size:clamp(1.65rem,3.4vw,2.45rem);font-weight:700;margin-bottom:.55em}
+h3{font-size:1.16rem;font-weight:600}
 p{overflow-wrap:break-word;min-width:0}
 .contenedor{width:min(var(--ancho),100% - 2.5rem);margin-inline:auto}
-section{padding:clamp(3.5rem,8vw,6rem) 0}
-.etiqueta{display:inline-block;font-family:var(--mono);font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--verde);border:1px solid var(--verde-oscuro);border-radius:999px;padding:.32rem .8rem;margin-bottom:1rem}
+section{padding:clamp(3.6rem,8vw,6.2rem) 0}
+.etiqueta{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--coral);border:1px solid var(--coral);border-radius:999px;padding:.32rem .8rem;margin-bottom:1rem}
 .sub{color:var(--suave);max-width:62ch}
-.btn{display:inline-flex;align-items:center;gap:.5rem;min-height:48px;padding:.72rem 1.5rem;border-radius:999px;font-weight:700;font-size:1rem;text-decoration:none;border:1px solid transparent;transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .2s ease}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;padding:.72rem 1.5rem;border-radius:10px;font-weight:700;font-size:1rem;text-decoration:none;border:1px solid var(--filete-claro);background:#0C0F14;color:var(--texto);transition:border-color .2s ease,background-color .2s ease,transform .2s ease}
 .btn:active{transform:scale(.98)}
-.btn-verde{background:var(--grad);color:var(--tinta);font-weight:800}
-.btn-verde:hover{box-shadow:var(--brillo)}
-.btn-contorno{border-color:var(--filete-claro);color:var(--texto);background:transparent}
+.btn-coral{border-color:var(--coral);background:var(--coral);color:#fff}
+.btn-coral:hover{background:#ff7d5f;border-color:#ff7d5f}
 .btn-contorno:hover{border-color:var(--celeste);color:var(--celeste)}
-.btn:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--celeste);outline-offset:3px;border-radius:6px}
+.btn:focus-visible,a:focus-visible,summary:focus-visible,button:focus-visible{outline:2px solid var(--celeste);outline-offset:3px;border-radius:6px}
+.rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
 /* ---------- encabezado ---------- */
-header{position:sticky;top:0;z-index:50;background:var(--noche);border-bottom:1px solid var(--filete)}
+header{position:sticky;top:0;z-index:50;background:rgba(12,15,20,.96);border-bottom:1px solid var(--filete)}
 .barra{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:68px}
-.marca{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--texto);font-family:var(--display);font-weight:700;font-size:1.06rem}
+.marca{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--texto);font-family:var(--display);font-weight:700;font-size:1.05rem}
 .marca .punto{width:11px;height:11px;border-radius:50%;background:var(--coral);flex:none}
 nav.principal{display:flex;gap:1.6rem}
 nav.principal a{color:var(--suave);text-decoration:none;font-size:.95rem;font-weight:600}
-nav.principal a:hover{color:var(--verde)}
+nav.principal a:hover{color:var(--celeste)}
 .barra .btn{min-height:44px;padding:.5rem 1.1rem;font-size:.95rem}
-@media (max-width:820px){nav.principal{display:none}}
+@media (max-width:900px){nav.principal{display:none}.barra .btn-agentes{display:none}}
 /* ---------- hero ---------- */
-.hero{position:relative;padding:clamp(2.6rem,6vw,4.5rem) 0 clamp(3rem,6vw,4.5rem);background-image:linear-gradient(var(--filete) 1px,transparent 1px),linear-gradient(90deg,var(--filete) 1px,transparent 1px);background-size:56px 56px;background-position:center top}
-.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(55% 70% at 85% 0%,rgba(167,139,250,.20),transparent 60%),radial-gradient(50% 65% at 8% 10%,rgba(56,189,248,.22),transparent 60%),linear-gradient(var(--noche),transparent 88%);pointer-events:none}
-.hero .contenedor{position:relative;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(1.8rem,4vw,3.5rem);align-items:center}
-.hero h1 .neon{color:var(--verde)}
-.hero .frase{color:var(--suave);font-size:1.13rem;margin:1.1rem 0 1.7rem;max-width:52ch}
-.acciones{display:flex;flex-wrap:wrap;gap:.8rem}
-.prueba-mini{margin-top:1.9rem;border-top:1px solid var(--filete);padding-top:1.1rem}
-.prueba-mini p{font-size:.82rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--tenue);margin-bottom:.55rem}
-.prueba-mini ul{list-style:none;display:flex;flex-wrap:wrap;gap:.45rem 1.2rem}
+.hero{padding:clamp(2.8rem,6vw,4.6rem) 0 clamp(3rem,6vw,4.6rem);text-align:center;background:radial-gradient(640px 320px at 50% -40px,rgba(31,78,121,.5),rgba(12,15,20,0) 70%)}
+.hero h1{max-width:20ch;margin-inline:auto}
+.hero h1 .hl{color:var(--celeste)}
+.hero .frase{color:var(--suave);font-size:1.13rem;margin:1.15rem auto 1.8rem;max-width:56ch}
+.acciones{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center}
+.hero-note{margin-top:1rem;font-size:.9rem;color:var(--tenue)}
+/* ---------- panel del sistema ---------- */
+.stage{position:relative;margin-top:3.2rem;text-align:left}
+.panel{background:var(--panel);border:1px solid var(--filete);border-radius:18px;box-shadow:0 30px 80px rgba(0,0,0,.5);overflow:hidden}
+.panel-bar{display:flex;align-items:center;gap:8px;background:#0E141D;padding:13px 18px;border-bottom:1px solid var(--filete)}
+.win-dot{width:11px;height:11px;border-radius:50%;flex:none}
+.panel-url{margin-left:10px;background:var(--panel-2);color:var(--tenue);font-size:.8rem;padding:5px 14px;border-radius:7px;white-space:nowrap;overflow:hidden}
+.panel-live{margin-left:auto;color:var(--verde);font-size:.8rem;font-weight:700;letter-spacing:.06em;white-space:nowrap}
+.live-dot{display:inline-block;animation:blink 1.6s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.panel-body{display:flex}
+.side{width:196px;flex:none;background:#0E141D;border-right:1px solid var(--filete);padding:20px 14px}
+.side-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:9px;font-size:.92rem;color:#93A6BB;margin-bottom:4px}
+.side-item.active{background:var(--azul);color:#fff;font-weight:600}
+.side-ico{width:26px;height:26px;border-radius:7px;background:#1B2C40;display:flex;align-items:center;justify-content:center;flex:none}
+.side-item.active .side-ico{background:#1F4E79}
+.main{flex:1;padding:22px 24px 24px;min-width:0}
+.main-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.main-title{font-family:var(--display);font-size:1.18rem;font-weight:700}
+.main-sub{font-size:.85rem;color:var(--tenue);margin-top:2px}
+.chip{background:var(--azul);color:#A9CCE8;font-size:.8rem;font-weight:600;padding:7px 14px;border-radius:999px}
+.kpis{display:flex;gap:14px;margin-top:18px;flex-wrap:wrap}
+.kpi{flex:1 1 140px;background:var(--panel-2);border:1px solid var(--filete);border-radius:13px;padding:15px 17px}
+.kpi-label{font-size:.74rem;color:var(--tenue);letter-spacing:.05em;font-weight:600}
+.kpi-value{font-family:var(--display);font-size:1.65rem;font-weight:700;margin-top:5px}
+.kpi-delta{font-size:.8rem;margin-top:3px;font-weight:700}
+.up{color:var(--verde)} .warn{color:var(--amarillo)}
+.panel-cols{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap}
+.chart-card{flex:1.5 1 300px;background:var(--panel-2);border:1px solid var(--filete);border-radius:13px;padding:17px 19px}
+.feed-card{flex:1 1 260px;background:var(--panel-2);border:1px solid var(--filete);border-radius:13px;padding:17px 19px}
+.donut-card{flex:.85 1 220px;background:var(--panel-2);border:1px solid var(--filete);border-radius:13px;padding:17px 19px}
+.card-title{font-size:.9rem;font-weight:700;color:#C7D5E4}
+.card-sub{font-size:.78rem;color:var(--tenue);margin-top:2px}
+.chart-area{position:relative;height:122px;margin-top:14px}
+.chart-area .bar{position:absolute;bottom:20px;width:9%;border-radius:6px 6px 3px 3px;background:#2C5F8A;transform-origin:bottom;animation:grow 1.1s cubic-bezier(.2,.8,.3,1) both}
+.chart-area .bar.hot{background:var(--coral)}
+@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.bar-day{position:absolute;bottom:0;width:9%;text-align:center;font-size:.7rem;color:var(--tenue)}
+.feed-row{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid #1E2D40}
+.feed-row:last-child{border-bottom:none}
+.feed-ico{width:30px;height:30px;border-radius:8px;background:#1B2C40;display:flex;align-items:center;justify-content:center;flex:none}
+.feed-text{font-size:.85rem;line-height:1.35}
+.feed-text b{color:#fff}
+.feed-time{margin-left:auto;font-size:.74rem;color:#63788D;flex:none}
+.feed-row.enter{animation:slideIn .55s ease-out}
+@keyframes slideIn{from{opacity:0;transform:translateY(-9px)}to{opacity:1;transform:translateY(0)}}
+.donut-wrap{display:flex;align-items:center;gap:15px;margin-top:12px}
+.legend{font-size:.78rem;color:#93A6BB;line-height:1.9}
+.legend b{color:var(--texto)}
+.lg-dot{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:7px}
+.float-card{position:absolute;background:#131C28;border:1px solid #2A4059;border-radius:13px;padding:12px 16px;box-shadow:0 18px 44px rgba(0,0,0,.55);display:flex;align-items:center;gap:11px;animation:floaty 5.2s ease-in-out infinite;z-index:3}
+.float-1{top:-24px;left:36px}
+.float-2{bottom:56px;right:-14px;animation-delay:2.6s}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.float-ico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex:none}
+.float-title{font-size:.88rem;font-weight:700}
+.float-sub{font-size:.76rem;color:var(--tenue)}
+@media (max-width:900px){.side{display:none}.float-2{display:none}}
+@media (max-width:560px){.float-1{left:8px}}
+/* cinta de actividad */
+.ticker{overflow:hidden;margin-top:1.7rem;border:1px solid var(--filete);background:#0E141D;border-radius:999px;padding:11px 0;text-align:left}
+.ticker-track{display:flex;gap:54px;white-space:nowrap;width:max-content;animation:tick 32s linear infinite;font-size:.88rem;color:#93A6BB;padding-left:27px}
+.ticker-track b{color:var(--texto)}
+.ticker-track .tk-dot{color:var(--coral)}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* prueba mini */
+.prueba-mini{margin-top:2.4rem;border-top:1px solid var(--filete);padding-top:1.2rem;text-align:center}
+.prueba-mini p{font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--tenue);margin-bottom:.6rem}
+.prueba-mini ul{list-style:none;display:flex;flex-wrap:wrap;gap:.45rem 1.4rem;justify-content:center}
 .prueba-mini a{color:var(--suave);text-decoration:none;font-weight:600;font-size:.95rem}
-.prueba-mini a:hover{color:var(--verde)}
-@media (max-width:900px){.hero .contenedor{grid-template-columns:minmax(0,1fr)}}
-/* constelación de sistemas */
-.constelacion{background:var(--panel-2);border:1px solid var(--filete-claro);border-radius:var(--r-tarjeta);padding:1.2rem;box-shadow:var(--brillo)}
-.constelacion .cab{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem}
-.constelacion .cab strong{margin-right:auto}
-.puntos{display:inline-flex;gap:.35rem}
-.puntos i{width:10px;height:10px;border-radius:50%;background:var(--coral)}
-.puntos i:nth-child(2){background:var(--verde)}
-.puntos i:nth-child(3){background:var(--celeste)}
-.constelacion .cab strong{font-family:var(--display);font-size:.95rem}
-.vivo{display:inline-flex;align-items:center;gap:.4rem;font-size:.78rem;font-weight:700;color:var(--coral)}
-.vivo::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--coral)}
-.red{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem}
-.nodo{display:block;background:var(--panel-2);border:1px solid var(--filete);border-radius:12px;padding:.85rem .95rem;text-decoration:none;transition:border-color .2s ease,transform .2s ease}
-.nodo:hover{border-color:var(--verde);transform:translateY(-2px);box-shadow:var(--brillo)}
-.nodo b{display:block;color:var(--texto);font-family:var(--display);font-size:1rem}
-.nodo span{color:var(--tenue);font-size:.85rem}
-.nodo.ancho{grid-column:1/-1;border-color:var(--celeste)}
-.nodo.ancho b{color:var(--celeste)}
-@media (max-width:480px){.red{grid-template-columns:minmax(0,1fr)}}
+.prueba-mini a:hover{color:var(--celeste)}
 /* ---------- tiras y tarjetas ---------- */
-.dolores{background:var(--panel);border-block:1px solid var(--filete)}
+.dolores{background:#0F1D29;border-block:1px solid var(--filete)}
 .parrilla-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:2.2rem}
 @media (max-width:900px){.parrilla-3{grid-template-columns:minmax(0,1fr)}}
-.tarjeta{background:var(--panel-2);border:1px solid var(--filete);border-radius:var(--r-tarjeta);padding:1.4rem}
-.dolores .tarjeta{background:var(--noche)}
+.tarjeta{background:var(--panel-2);border:1px solid var(--filete);border-radius:var(--r);padding:1.4rem}
 .tarjeta h3{margin-bottom:.45rem}
 .tarjeta p{color:var(--suave);font-size:.97rem}
-.tarjeta .ico{font-size:1.5rem;margin-bottom:.7rem}
-.bento{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:2.2rem}
-@media (max-width:900px){.bento{grid-template-columns:minmax(0,1fr)}}
-.bento .tarjeta{display:flex;flex-direction:column;gap:.4rem}
-.bento .tarjeta.grande{grid-column:span 2}
-@media (max-width:900px){.bento .tarjeta.grande{grid-column:auto}}
-.bento .tarjeta a{margin-top:auto;font-weight:700;text-decoration:none}
-.bento .tarjeta a:hover{text-decoration:underline}
+.tarjeta .ico{margin-bottom:.7rem}
+/* estadísticas */
+.stats-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--azul-borde);border-radius:var(--r);background:var(--azul);overflow:hidden}
+.stat{padding:1.4rem 1rem;text-align:center;border-left:1px solid var(--azul-borde)}
+.stat:first-child{border-left:none}
+.stat b{display:block;font-family:var(--display);font-size:clamp(1.6rem,3.4vw,2.3rem);color:var(--coral)}
+.stat span{font-size:.85rem;color:#C7D5E4}
+@media (max-width:700px){.stats-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.stat:nth-child(3){border-left:none}.stat:nth-child(n+3){border-top:1px solid var(--azul-borde)}}
+/* portafolio */
+.filters{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin:1.8rem 0}
+.filters button{background:var(--panel-2);border:1px solid var(--filete);color:var(--suave);border-radius:999px;padding:.55rem 1.15rem;font-size:.9rem;font-weight:600;cursor:pointer;font-family:var(--cuerpo);min-height:44px}
+.filters button.on{background:#0C0F14;color:var(--texto);border-color:var(--coral)}
+.demo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.9rem}
+@media (max-width:900px){.demo-grid{grid-template-columns:minmax(0,1fr)}}
+.demo{display:flex;flex-direction:column;gap:.35rem;background:var(--panel-2);border:1px solid var(--filete);border-radius:var(--r);padding:1.15rem 1.25rem;text-decoration:none;transition:border-color .2s ease,transform .2s ease}
+.demo:hover{border-color:var(--celeste);transform:translateY(-2px)}
+.demo.hide{display:none}
+.demo .tag{align-self:flex-start;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);border:1px solid var(--coral);border-radius:999px;padding:.15rem .6rem}
+.demo h3{color:var(--texto)}
+.demo p{color:var(--suave);font-size:.93rem}
+.demo .url{color:var(--tenue);font-size:.85rem;margin-top:auto}
+.demo .go{color:var(--celeste);font-weight:700}
+.muted{color:var(--tenue)}
+/* ---------- consola de sistemas ---------- */
+.console{margin-top:2.4rem;background:var(--panel);border:1px solid var(--filete);border-radius:18px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.console-bar{display:flex;align-items:center;gap:8px;background:#0E141D;padding:13px 18px;border-bottom:1px solid var(--filete)}
+.console-body{display:flex}
+.sys-list{width:318px;flex:none;background:#0E141D;border-right:1px solid var(--filete);padding:14px}
+.sys-item{display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:11px;cursor:pointer;margin-bottom:4px;border:1px solid transparent}
+.sys-item:hover{background:#131C28}
+.sys-item.active{background:var(--azul);border-color:var(--azul-borde)}
+.sys-dot{width:9px;height:9px;border-radius:50%;background:var(--verde);flex:none;box-shadow:0 0 8px rgba(74,222,128,.8)}
+.sys-name{font-size:1.02rem;font-weight:700;color:var(--texto)}
+.sys-tag{font-size:.78rem;color:var(--tenue);margin-top:1px}
+.sys-arrow{margin-left:auto;color:#63788D;font-size:1.25rem}
+.sys-item.active .sys-arrow{color:var(--celeste)}
+.sys-detail{flex:1;padding:30px 34px;min-width:0}
+.sys-detail.swap{animation:slideIn .45s ease-out}
+.sys-detail-head{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.sys-detail h3{font-size:1.8rem;font-weight:700}
+.sys-detail .tag{font-size:.76rem;font-weight:700;color:var(--verde);background:rgba(74,222,128,.1);padding:5px 11px;border-radius:999px}
+.sys-detail p{font-size:1.04rem;line-height:1.6;color:var(--suave);margin-top:13px}
+.sys-feats{margin-top:20px}
+.sys-feat{font-size:.99rem;padding:9px 0 9px 30px;position:relative;border-bottom:1px solid #1B2939;color:var(--texto)}
+.sys-feat:last-child{border-bottom:none}
+.sys-feat::before{content:"✓";position:absolute;left:2px;color:var(--verde);font-weight:800}
+.sys-ideal{margin-top:20px;background:var(--panel-2);border:1px solid var(--filete);border-radius:11px;padding:13px 18px;font-size:.93rem;color:#A9CCE8}
+.sys-link{display:inline-block;margin-top:20px;font-weight:700;text-decoration:none;color:var(--celeste)}
+.sys-link:hover{text-decoration:underline}
+@media (max-width:860px){.console-body{flex-direction:column}.sys-list{width:auto;border-right:none;border-bottom:1px solid var(--filete)}}
+/* ---------- red / infraestructura ---------- */
+.net-card{margin-top:2.4rem;background:var(--panel);border:1px solid var(--filete);border-radius:18px;padding:26px 30px 6px}
+.net-card svg{width:100%;height:auto}
+.net-cols{display:flex;gap:1rem;margin-top:1.1rem;flex-wrap:wrap}
+.net-col{flex:1 1 280px;background:var(--panel);border:1px solid var(--filete);border-radius:var(--r);padding:1.35rem 1.45rem}
+.net-col h3{font-size:1.12rem;display:flex;align-items:center;gap:10px}
+.net-col p{font-size:.95rem;line-height:1.55;color:var(--suave);margin-top:8px}
+.net-ico{width:34px;height:34px;border-radius:9px;background:var(--azul);display:flex;align-items:center;justify-content:center;flex:none}
+/* franja agentes */
+.agentes{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;background:var(--azul);border:1px solid var(--azul-borde);border-radius:var(--r);padding:1.2rem 1.5rem}
+.agentes p{font-family:var(--display);font-weight:600;font-size:1.05rem}
 /* pasos */
-.pasos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:2.2rem;counter-reset:paso}
+.pasos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:2.2rem}
 @media (max-width:900px){.pasos{grid-template-columns:minmax(0,1fr)}}
-.paso{background:var(--panel);border:1px solid var(--filete);border-radius:var(--r-tarjeta);padding:1.4rem}
+.paso{background:var(--panel);border:1px solid var(--filete);border-radius:var(--r);padding:1.4rem}
 .paso .num{font-family:var(--display);font-size:2rem;font-weight:700;color:var(--celeste)}
 .paso p{color:var(--suave);font-size:.97rem}
 /* comparativa */
@@ -128,15 +222,14 @@ nav.principal a:hover{color:var(--verde)}
 .tabla thead th{font-family:var(--display);color:var(--texto)}
 .tabla td{color:var(--suave)}
 .tabla td.si{color:var(--verde);font-weight:700}
-.tabla td.no{color:var(--peligro)}
+.tabla td.no{color:var(--rojo)}
 .envoltura-tabla{overflow-x:auto}
 /* precios */
-.precios{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.precios{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:2.2rem;align-items:stretch}
 .precios.dos{grid-template-columns:repeat(2,minmax(0,1fr))}
-@media (max-width:900px){.precios.dos{grid-template-columns:minmax(0,1fr))};gap:1rem;margin-top:2.2rem;align-items:stretch}
-@media (max-width:900px){.precios{grid-template-columns:minmax(0,1fr)}}
-.plan{background:var(--panel);border:1px solid var(--filete);border-radius:var(--r-precio);padding:1.6rem;display:flex;flex-direction:column}
-.plan.destacado{border-color:var(--celeste);background:var(--panel-2)}
+@media (max-width:900px){.precios,.precios.dos{grid-template-columns:minmax(0,1fr)}}
+.plan{background:var(--panel);border:1px solid var(--filete);border-radius:10px;padding:1.6rem;display:flex;flex-direction:column}
+.plan.destacado{border-color:var(--coral);background:var(--azul)}
 .plan .nombre{font-family:var(--display);font-weight:700;font-size:1.05rem}
 .plan .precio{font-family:var(--display);font-size:2.3rem;font-weight:700;margin:.5rem 0 0}
 .plan .precio small{font-size:1rem;color:var(--suave);font-weight:600}
@@ -144,18 +237,18 @@ nav.principal a:hover{color:var(--verde)}
 .plan ul{list-style:none;margin:0 0 1.4rem;display:grid;gap:.5rem;color:var(--suave);font-size:.95rem}
 .plan ul li::before{content:"✓ ";color:var(--verde);font-weight:800}
 .plan .btn{margin-top:auto;justify-content:center}
-.sello{align-self:flex-start;background:var(--celeste);color:var(--tinta);font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:.25rem .7rem;margin-bottom:.8rem}
+.sello{align-self:flex-start;background:var(--coral);color:#181008;font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:.25rem .7rem;margin-bottom:.8rem}
 .nota{color:var(--tenue);font-size:.9rem;margin-top:1rem}
 /* combos */
 .combos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:2.2rem}
 @media (max-width:900px){.combos{grid-template-columns:minmax(0,1fr)}}
-.combo{border:1px solid var(--filete-claro);background:var(--panel);border-radius:var(--r-tarjeta);padding:1.7rem}
+.combo{border:1px solid var(--filete-claro);background:var(--panel);border-radius:var(--r);padding:1.7rem}
 .combo .tachado{color:var(--tenue);text-decoration:line-through;font-weight:600}
 .combo .grande{font-family:var(--display);font-size:2rem;font-weight:700;color:var(--coral)}
 .combo ul{list-style:none;margin:1rem 0 1.3rem;display:grid;gap:.5rem;color:var(--suave);font-size:.96rem}
 .combo ul li::before{content:"✓ ";color:var(--verde);font-weight:800}
 /* faq */
-details{border:1px solid var(--filete);border-radius:var(--r-precio);background:var(--panel);margin-top:.7rem}
+details{border:1px solid var(--filete);border-radius:10px;background:var(--panel);margin-top:.7rem}
 summary{cursor:pointer;font-weight:700;font-family:var(--display);padding:1rem 1.2rem;list-style:none}
 details p{padding:0 1.2rem 1.1rem;color:var(--suave)}
 /* cierre y pie */
@@ -165,83 +258,18 @@ details p{padding:0 1.2rem 1.1rem;color:var(--suave)}
 footer{padding:2.4rem 0 2.8rem;color:var(--tenue);font-size:.92rem}
 footer .contenedor{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
 footer a{color:var(--suave);text-decoration:none}
-footer a:hover{color:var(--verde)}
-.wa{position:fixed;right:1.1rem;bottom:1.1rem;z-index:60;background:var(--grad);box-shadow:var(--brillo);color:var(--noche);font-weight:800;text-decoration:none;border-radius:999px;padding:.85rem 1.3rem;box-shadow:var(--sombra-wa)}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.nodo,.btn{transition:none}}
-
-/* estadísticas */
-.stats-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--filete);border-radius:var(--r-tarjeta);background:var(--panel);overflow:hidden}
-.stat{padding:1.4rem 1rem;text-align:center;border-left:1px solid var(--filete)}
-.stat:first-child{border-left:none}
-.stat b{display:block;font-family:var(--display);font-size:clamp(1.6rem,3.4vw,2.3rem);color:var(--verde)}
-.stat span{font-size:.85rem;color:var(--suave)}
-@media (max-width:700px){.stats-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.stat:nth-child(3){border-left:none}.stat:nth-child(n+3){border-top:1px solid var(--filete)}}
-/* portafolio */
-.filters{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin:1.8rem 0}
-.filters button{background:var(--panel);border:1px solid var(--filete);color:var(--suave);border-radius:999px;padding:.55rem 1.15rem;font-size:.9rem;font-weight:600;cursor:pointer;font-family:var(--cuerpo);min-height:44px}
-.filters button.on{background:var(--grad);color:var(--tinta);border-color:transparent}
-.demo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.9rem}
-@media (max-width:900px){.demo-grid{grid-template-columns:minmax(0,1fr)}}
-.demo{display:flex;flex-direction:column;gap:.35rem;background:var(--panel);border:1px solid var(--filete);border-radius:var(--r-tarjeta);padding:1.15rem 1.25rem;text-decoration:none;transition:border-color .2s ease,transform .2s ease}
-.demo:hover{border-color:var(--verde);transform:translateY(-2px);box-shadow:var(--brillo)}
-.demo .tag{align-self:flex-start;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);border:1px solid var(--coral);border-radius:999px;padding:.15rem .6rem}
-.demo h3{color:var(--texto)}
-.demo p{color:var(--suave);font-size:.93rem}
-.demo .url{color:var(--tenue);font-size:.85rem;margin-top:auto}
-.demo .go{color:var(--verde);font-weight:700}
-.muted{color:var(--tenue)}
-/* franja agentes */
-.agentes{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;background:var(--panel-2);border:1px solid var(--celeste);border-radius:var(--r-tarjeta);padding:1.2rem 1.5rem}
-.agentes p{font-family:var(--display);font-weight:600;font-size:1.05rem}
-</style>
-
-<style id="concepto-lester">
-/* CONCEPTO LESTER 20:22 — tech moderno minimalista, serio pero fuera del molde.
-   Base grafito casi neutra (no azul piscina), azul solo en detalles, UN acento vivo: coral. Sin rejilla, sin degradados, sin brillos. */
-:root{--noche:#0C0F14;--panel:#141920;--panel-2:#1A212B;--filete:#2A333F;--filete-claro:#3D4856;
---verde:#FF6B4A;--celeste:#56CCF2;--coral:#FF6B4A;--btn:#0C0F14;--btn-borde:#3D4856;
---grad:linear-gradient(180deg,#1A212B,#141920);--brillo:0 0 0 rgba(0,0,0,0);
---texto:#F2F4F6;--suave:#C6CDD4;--tenue:#8B95A1}
-body{background:var(--noche)}
-section{background:transparent;padding:clamp(4.2rem,9vw,6.5rem) 0}
-.dolores{background:var(--panel)}
-.hero{background-image:none}
-.hero::before{background:none}
-.tarjeta,.nodo,.plan,.combo,.demo,.stats-strip,.agentes,.constelacion,.paso{background:var(--panel-2);border-color:var(--filete)}
-.btn,.btn-verde,.btn-contorno,.wa{background:var(--btn);color:var(--texto);border:1px solid var(--btn-borde);box-shadow:none}
-.btn-verde{border-color:var(--coral)}
-.btn-verde:hover,.btn-contorno:hover,.wa:hover{background:#11161D;color:var(--texto);border-color:var(--celeste);box-shadow:none}
-.filters button{background:var(--panel-2);color:var(--suave);border-color:var(--filete)}
-.filters button.on{background:var(--btn);color:var(--texto);border-color:var(--coral)}
-input,select,textarea{background:#0A0E13;color:var(--texto);border-color:var(--filete-claro)}
-.etiqueta{color:var(--coral);border-color:var(--coral)}
-.neon{color:var(--celeste)}
-.sello{background:var(--coral);color:#181008}
-.stat b{color:var(--coral)}
-.plan.destacado{border-color:var(--coral)}
-.marca .punto{background:var(--coral)}
-.vivo{color:var(--coral)}.vivo::before{background:var(--coral)}
-.nodo.ancho{border-color:var(--filete-claro)}.nodo.ancho b{color:var(--celeste)}
-.paso .num{color:var(--celeste)}
-.demo .go{color:var(--celeste)}
-.demo .tag{color:var(--coral);border-color:var(--coral)}
-.constelacion{box-shadow:none}
-.tarjeta{background:var(--panel-2)}
-</style>
-
-<style>
-/* Corrección 20:25 — el azul SÍ está, en bloques; no todo es azul. */
-.constelacion{background:#14344D;border-color:#2E5F85}
-.stats-strip{background:#14344D;border-color:#2E5F85}
-.dolores{background:#0F1D29}
-.plan.destacado{background:#14344D;border-color:#2E5F85}
-.agentes{background:#14344D;border-color:#2E5F85}
-.nodo b{color:#BFE3F7}
-.paso .num{color:var(--celeste)}
+footer a:hover{color:var(--celeste)}
+.wa{position:fixed;right:1.1rem;bottom:1.1rem;z-index:60;background:#0C0F14;border:1px solid var(--coral);color:var(--texto);font-weight:800;text-decoration:none;border-radius:999px;padding:.85rem 1.3rem;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+.wa:hover{border-color:var(--celeste)}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .ticker-track,.float-card,.live-dot,.chart-area .bar,.feed-row.enter,.sys-detail.swap{animation:none}
+  .rv{opacity:1;transform:none;transition:none}
+}
 </style>
 </head>
 <body>
-<!-- Diseño CONCEPTO LESTER aprobado y publicado con su Sí el 2026-11-12: grafito + azul en bloques + coral, minimalista. -->
+<!-- Rediseño TECNOLOGÍA aprobado por Lester el 2026-11-21: panel de sistema animado en el hero, red de fibra/nube/satélite y consola interactiva de sistemas, sobre el concepto grafito + azul en bloques + coral. Conserva todas las secciones, precios, enlaces de Stripe, portafolio de Supabase, setter y portal de agentes de la versión anterior. -->
 <header>
   <div class="contenedor barra">
     <a class="marca" href="/"><span class="punto" aria-hidden="true"></span>New Age Professional System</a>
@@ -252,45 +280,125 @@ input,select,textarea{background:#0A0E13;color:var(--texto);border-color:var(--f
       <a href="#combos">Combos</a>
       <a href="#preguntas">Preguntas</a>
     </nav>
-    <a class="btn btn-contorno" href="portal-agentes/">🔑 Agentes</a>
-    <a class="btn btn-verde" href="https://wa.me/18132353313?text=Hola%2C%20quiero%20informaci%C3%B3n%20para%20la%20p%C3%A1gina%20de%20mi%20negocio" target="_blank" rel="noopener">WhatsApp directo</a>
+    <a class="btn btn-contorno btn-agentes" href="portal-agentes/">🔑 Agentes</a>
+    <a class="btn btn-coral" href="https://wa.me/18132353313?text=Hola%2C%20quiero%20informaci%C3%B3n%20para%20la%20p%C3%A1gina%20de%20mi%20negocio" target="_blank" rel="noopener">WhatsApp directo</a>
   </div>
 </header>
 
 <main>
 <section class="hero">
   <div class="contenedor">
-    <div>
-      <span class="etiqueta">Diseño web para negocios latinos</span>
-      <h1>Tu negocio en internet, <span class="neon">trabajando por ti</span> las 24 horas</h1>
-      <p class="frase">Página profesional a medida con tu menú o tus servicios, botón de WhatsApp, códigos QR y pedidos en línea — conectada a sistemas propios que venden, reservan y consiguen reseñas mientras tú atiendes tu negocio.</p>
-      <div class="acciones">
-        <a class="btn btn-verde" href="#precios">Ver planes y precios</a>
-        <a class="btn btn-contorno" href="https://wa.me/18132353313?text=Hola%2C%20quiero%20una%20p%C3%A1gina%20para%20mi%20negocio" target="_blank" rel="noopener">Hablar por WhatsApp</a>
+    <span class="etiqueta">Diseño web para negocios latinos</span>
+    <h1>Tu negocio en internet, <span class="hl">trabajando por ti</span> las 24 horas</h1>
+    <p class="frase">Página profesional a medida con tu menú o tus servicios, botón de WhatsApp, códigos QR y pedidos en línea — conectada a sistemas propios que venden, reservan y consiguen reseñas mientras tú atiendes tu negocio.</p>
+    <div class="acciones">
+      <a class="btn btn-coral" href="#precios">Ver planes y precios</a>
+      <a class="btn btn-contorno" href="https://wa.me/18132353313?text=Hola%2C%20quiero%20una%20p%C3%A1gina%20para%20mi%20negocio" target="_blank" rel="noopener">Hablar por WhatsApp</a>
+    </div>
+    <p class="hero-note">Sin contratos largos · Soporte en español · Tus datos son tuyos</p>
+
+    <div class="stage">
+      <div class="panel" role="img" aria-label="Panel de control de un negocio con New Age: ventas, pedidos, citas y envíos en tiempo real">
+        <div class="panel-bar">
+          <span class="win-dot" style="background:#F87171"></span>
+          <span class="win-dot" style="background:#FBBF24"></span>
+          <span class="win-dot" style="background:#4ADE80"></span>
+          <span class="panel-url">panel.newageprosystem.com</span>
+          <span class="panel-live"><span class="live-dot">●</span> EN VIVO</span>
+        </div>
+        <div class="panel-body">
+          <div class="side" aria-hidden="true">
+            <div class="side-item active"><span class="side-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="2" fill="#7FB2D9"/><rect x="13" y="3" width="8" height="5" rx="2" fill="#7FB2D9" opacity=".55"/><rect x="13" y="10" width="8" height="11" rx="2" fill="#7FB2D9" opacity=".55"/><rect x="3" y="13" width="8" height="8" rx="2" fill="#7FB2D9" opacity=".55"/></svg></span>Panel</div>
+            <div class="side-item"><span class="side-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 7h16l-1.5 12h-13L4 7Z" stroke="#7FB2D9" stroke-width="2" stroke-linejoin="round"/><path d="M8 10V6a4 4 0 0 1 8 0v4" stroke="#7FB2D9" stroke-width="2"/></svg></span>Pedidos</div>
+            <div class="side-item"><span class="side-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="2" stroke="#7FB2D9" stroke-width="2"/><path d="M3 10h18M8 3v4M16 3v4" stroke="#7FB2D9" stroke-width="2" stroke-linecap="round"/></svg></span>Citas</div>
+            <div class="side-item"><span class="side-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M3 8l9-5 9 5v8l-9 5-9-5V8Z" stroke="#7FB2D9" stroke-width="2" stroke-linejoin="round"/><path d="M3 8l9 5 9-5M12 13v8" stroke="#7FB2D9" stroke-width="2" stroke-linejoin="round"/></svg></span>Envíos</div>
+            <div class="side-item"><span class="side-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M3 10a9 9 0 1 0 9-9" stroke="#7FB2D9" stroke-width="2" stroke-linecap="round"/><path d="M3 4v6h6" stroke="#7FB2D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Tienda</div>
+            <div class="side-item"><span class="side-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="13" rx="2" stroke="#7FB2D9" stroke-width="2"/><path d="M3 10h18" stroke="#7FB2D9" stroke-width="2"/></svg></span>Cobros</div>
+            <div class="side-item"><span class="side-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3.5" stroke="#7FB2D9" stroke-width="2"/><path d="M3 20c.8-3.2 3-5 6-5s5.2 1.8 6 5" stroke="#7FB2D9" stroke-width="2" stroke-linecap="round"/><path d="M16 5.5a3.5 3.5 0 0 1 0 6M18.5 15.5c1.4.8 2.3 2.3 2.7 4.5" stroke="#7FB2D9" stroke-width="2" stroke-linecap="round"/></svg></span>Clientes</div>
+          </div>
+          <div class="main">
+            <div class="main-head">
+              <div>
+                <div class="main-title">Buenas tardes, tu negocio hoy</div>
+                <div class="main-sub">Resumen en tiempo real de todas tus áreas</div>
+              </div>
+              <span class="chip">Hoy · en vivo</span>
+            </div>
+            <div class="kpis">
+              <div class="kpi"><div class="kpi-label">VENTAS DE HOY</div><div class="kpi-value" data-count="1284" data-prefix="$">$1,284</div><div class="kpi-delta up">▲ 18% vs. ayer</div></div>
+              <div class="kpi"><div class="kpi-label">PEDIDOS</div><div class="kpi-value" data-count="47">47</div><div class="kpi-delta up">▲ 9 en la última hora</div></div>
+              <div class="kpi"><div class="kpi-label">CITAS DE HOY</div><div class="kpi-value" data-count="12">12</div><div class="kpi-delta up">Todas confirmadas</div></div>
+              <div class="kpi"><div class="kpi-label">ENVÍOS EN RUTA</div><div class="kpi-value" data-count="23">23</div><div class="kpi-delta warn">2 por entregar hoy</div></div>
+            </div>
+            <div class="panel-cols">
+              <div class="chart-card">
+                <div class="card-title">Ventas de la semana</div>
+                <div class="card-sub">Lunes a domingo · todas las áreas</div>
+                <div class="chart-area" aria-hidden="true">
+                  <div class="bar" style="left:1%;height:52px;animation-delay:.05s"></div><div class="bar-day" style="left:1%">Lun</div>
+                  <div class="bar" style="left:15%;height:66px;animation-delay:.15s"></div><div class="bar-day" style="left:15%">Mar</div>
+                  <div class="bar" style="left:29%;height:58px;animation-delay:.25s"></div><div class="bar-day" style="left:29%">Mié</div>
+                  <div class="bar" style="left:43%;height:78px;animation-delay:.35s"></div><div class="bar-day" style="left:43%">Jue</div>
+                  <div class="bar" style="left:57%;height:88px;animation-delay:.45s"></div><div class="bar-day" style="left:57%">Vie</div>
+                  <div class="bar hot" style="left:71%;height:102px;animation-delay:.55s"></div><div class="bar-day" style="left:71%">Sáb</div>
+                  <div class="bar" style="left:85%;height:72px;animation-delay:.65s"></div><div class="bar-day" style="left:85%">Dom</div>
+                </div>
+              </div>
+              <div class="feed-card">
+                <div class="card-title">Actividad en vivo</div>
+                <div class="card-sub">Lo último que pasó en tu negocio</div>
+                <div id="feed">
+                  <div class="feed-row"><span class="feed-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 7h16l-1.5 12h-13L4 7Z" stroke="#4ADE80" stroke-width="2" stroke-linejoin="round"/></svg></span><span class="feed-text"><b>Pedido nuevo</b> · Tienda en línea</span><span class="feed-time">ahora</span></div>
+                  <div class="feed-row"><span class="feed-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="2" stroke="#7FB2D9" stroke-width="2"/><path d="M3 10h18" stroke="#7FB2D9" stroke-width="2"/></svg></span><span class="feed-text"><b>Cita confirmada</b> · Barbería</span><span class="feed-time">2 min</span></div>
+                  <div class="feed-row"><span class="feed-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#4ADE80" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="feed-text"><b>Pago recibido</b> · $150.00</span><span class="feed-time">6 min</span></div>
+                  <div class="feed-row"><span class="feed-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M3 8l9-5 9 5v8l-9 5-9-5V8Z" stroke="#FBBF24" stroke-width="2" stroke-linejoin="round"/></svg></span><span class="feed-text"><b>Paquete entregado</b> · con foto</span><span class="feed-time">11 min</span></div>
+                </div>
+              </div>
+              <div class="donut-card">
+                <div class="card-title">Canales de venta</div>
+                <div class="card-sub">De dónde entró el dinero hoy</div>
+                <div class="donut-wrap">
+                  <svg width="92" height="92" viewBox="0 0 92 92" aria-hidden="true">
+                    <circle cx="46" cy="46" r="34" fill="none" stroke="#1B2C40" stroke-width="13"/>
+                    <circle cx="46" cy="46" r="34" fill="none" stroke="#2C5F8A" stroke-width="13" stroke-dasharray="117.5 213.6" transform="rotate(-90 46 46)"/>
+                    <circle cx="46" cy="46" r="34" fill="none" stroke="#FF6B4A" stroke-width="13" stroke-dasharray="53.4 213.6" stroke-dashoffset="-117.5" transform="rotate(-90 46 46)"/>
+                    <circle cx="46" cy="46" r="34" fill="none" stroke="#4ADE80" stroke-width="13" stroke-dasharray="42.7 213.6" stroke-dashoffset="-170.9" transform="rotate(-90 46 46)"/>
+                    <text x="46" y="43" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="800">Hoy</text>
+                    <text x="46" y="59" font-size="10.5" fill="#7E93A9" text-anchor="middle">$1,284</text>
+                  </svg>
+                  <div class="legend">
+                    <div><span class="lg-dot" style="background:#2C5F8A"></span>Tienda <b>55%</b></div>
+                    <div><span class="lg-dot" style="background:#FF6B4A"></span>Pedidos <b>25%</b></div>
+                    <div><span class="lg-dot" style="background:#4ADE80"></span>Citas <b>20%</b></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="prueba-mini">
-        <p>Negocios reales ya en línea con nosotros</p>
-        <ul>
-          <li><a href="https://semillabakerytampa.com" target="_blank" rel="noopener">La Semilla Bakery</a></li>
-          <li><a href="https://taquerialaleyenda.com" target="_blank" rel="noopener">Taqueria La Leyenda</a></li>
-          <li><a href="https://willibarbershop.com" target="_blank" rel="noopener">Willi Barbershop</a></li>
-          <li><a href="https://mayatravelcompany.com" target="_blank" rel="noopener">Maya Travel Company</a></li>
-          <li><a href="https://botanicacuatrocamino.com" target="_blank" rel="noopener">Botánica Cuatro Caminos</a></li>
-        </ul>
+      <div class="float-card float-1" aria-hidden="true">
+        <span class="float-ico" style="background:rgba(74,222,128,.13)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#4ADE80" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span><span class="float-title">Pago confirmado</span><br><span class="float-sub">Tarjeta · hace 1 minuto</span></span>
+      </div>
+      <div class="float-card float-2" aria-hidden="true">
+        <span class="float-ico" style="background:rgba(255,107,74,.14)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="#FF6B4A" stroke-width="2.2"/><path d="M12 7.5V12l3 2" stroke="#FF6B4A" stroke-width="2.2" stroke-linecap="round"/></svg></span>
+        <span><span class="float-title">Trabaja 24/7</span><br><span class="float-sub">Aunque estés cerrado</span></span>
       </div>
     </div>
-    <aside class="constelacion" aria-label="Nuestros sistemas en vivo">
-      <div class="cab"><span class="puntos" aria-hidden="true"><i></i><i></i><i></i></span><strong>Todo conectado, como un solo sistema</strong><span class="vivo">En vivo</span></div>
-      <div class="red">
-        <a class="nodo ancho" href="https://mesaready.newageprosystem.com" target="_blank" rel="noopener"><b>MesaReady</b><span>Pedidos y catering sin comisiones por pedido</span></a>
-        <a class="nodo" href="https://puntoready.newageprosystem.com" target="_blank" rel="noopener"><b>PuntoReady</b><span>Tu agencia multiservicios completa</span></a>
-        <a class="nodo" href="https://citaspro.newageprosystem.com" target="_blank" rel="noopener"><b>CitasPro</b><span>Citas y fila de espera en tu local</span></a>
-        <a class="nodo" href="https://viajeready.newageprosystem.com" target="_blank" rel="noopener"><b>ViajeReady</b><span>Reservas para agencias de viajes</span></a>
-        <a class="nodo" href="https://reviewready.newageprosystem.com" target="_blank" rel="noopener"><b>ReviewReady</b><span>Reseñas que suben tu Google</span></a>
-        <a class="nodo" href="https://polizaready.newageprosystem.com" target="_blank" rel="noopener"><b>PólizaReady</b><span>Gestión para agencias de seguros</span></a>
-        <a class="nodo" href="https://credito.newageprosystem.com" target="_blank" rel="noopener"><b>CréditoReady</b><span>Reparación de crédito con sistema</span></a>
-      </div>
-    </aside>
+
+    <div class="ticker" aria-hidden="true"><div class="ticker-track" id="tickerTrack"></div></div>
+
+    <div class="prueba-mini">
+      <p>Negocios reales ya en línea con nosotros</p>
+      <ul>
+        <li><a href="https://semillabakerytampa.com" target="_blank" rel="noopener">La Semilla Bakery</a></li>
+        <li><a href="https://taquerialaleyenda.com" target="_blank" rel="noopener">Taqueria La Leyenda</a></li>
+        <li><a href="https://willibarbershop.com" target="_blank" rel="noopener">Willi Barbershop</a></li>
+        <li><a href="https://mayatravelcompany.com" target="_blank" rel="noopener">Maya Travel Company</a></li>
+        <li><a href="https://botanicacuatrocamino.com" target="_blank" rel="noopener">Botánica Cuatro Caminos</a></li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -311,9 +419,9 @@ input,select,textarea{background:#0A0E13;color:var(--texto);border-color:var(--f
     <h2>¿Te suena familiar?</h2>
     <p class="sub">La mayoría de los negocios latinos pierde clientes todos los días por lo mismo — y casi nunca se entera.</p>
     <div class="parrilla-3">
-      <article class="tarjeta"><div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--verde)" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg></div><h3>Te buscan y no te encuentran</h3><p>El cliente busca en Google, encuentra a tu competencia con página y reseñas, y llama allá. Tú ni te enteras de que existió.</p></article>
-      <article class="tarjeta"><div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--verde)" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></svg></div><h3>Todo depende de las redes</h3><p>Tu único escaparate es una red social que no es tuya: si cambia el algoritmo o te bloquean la cuenta, tu negocio desaparece.</p></article>
-      <article class="tarjeta"><div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--verde)" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v10M15 9.2c-.6-.8-1.7-1.2-3-1.2-1.7 0-3 .9-3 2.2 0 3 6 1.6 6 4 0 1.3-1.3 2.2-3 2.2-1.3 0-2.4-.4-3-1.2"/></svg></div><h3>Comisiones en cada pedido</h3><p>Las plataformas de terceros se quedan con un pedazo de cada venta. Tus clientes, tu menú y tu dinero deberían ser tuyos.</p></article>
+      <article class="tarjeta"><div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FF6B4A" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg></div><h3>Te buscan y no te encuentran</h3><p>El cliente busca en Google, encuentra a tu competencia con página y reseñas, y llama allá. Tú ni te enteras de que existió.</p></article>
+      <article class="tarjeta"><div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FF6B4A" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M11 18.5h2"/></svg></div><h3>Todo depende de las redes</h3><p>Tu único escaparate es una red social que no es tuya: si cambia el algoritmo o te bloquean la cuenta, tu negocio desaparece.</p></article>
+      <article class="tarjeta"><div class="ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FF6B4A" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v10M15 9.2c-.6-.8-1.7-1.2-3-1.2-1.7 0-3 .9-3 2.2 0 3 6 1.6 6 4 0 1.3-1.3 2.2-3 2.2-1.3 0-2.4-.4-3-1.2"/></svg></div><h3>Comisiones en cada pedido</h3><p>Las plataformas de terceros se quedan con un pedazo de cada venta. Tus clientes, tu menú y tu dinero deberían ser tuyos.</p></article>
     </div>
   </div>
 </section>
@@ -338,7 +446,7 @@ input,select,textarea{background:#0A0E13;color:var(--texto);border-color:var(--f
   <div class="contenedor">
     <span class="etiqueta">Portafolio</span>
     <h2>Trabajos reales, no plantillas vacías</h2>
-    <p class="sub">Explora ejemplos de páginas que hemos creado para negocios como el tuyo.</p></div>
+    <p class="sub">Explora ejemplos de páginas que hemos creado para negocios como el tuyo.</p>
     <div class="filters">
       <button class="on" data-filter="all">Todos</button>
       <button data-filter="us">EE.UU.</button>
@@ -389,25 +497,139 @@ input,select,textarea{background:#0A0E13;color:var(--texto);border-color:var(--f
   <div class="contenedor">
     <span class="etiqueta">El ecosistema</span>
     <h2>No solo páginas: sistemas que trabajan por ti</h2>
-    <p class="sub">Cada sistema es nuestro, está en vivo y se conecta con tu página. Lo mismo que venden las agencias grandes — a tu medida, en tu idioma y sin comisiones escondidas.</p>
-    <div class="bento">
-      <article class="tarjeta grande"><h3>MesaReady — pedidos y catering</h3><p>Tu menú en línea con pedidos para entrega o recogida, hoja de cocina y voucher para el cliente. Sin comisión por pedido: lo que vendes es tuyo. Lo usan panaderías y restaurantes reales de Tampa, todos los días.</p><a href="https://mesaready.newageprosystem.com" target="_blank" rel="noopener">Ver MesaReady en vivo →</a></article>
-      <article class="tarjeta"><h3>PuntoReady — agencias multiservicios</h3><p>Envíos, tienda, viajes y trámites en un solo sistema para tu agencia, con tu marca y tus clientes.</p><a href="https://puntoready.newageprosystem.com" target="_blank" rel="noopener">Ver PuntoReady →</a></article>
-      <article class="tarjeta"><h3>CitasPro — citas y fila de espera</h3><p>Reservas en línea, kiosko de llegada y pantalla pública para barberías, salones y clínicas.</p><a href="https://citaspro.newageprosystem.com" target="_blank" rel="noopener">Ver CitasPro →</a></article>
-      <article class="tarjeta"><h3>ViajeReady — reservas de viajes</h3><p>Cotización y reserva de traslados y servicios para agencias de viajes, con confirmación al cliente.</p><a href="https://viajeready.newageprosystem.com" target="_blank" rel="noopener">Ver ViajeReady →</a></article>
-      <article class="tarjeta"><h3>ReviewReady — reseñas en automático</h3><p>Pide la reseña en el momento justo y convierte clientes contentos en tu mejor publicidad en Google.</p><a href="https://reviewready.newageprosystem.com" target="_blank" rel="noopener">Ver ReviewReady →</a></article>
-      <article class="tarjeta"><h3>PólizaReady — agencias de seguros</h3><p>Clientes, agentes y producción de tu agencia de seguros en un solo panel, listo para vender como servicio.</p><a href="https://polizaready.newageprosystem.com" target="_blank" rel="noopener">Ver PólizaReady →</a></article>
-      <article class="tarjeta"><h3>CréditoReady — reparación de crédito</h3><p>El proceso completo de disputa y mejora de puntaje, ordenado en un sistema con portal para tu cliente.</p><a href="https://credito.newageprosystem.com" target="_blank" rel="noopener">Ver CréditoReady →</a></article>
+    <p class="sub">Cada sistema es nuestro, está en vivo y se conecta con tu página. Toca un sistema y mira lo que hace. Lo mismo que venden las agencias grandes — a tu medida, en tu idioma y sin comisiones escondidas.</p>
+    <div class="console">
+      <div class="console-bar">
+        <span class="win-dot" style="background:#F87171"></span>
+        <span class="win-dot" style="background:#FBBF24"></span>
+        <span class="win-dot" style="background:#4ADE80"></span>
+        <span class="panel-url">sistemas.newageprosystem.com</span>
+        <span class="panel-live"><span class="live-dot">●</span> 7 SISTEMAS EN VIVO</span>
+      </div>
+      <div class="console-body">
+        <div class="sys-list" id="sysList" role="tablist" aria-label="Sistemas de New Age">
+          <div class="sys-item active" data-sys="punto" role="tab" tabindex="0" aria-selected="true"><span class="sys-dot"></span><div><div class="sys-name">PuntoReady</div><div class="sys-tag">Agencias y tiendas</div></div><span class="sys-arrow">›</span></div>
+          <div class="sys-item" data-sys="mesa" role="tab" tabindex="0" aria-selected="false"><span class="sys-dot"></span><div><div class="sys-name">MesaReady</div><div class="sys-tag">Restaurantes</div></div><span class="sys-arrow">›</span></div>
+          <div class="sys-item" data-sys="citas" role="tab" tabindex="0" aria-selected="false"><span class="sys-dot"></span><div><div class="sys-name">CitasPro</div><div class="sys-tag">Citas y reservas</div></div><span class="sys-arrow">›</span></div>
+          <div class="sys-item" data-sys="viaje" role="tab" tabindex="0" aria-selected="false"><span class="sys-dot"></span><div><div class="sys-name">ViajeReady</div><div class="sys-tag">Agencias de viaje</div></div><span class="sys-arrow">›</span></div>
+          <div class="sys-item" data-sys="review" role="tab" tabindex="0" aria-selected="false"><span class="sys-dot"></span><div><div class="sys-name">ReviewReady</div><div class="sys-tag">Reseñas de Google</div></div><span class="sys-arrow">›</span></div>
+          <div class="sys-item" data-sys="poliza" role="tab" tabindex="0" aria-selected="false"><span class="sys-dot"></span><div><div class="sys-name">PólizaReady</div><div class="sys-tag">Agencias de seguros</div></div><span class="sys-arrow">›</span></div>
+          <div class="sys-item" data-sys="credito" role="tab" tabindex="0" aria-selected="false"><span class="sys-dot"></span><div><div class="sys-name">CréditoReady</div><div class="sys-tag">Reparación de crédito</div></div><span class="sys-arrow">›</span></div>
+        </div>
+        <div class="sys-detail" id="sysDetail">
+          <div class="sys-detail-head">
+            <h3 id="sdName">PuntoReady</h3>
+            <span class="tag">● EN VIVO</span>
+          </div>
+          <p id="sdDesc">Envíos, tienda, viajes y trámites en un solo sistema para tu agencia, con tu marca y tus clientes — y el rastreo que tu cliente consulta solo, sin llamarte.</p>
+          <div class="sys-feats" id="sdFeats">
+            <div class="sys-feat">Envíos con rastreo en vivo y foto de entrega</div>
+            <div class="sys-feat">Tienda en línea con pago con tarjeta</div>
+            <div class="sys-feat">Boletos y paquetes con su factura automática</div>
+            <div class="sys-feat">Panel por sucursal, con roles y permisos</div>
+          </div>
+          <div class="sys-ideal" id="sdIdeal">Ideal para: agencias de envíos, multiservicios y tiendas</div>
+          <a class="sys-link" id="sdLink" href="https://puntoready.newageprosystem.com" target="_blank" rel="noopener">Ver PuntoReady en vivo →</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
+<section class="dolores">
+  <div class="contenedor">
+    <span class="etiqueta">Infraestructura</span>
+    <h2>Todo conectado: fibra, nube y satélite</h2>
+    <p class="sub">Tus sistemas no viven aislados: se hablan entre sí y con tu página por una red rápida y con respaldo, para que tu negocio nunca se detenga.</p>
+    <div class="net-card">
+      <svg viewBox="0 0 1052 400" role="img" aria-label="Mapa de interconexión: tu panel al centro, conectado con tu página web, tus clientes, PuntoReady, MesaReady, CitasPro, ViajeReady, la nube segura y un enlace satelital">
+        <path d="M190 78 C 330 78, 380 120, 452 158" stroke="#2C5F8A" stroke-width="2.5" fill="none"/>
+        <path d="M190 300 C 320 300, 390 250, 452 214" stroke="#2C5F8A" stroke-width="2.5" fill="none"/>
+        <path d="M862 78 C 730 78, 672 120, 600 158" stroke="#2C5F8A" stroke-width="2.5" fill="none"/>
+        <path d="M862 300 C 740 300, 668 250, 600 214" stroke="#2C5F8A" stroke-width="2.5" fill="none"/>
+        <path d="M526 238 L 526 292" stroke="#2C5F8A" stroke-width="2.5"/>
+        <path d="M600 168 C 700 120, 790 92, 858 66" stroke="#3E7CB1" stroke-width="2" fill="none" stroke-dasharray="7 7">
+          <animate attributeName="stroke-dashoffset" values="28;0" dur="1.4s" repeatCount="indefinite"/>
+        </path>
+        <path d="M190 188 L 446 186" stroke="#2C5F8A" stroke-width="2.5"/>
+        <path d="M606 186 L 862 188" stroke="#2C5F8A" stroke-width="2.5"/>
+        <circle r="5" fill="#FF6B4A"><animateMotion dur="3.4s" repeatCount="indefinite" path="M190 78 C 330 78, 380 120, 452 158"/></circle>
+        <circle r="5" fill="#4ADE80"><animateMotion dur="4.1s" repeatCount="indefinite" path="M452 214 C 390 250, 320 300, 190 300"/></circle>
+        <circle r="5" fill="#4ADE80"><animateMotion dur="3.8s" repeatCount="indefinite" path="M862 78 C 730 78, 672 120, 600 158"/></circle>
+        <circle r="5" fill="#FF6B4A"><animateMotion dur="4.4s" repeatCount="indefinite" path="M600 214 C 668 250, 740 300, 862 300"/></circle>
+        <circle r="4.5" fill="#7FB2D9"><animateMotion dur="2.6s" repeatCount="indefinite" path="M190 188 L 446 186"/></circle>
+        <circle r="4.5" fill="#7FB2D9"><animateMotion dur="2.9s" repeatCount="indefinite" path="M862 188 L 606 186"/></circle>
+        <circle r="4.5" fill="#FBBF24"><animateMotion dur="2.2s" repeatCount="indefinite" path="M526 238 L 526 292"/></circle>
+        <g transform="rotate(24 905 44)">
+          <rect x="888" y="32" width="34" height="24" rx="4" fill="#1B2C40" stroke="#7FB2D9" stroke-width="2"/>
+          <rect x="846" y="36" width="34" height="16" rx="3" fill="#14344D" stroke="#2C5F8A" stroke-width="2"/>
+          <rect x="930" y="36" width="34" height="16" rx="3" fill="#14344D" stroke="#2C5F8A" stroke-width="2"/>
+          <path d="M855 40h19M855 48h19M939 40h19M939 48h19" stroke="#2C5F8A" stroke-width="1.6"/>
+        </g>
+        <path d="M872 84 a30 30 0 0 1 22 14" stroke="#4ADE80" stroke-width="2.4" fill="none" stroke-linecap="round">
+          <animate attributeName="opacity" values="1;.2;1" dur="1.8s" repeatCount="indefinite"/>
+        </path>
+        <path d="M858 98 a48 48 0 0 1 34 22" stroke="#4ADE80" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".55">
+          <animate attributeName="opacity" values=".55;.08;.55" dur="1.8s" begin=".45s" repeatCount="indefinite"/>
+        </path>
+        <text x="905" y="140" font-size="13.5" fill="#7E93A9" text-anchor="middle" font-weight="600">Enlace satelital</text>
+        <circle cx="526" cy="186" r="54" fill="none" stroke="#3E7CB1" stroke-width="1.6">
+          <animate attributeName="r" values="54;76" dur="2.8s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values=".75;0" dur="2.8s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="526" cy="186" r="54" fill="none" stroke="#2C5F8A" stroke-width="1.6" opacity=".8"/>
+        <rect x="446" y="146" width="160" height="80" rx="14" fill="#14344D" stroke="#3E7CB1" stroke-width="2"/>
+        <text x="526" y="180" font-size="16.5" fill="#FFFFFF" text-anchor="middle" font-weight="700">Tu panel</text>
+        <text x="526" y="203" font-size="13" fill="#A9CCE8" text-anchor="middle">New Age · en vivo</text>
+        <rect x="30" y="46" width="160" height="64" rx="12" fill="#16202E" stroke="#22344A" stroke-width="1.6"/>
+        <text x="110" y="74" font-size="15.5" fill="#FFFFFF" text-anchor="middle" font-weight="700">Tu página web</text>
+        <text x="110" y="95" font-size="12.5" fill="#7E93A9" text-anchor="middle">Abierta 24/7</text>
+        <rect x="30" y="268" width="160" height="64" rx="12" fill="#16202E" stroke="#22344A" stroke-width="1.6"/>
+        <text x="110" y="296" font-size="15.5" fill="#FFFFFF" text-anchor="middle" font-weight="700">PuntoReady</text>
+        <text x="110" y="317" font-size="12.5" fill="#7E93A9" text-anchor="middle">Tienda y envíos</text>
+        <rect x="862" y="46" width="160" height="64" rx="12" fill="#16202E" stroke="#22344A" stroke-width="1.6"/>
+        <text x="942" y="74" font-size="15.5" fill="#FFFFFF" text-anchor="middle" font-weight="700">MesaReady</text>
+        <text x="942" y="95" font-size="12.5" fill="#7E93A9" text-anchor="middle">Pedidos del restaurante</text>
+        <rect x="862" y="268" width="160" height="64" rx="12" fill="#16202E" stroke="#22344A" stroke-width="1.6"/>
+        <text x="942" y="296" font-size="15.5" fill="#FFFFFF" text-anchor="middle" font-weight="700">CitasPro</text>
+        <text x="942" y="317" font-size="12.5" fill="#7E93A9" text-anchor="middle">Agenda automática</text>
+        <rect x="446" y="296" width="160" height="64" rx="12" fill="#16202E" stroke="#22344A" stroke-width="1.6"/>
+        <text x="526" y="324" font-size="15.5" fill="#FFFFFF" text-anchor="middle" font-weight="700">Nube segura</text>
+        <text x="526" y="345" font-size="12.5" fill="#7E93A9" text-anchor="middle">Respaldo automático</text>
+        <rect x="30" y="158" width="160" height="60" rx="12" fill="#16202E" stroke="#22344A" stroke-width="1.6"/>
+        <text x="110" y="185" font-size="15.5" fill="#FFFFFF" text-anchor="middle" font-weight="700">Tus clientes</text>
+        <text x="110" y="206" font-size="12.5" fill="#7E93A9" text-anchor="middle">WhatsApp y web</text>
+        <rect x="862" y="158" width="160" height="60" rx="12" fill="#16202E" stroke="#22344A" stroke-width="1.6"/>
+        <text x="942" y="185" font-size="15.5" fill="#FFFFFF" text-anchor="middle" font-weight="700">ViajeReady</text>
+        <text x="942" y="206" font-size="12.5" fill="#7E93A9" text-anchor="middle">Reservas y paquetes</text>
+        <circle cx="190" cy="78" r="5.5" fill="#7FB2D9"/>
+        <circle cx="190" cy="300" r="5.5" fill="#7FB2D9"/>
+        <circle cx="862" cy="78" r="5.5" fill="#7FB2D9"/>
+        <circle cx="862" cy="300" r="5.5" fill="#7FB2D9"/>
+      </svg>
+    </div>
+    <div class="net-cols">
+      <div class="net-col">
+        <h3><span class="net-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="5.5" cy="12" r="2.4" fill="#7FB2D9"/><circle cx="18.5" cy="5.5" r="2.4" fill="#7FB2D9"/><circle cx="18.5" cy="18.5" r="2.4" fill="#7FB2D9"/><path d="M7.7 10.8l8.4-4M7.7 13.2l8.4 4" stroke="#7FB2D9" stroke-width="1.8"/></svg></span>Interconexión total</h3>
+        <p>La página, la tienda, los pedidos y las citas se alimentan unos a otros: un solo negocio conectado, sin datos sueltos ni dobles registros.</p>
+      </div>
+      <div class="net-col">
+        <h3><span class="net-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M13 2L4.5 13.5H11L9.5 22 19 10h-6.5L13 2Z" fill="#7FB2D9"/></svg></span>Velocidad de fibra</h3>
+        <p>Tus sistemas corren sobre infraestructura rápida y moderna: el panel responde al instante y tu página carga sin hacer esperar al cliente.</p>
+      </div>
+      <div class="net-col">
+        <h3><span class="net-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 20a8 8 0 1 1 8-8" stroke="#7FB2D9" stroke-width="2" stroke-linecap="round"/><path d="M12 12l6.5-6.5M15 3.5h3.5V7" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Siempre en línea</h3>
+        <p>Servidores vigilados todo el día y respaldos automáticos de tu información: si algo falla, tu negocio sigue vendiendo.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section style="padding-top:0">
   <div class="contenedor">
     <div class="agentes">
       <p>¿Eres agente de New Age? Tu portal te espera.</p>
-      <a class="btn btn-verde" href="portal-agentes/">Entrar al portal →</a>
+      <a class="btn btn-coral" href="portal-agentes/">Entrar al portal →</a>
     </div>
   </div>
 </section>
@@ -462,7 +684,7 @@ input,select,textarea{background:#0A0E13;color:var(--texto);border-color:var(--f
         <p class="precio">$699 <small>instalación</small></p>
         <p class="mes">+ $89/mes</p>
         <ul><li>Todo lo del Básico</li><li>Pedidos en línea con tu menú</li><li>Códigos QR para tu local y tus tarjetas</li><li>Sección de reseñas de Google</li><li>Versión en español e inglés</li></ul>
-        <a class="btn btn-verde pay" data-plan="profesional" href="https://buy.stripe.com/4gM5kEc2m91Th2tahl1gs0e" target="_blank" rel="noopener">Pagar con tarjeta</a>
+        <a class="btn btn-coral pay" data-plan="profesional" href="https://buy.stripe.com/4gM5kEc2m91Th2tahl1gs0e" target="_blank" rel="noopener">Pagar con tarjeta</a>
       </article>
       <article class="plan">
         <p class="nombre">Sin Entrada</p>
@@ -486,13 +708,13 @@ input,select,textarea{background:#0A0E13;color:var(--texto);border-color:var(--f
         <h3>Web Profesional + MesaReady</h3>
         <p><span class="tachado">$1,198</span> <span class="grande">$1,000</span> de instalación · <span class="tachado">$178</span> <strong>$150/mes</strong></p>
         <ul><li>Todo lo del plan Profesional</li><li>MesaReady: tu menú, tus pedidos y tu hoja de cocina, sin comisiones por pedido</li><li>Pedidos de catering con entrega o recogida, configurados con tu negocio</li><li>Sin Entrada: $250/mes por 12 meses, luego $150/mes</li></ul>
-        <a class="btn btn-verde" href="https://wa.me/18132353313?text=Hola%2C%20quiero%20el%20combo%20Web%20%2B%20MesaReady" target="_blank" rel="noopener">Quiero este combo</a>
+        <a class="btn btn-coral" href="https://wa.me/18132353313?text=Hola%2C%20quiero%20el%20combo%20Web%20%2B%20MesaReady" target="_blank" rel="noopener">Quiero este combo</a>
       </article>
       <article class="combo">
         <h3>Web Profesional + PuntoReady</h3>
         <p><span class="tachado">$1,398</span> <span class="grande">$1,100</span> de instalación · <span class="tachado">$178</span> <strong>$150/mes</strong></p>
         <ul><li>Todo lo del plan Profesional</li><li>PuntoReady: envíos, tienda, viajes y trámites de tu agencia en un solo sistema</li><li>Tu tienda en línea con tu marca y tus clientes</li><li>Sin Entrada: $250/mes por 12 meses, luego $150/mes</li></ul>
-        <a class="btn btn-verde" href="https://wa.me/18132353313?text=Hola%2C%20quiero%20el%20combo%20Web%20%2B%20PuntoReady" target="_blank" rel="noopener">Quiero este combo</a>
+        <a class="btn btn-coral" href="https://wa.me/18132353313?text=Hola%2C%20quiero%20el%20combo%20Web%20%2B%20PuntoReady" target="_blank" rel="noopener">Quiero este combo</a>
       </article>
     </div>
   </div>
@@ -548,7 +770,7 @@ input,select,textarea{background:#0A0E13;color:var(--texto);border-color:var(--f
     <h2>Empieza hoy con tu negocio en línea</h2>
     <p class="sub">Una llamada corta y sin compromiso. Sales sabiendo exactamente qué tendría tu página, cuánto cuesta y cuándo estaría lista.</p>
     <div class="acciones">
-      <a class="btn btn-verde" href="https://wa.me/18132353313?text=Hola%2C%20quiero%20empezar%20con%20la%20p%C3%A1gina%20de%20mi%20negocio" target="_blank" rel="noopener">Escríbeme por WhatsApp</a>
+      <a class="btn btn-coral" href="https://wa.me/18132353313?text=Hola%2C%20quiero%20empezar%20con%20la%20p%C3%A1gina%20de%20mi%20negocio" target="_blank" rel="noopener">Escríbeme por WhatsApp</a>
       <a class="btn btn-contorno" href="#precios">Ver precios otra vez</a>
     </div>
   </div>
@@ -565,7 +787,112 @@ input,select,textarea{background:#0A0E13;color:var(--texto);border-color:var(--f
 <a class="wa" href="https://wa.me/18132353313?text=Hola%2C%20quiero%20informaci%C3%B3n%20para%20mi%20negocio" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">WhatsApp</a>
 <script src="app.js" defer></script>
 <script>document.getElementById('anio').textContent=new Date().getFullYear();</script>
-<!-- ===== Setter web de New Age (preview local) — se agrega sin tocar ninguna sección ===== -->
+<script>
+/* Rediseño tecnología: panel animado, cinta de actividad y consola de sistemas */
+(function(){
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* Contadores del panel */
+  if (!reduce) {
+    document.querySelectorAll('.kpi-value[data-count]').forEach(function(el){
+      var target = parseInt(el.getAttribute('data-count'), 10);
+      var prefix = el.getAttribute('data-prefix') || '';
+      var start = null;
+      function step(ts){
+        if(!start) start = ts;
+        var p = Math.min((ts - start) / 1400, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = prefix + Math.round(target * eased).toLocaleString('en-US');
+        if(p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  /* Cinta de actividad (contenido duplicado para el ciclo sin fin) */
+  var tickerItems = [
+    '<b>Pedido nuevo</b> · Tienda en línea',
+    '<b>Pago confirmado</b> · $150.00',
+    '<b>Cita confirmada</b> · Barbería · 4:30 PM',
+    '<b>Paquete entregado</b> · con foto de entrega',
+    '<b>Reseña nueva</b> · 5 estrellas en Google',
+    '<b>Reserva de viaje</b> · Tampa → Cancún',
+    '<b>Factura creada</b> · cobro automático'
+  ];
+  var tickerHTML = tickerItems.map(function(t){ return '<span>' + t + '</span><span class="tk-dot">●</span>'; }).join('');
+  var track = document.getElementById('tickerTrack');
+  if (track) track.innerHTML = tickerHTML + tickerHTML;
+
+  /* Actividad en vivo del panel */
+  var feedPool = [
+    {icon:'<path d="M12 3l2.5 5.6 6 .7-4.5 4.1 1.2 5.9L12 16.4 6.8 19.3 8 13.4 3.5 9.3l6-.7L12 3Z" stroke="#FBBF24" stroke-width="2" stroke-linejoin="round" fill="none"/>', text:'<b>Reseña nueva</b> · 5 estrellas'},
+    {icon:'<path d="M3 8l9-5 9 5v8l-9 5-9-5V8Z" stroke="#7FB2D9" stroke-width="2" stroke-linejoin="round" fill="none"/>', text:'<b>Envío en ruta</b> · Tampa → Miami'},
+    {icon:'<path d="M10.5 13.5L3 11l1.8-2.3L11 10l3.5-5.5c.6-1 2.3-1 2.9.1.4.7.3 1.6-.2 2.3L13.5 11l6.3 1.7 1.7 2.3-7.5-1.5-2.6 3.4-.9 3.6-2-.9.4-3.7 1.6-2.4Z" fill="#7FB2D9"/>', text:'<b>Reserva de viaje</b> · Cancún'},
+    {icon:'<path d="M20 6L9 17l-5-5" stroke="#4ADE80" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>', text:'<b>Pago recibido</b> · $89.00'},
+    {icon:'<path d="M4 7h16l-1.5 12h-13L4 7Z" stroke="#4ADE80" stroke-width="2" stroke-linejoin="round" fill="none"/>', text:'<b>Pedido nuevo</b> · Restaurante'}
+  ];
+  var feedIdx = 0;
+  if (!reduce) {
+    setInterval(function(){
+      var feed = document.getElementById('feed');
+      if(!feed) return;
+      var ev = feedPool[feedIdx % feedPool.length]; feedIdx++;
+      var row = document.createElement('div');
+      row.className = 'feed-row enter';
+      row.innerHTML = '<span class="feed-ico"><svg width="15" height="15" viewBox="0 0 24 24">' + ev.icon + '</svg></span>' +
+                      '<span class="feed-text">' + ev.text + '</span><span class="feed-time">ahora</span>';
+      feed.querySelectorAll('.feed-time').forEach(function(t){ if(t.textContent === 'ahora') t.textContent = '1 min'; });
+      feed.insertBefore(row, feed.firstChild);
+      while(feed.children.length > 4) feed.removeChild(feed.lastChild);
+    }, 3600);
+  }
+
+  /* Consola de sistemas */
+  var SYS = {
+    punto: { name: 'PuntoReady', desc: 'Envíos, tienda, viajes y trámites en un solo sistema para tu agencia, con tu marca y tus clientes — y el rastreo que tu cliente consulta solo, sin llamarte.',
+      feats: ['Envíos con rastreo en vivo y foto de entrega','Tienda en línea con pago con tarjeta','Boletos y paquetes con su factura automática','Panel por sucursal, con roles y permisos'],
+      ideal: 'Ideal para: agencias de envíos, multiservicios y tiendas', url: 'https://puntoready.newageprosystem.com' },
+    mesa: { name: 'MesaReady', desc: 'Tu menú en línea con pedidos para entrega o recogida, hoja de cocina y voucher para el cliente. Sin comisión por pedido: lo que vendes es tuyo. Lo usan panaderías y restaurantes reales de Tampa, todos los días.',
+      feats: ['Menú digital conectado a tu página web','Pedidos en línea con pago incluido','Una sola cola de pedidos para la cocina','Especiales y eventos que se publican solos'],
+      ideal: 'Ideal para: restaurantes, cafeterías y food trucks', url: 'https://mesaready.newageprosystem.com' },
+    citas: { name: 'CitasPro', desc: 'Reservas en línea, kiosko de llegada y pantalla pública para barberías, salones y clínicas: el cliente reserva solo y tu agenda se llena sin llamadas.',
+      feats: ['Reservas en línea las 24 horas','Confirmación automática al cliente','Agenda por empleado y por servicio','Fila de espera con pantalla en tu local'],
+      ideal: 'Ideal para: barberías, salones de belleza y clínicas', url: 'https://citaspro.newageprosystem.com' },
+    viaje: { name: 'ViajeReady', desc: 'Cotización y reserva de traslados y servicios para agencias de viajes, con confirmación al cliente y todo el viaje en orden.',
+      feats: ['Reservas y paquetes en un solo lugar','Cotizador de traslados por zona','Pago en línea del cliente','Confirmación automática de cada reserva'],
+      ideal: 'Ideal para: agencias de viaje y compañías de traslados', url: 'https://viajeready.newageprosystem.com' },
+    review: { name: 'ReviewReady', desc: 'Pide la reseña en el momento justo y convierte clientes contentos en tu mejor publicidad en Google — con un equipo que lo trabaja por ti.',
+      feats: ['Reseñas reales de clientes reales','Seguimiento por negocio en el panel','Más presencia y confianza en Google','Reportes claros de resultados'],
+      ideal: 'Ideal para: cualquier negocio local que vive de su reputación', url: 'https://reviewready.newageprosystem.com' },
+    poliza: { name: 'PólizaReady', desc: 'Clientes, agentes y producción de tu agencia de seguros en un solo panel, listo para vender como servicio a otras agencias.',
+      feats: ['Oficina completa en línea, por agencia','Equipo y agentes con sus roles','Catálogo de aseguradoras organizado','Producción y comisiones a la vista'],
+      ideal: 'Ideal para: agencias de seguros y sus agentes', url: 'https://polizaready.newageprosystem.com' },
+    credito: { name: 'CréditoReady', desc: 'El proceso completo de disputa y mejora de puntaje, ordenado en un sistema con portal para tu cliente y su avance siempre visible.',
+      feats: ['Expediente completo de cada cliente','Rondas de disputa organizadas','Avance del caso siempre a la vista','Todo el historial en un solo lugar'],
+      ideal: 'Ideal para: reparadores de crédito y sus clientes', url: 'https://credito.newageprosystem.com' }
+  };
+  function selectSys(item){
+    document.querySelectorAll('.sys-item').forEach(function(i){ i.classList.remove('active'); i.setAttribute('aria-selected','false'); });
+    item.classList.add('active'); item.setAttribute('aria-selected','true');
+    var d = SYS[item.getAttribute('data-sys')];
+    if(!d) return;
+    document.getElementById('sdName').textContent = d.name;
+    document.getElementById('sdDesc').textContent = d.desc;
+    document.getElementById('sdFeats').innerHTML = d.feats.map(function(f){ return '<div class="sys-feat">' + f + '</div>'; }).join('');
+    document.getElementById('sdIdeal').textContent = d.ideal;
+    var link = document.getElementById('sdLink');
+    link.href = d.url; link.textContent = 'Ver ' + d.name + ' en vivo →';
+    var detail = document.getElementById('sysDetail');
+    detail.classList.remove('swap'); void detail.offsetWidth; detail.classList.add('swap');
+  }
+  document.querySelectorAll('.sys-item').forEach(function(item){
+    item.addEventListener('click', function(){ selectSys(item); });
+    item.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); selectSys(item); } });
+  });
+})();
+</script>
+<!-- ===== Setter web de New Age — se conserva intacto de la versión anterior ===== -->
 <button id="setter-burbuja" class="setter-burbuja" type="button" aria-label="Abrir el asistente de New Age">
   <span class="setter-punto" aria-hidden="true"></span>
   <span>¿Te ayudo?</span>
