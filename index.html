@@ -173,6 +173,14 @@ nav.principal a:hover{color:var(--celeste)}
 .demo .url{color:var(--tenue);font-size:.85rem;margin-top:auto}
 .demo .go{color:var(--celeste);font-weight:700}
 .muted{color:var(--tenue)}
+.portafolio-toggle{margin-top:1.6rem}
+.portafolio-toggle .chev{display:inline-block;color:var(--celeste);transition:transform .2s ease}
+.portafolio-toggle[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.grupo-titulo{display:flex;align-items:center;gap:.6rem;margin:2.2rem 0 1rem;font-family:var(--display);font-size:1.25rem;font-weight:700;text-align:left}
+.grupo-titulo .punto{width:9px;height:9px;border-radius:50%;background:var(--verde);flex:none}
+.grupo-titulo .punto.demo{background:var(--celeste)}
+.grupo-titulo .conteo{color:var(--tenue);font-family:var(--cuerpo);font-size:.88rem;font-weight:600}
+.demo .go.vivo{color:var(--verde)}
 /* ---------- consola de sistemas ---------- */
 .console{margin-top:2.4rem;background:var(--panel);border:1px solid var(--filete);border-radius:18px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.45)}
 .console-bar{display:flex;align-items:center;gap:8px;background:#0E141D;padding:13px 18px;border-bottom:1px solid var(--filete)}
@@ -448,6 +456,8 @@ footer a:hover{color:var(--celeste)}
     <span class="etiqueta">Portafolio</span>
     <h2>Trabajos reales, no plantillas vacías</h2>
     <p class="sub">Explora ejemplos de páginas que hemos creado para negocios como el tuyo.</p>
+    <button class="btn btn-contorno portafolio-toggle" id="portafolio-toggle" aria-expanded="false" aria-controls="portafolio-cuerpo">Ver el portafolio <span class="chev" aria-hidden="true">\u25be</span></button>
+    <div id="portafolio-cuerpo" hidden>
     <div class="filters">
       <button class="on" data-filter="all">Todos</button>
       <button data-filter="us">EE.UU.</button>
@@ -455,40 +465,87 @@ footer a:hover{color:var(--celeste)}
       <button data-filter="nl">Países Bajos</button>
       <button data-filter="mx">México</button>
     </div>
-    <div class="demo-grid" id="demo-grid">
-      <p class="muted" style="text-align:center;grid-column:1/-1">Cargando demos…</p>
+    <p class="muted" id="portafolio-cargando" style="text-align:center" hidden>Cargando el portafolio\u2026</p>
+    <div class="portafolio-grupo" id="grupo-clientes">
+      <h3 class="grupo-titulo"><span class="punto"></span> Páginas en línea de clientes <span class="conteo">negocios reales, en su propio dominio</span></h3>
+      <div class="demo-grid" id="grid-clientes"></div>
+    </div>
+    <div class="portafolio-grupo" id="grupo-demos">
+      <h3 class="grupo-titulo"><span class="punto demo"></span> Demos <span class="conteo">ejemplos creados para mostrar el trabajo</span></h3>
+      <div class="demo-grid" id="demo-grid"></div>
+    </div>
     </div>
     <script>
-    /* Demos al instante desde Supabase — integrado al diseño azul (16-oct).
-       Lee demo_secciones/demo_paginas y pinta las tarjetas con el markup del
-       diseño azul; los filtros por país (app.js) siguen funcionando. */
+    /* Portafolio oculto hasta el clic y separado en dos grupos (Lester, 2026-11-25):
+       las páginas de clientes en línea van primero, con su dominio real, y las
+       demos en su propio grupo. Los datos siguen saliendo de Supabase
+       (demo_secciones/demo_paginas) y los filtros por país (app.js) aplican
+       a los dos grupos. La carga ocurre recién al primer clic. */
     (function () {
       var U = "https://ildviocjmqcyfknzlyrm.supabase.co", K = "sb_publishable_b6X_FUcoooXAvUWI6UXT-g_Zu4ZHi0g";
       var EXCLUIR = { "Herramienta de equipo": 1, "Herramienta de ventas": 1, "Mi negocio": 1 };
       var REGION = { lester: "us", espana: "es", brasil: "br", paises_bajos: "nl", mexico: "mx" };
+      /* Clientes con página en línea: su tarjeta apunta a su dominio real,
+         aunque en los datos de Supabase figure el enlace de su demo. */
+      var EN_LINEA = {
+        "La Semilla Bakery": { url: "https://semillabakerytampa.com" },
+        "Taqueria La Leyenda": { url: "https://taquerialaleyenda.com" },
+        "Willi Barbershop": { url: "https://www.willibarbershop.com" },
+        "Botánica Cuatro Caminos — Demo": { url: "https://botanicacuatrocamino.com", titulo: "Botánica Cuatro Caminos" }
+      };
       function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
-      var grid = document.getElementById('demo-grid');
-      fetch(U + "/rest/v1/demo_secciones?select=*,demo_paginas(*)&demo_paginas.estado=eq.terminado&demo_paginas.visible=eq.true&order=orden.asc&demo_paginas.order=orden.asc",
-        { headers: { apikey: K, Authorization: "Bearer " + K } })
-        .then(function(r){ if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
-        .then(function(secs){
-          var html = '';
-          secs.forEach(function(s){
-            var region = REGION[s.slug] || 'us';
-            (s.demo_paginas || []).forEach(function(p){
-              if (EXCLUIR[p.tag]) return;
-              var corta = String(p.url || '').replace(/^https?:\/\//, '').replace(/\/$/, '');
-              html += '<a class="demo" data-region="' + region + '" href="' + esc(p.url) + '" target="_blank" rel="noopener">'
-                + '<div class="tag">' + esc(p.tag || '') + '</div>'
-                + '<h3>' + esc(p.titulo) + '</h3>'
-                + '<p>' + esc(p.descripcion || '') + '</p>'
-                + '<div class="url">' + esc(corta) + '</div>'
-                + '<span class="go">Ver demo →</span></a>';
+      var btn = document.getElementById('portafolio-toggle');
+      var cuerpo = document.getElementById('portafolio-cuerpo');
+      var cargando = document.getElementById('portafolio-cargando');
+      var gridC = document.getElementById('grid-clientes');
+      var gridD = document.getElementById('demo-grid');
+      var cargado = false;
+      function reaplicarFiltro(){
+        var on = document.querySelector('.filters button.on');
+        if (on) on.click();
+      }
+      function cargar(){
+        cargando.hidden = false;
+        fetch(U + "/rest/v1/demo_secciones?select=*,demo_paginas(*)&demo_paginas.estado=eq.terminado&demo_paginas.visible=eq.true&order=orden.asc&demo_paginas.order=orden.asc",
+          { headers: { apikey: K, Authorization: "Bearer " + K } })
+          .then(function(r){ if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+          .then(function(secs){
+            var htmlC = '', htmlD = '';
+            secs.forEach(function(s){
+              var region = REGION[s.slug] || 'us';
+              (s.demo_paginas || []).forEach(function(p){
+                if (EXCLUIR[p.tag]) return;
+                var enLinea = EN_LINEA[p.titulo];
+                var url = enLinea ? enLinea.url : (p.url || '');
+                var titulo = enLinea && enLinea.titulo ? enLinea.titulo : p.titulo;
+                var corta = String(url).replace(/^https?:\/\//, '').replace(/\/$/, '');
+                var tarjeta = '<a class="demo" data-region="' + region + '" href="' + esc(url) + '" target="_blank" rel="noopener">'
+                  + '<div class="tag">' + esc(p.tag || '') + '</div>'
+                  + '<h3>' + esc(titulo) + '</h3>'
+                  + '<p>' + esc(p.descripcion || '') + '</p>'
+                  + '<div class="url">' + esc(corta) + '</div>'
+                  + (enLinea ? '<span class="go vivo">Ver página \u2192</span></a>' : '<span class="go">Ver demo \u2192</span></a>');
+                if (enLinea) htmlC += tarjeta; else htmlD += tarjeta;
+              });
             });
+            gridC.innerHTML = htmlC;
+            gridD.innerHTML = htmlD || '<p class="muted" style="text-align:center;grid-column:1/-1">No hay demos publicados por ahora.</p>';
+            document.getElementById('grupo-clientes').style.display = htmlC ? '' : 'none';
+            cargando.hidden = true;
+            reaplicarFiltro();
+          })
+          .catch(function(){
+            cargando.hidden = true;
+            gridD.innerHTML = '<p class="muted" style="text-align:center;grid-column:1/-1">No se pudo cargar el portafolio. Revisa tu conexión e intenta de nuevo.</p>';
           });
-          grid.innerHTML = html || '<p class="muted" style="text-align:center;grid-column:1/-1">No hay demos publicados por ahora.</p>';
-        })
-        .catch(function(){ grid.innerHTML = '<p class="muted" style="text-align:center;grid-column:1/-1">No se pudieron cargar los demos. Revisa tu conexión e intenta de nuevo.</p>'; });
+      }
+      btn.addEventListener('click', function(){
+        var abierto = btn.getAttribute('aria-expanded') === 'true';
+        if (!abierto && !cargado) { cargado = true; cargar(); }
+        btn.setAttribute('aria-expanded', String(!abierto));
+        cuerpo.hidden = abierto;
+        btn.firstChild.textContent = abierto ? 'Ver el portafolio ' : 'Ocultar el portafolio ';
+      });
     })();
     </script>
   </div>

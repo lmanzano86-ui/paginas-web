@@ -24,6 +24,11 @@
       document.querySelectorAll(".demo-grid .demo").forEach(function(d){
         d.classList.toggle("hide", f !== "all" && d.dataset.region !== f);
       });
+      /* Un grupo del portafolio (clientes / demos) se oculta si el filtro lo deja vacío */
+      document.querySelectorAll(".portafolio-grupo").forEach(function(g){
+        var visibles = g.querySelectorAll(".demo:not(.hide)").length;
+        g.style.display = visibles ? "" : "none";
+      });
     });
   });
 
