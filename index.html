@@ -211,9 +211,7 @@ nav.principal a:hover{color:var(--celeste)}
 @media (max-width:860px){.console-body{flex-direction:column}.sys-list{width:auto;border-right:none;border-bottom:1px solid var(--filete)}}
 /* ---------- red / infraestructura ---------- */
 .net-card{margin-top:2.4rem;border:1px solid var(--azul-borde);border-radius:18px;padding:26px 30px 6px;background-color:#0A2547;background-image:linear-gradient(rgba(127,178,217,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(127,178,217,.13) 1px,transparent 1px),linear-gradient(rgba(127,178,217,.22) 1px,transparent 1px),linear-gradient(90deg,rgba(127,178,217,.22) 1px,transparent 1px),radial-gradient(ellipse at 50% 42%,rgba(62,124,177,.35),rgba(10,37,71,0) 65%);background-size:28px 28px,28px 28px,140px 140px,140px 140px,100% 100%}
-.flota-red{animation:flotar-red 7s ease-in-out infinite}
-@keyframes flotar-red{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-@media (prefers-reduced-motion: reduce){.flota-red{animation:none}}
+/* Sin flotación: Lester reportó el 2026-11-25 que los textos se movían y molestaba; la red va fija y solo viajan los pulsos de luz. */
 .net-card svg{width:100%;height:auto}
 .net-cols{display:flex;gap:1rem;margin-top:1.1rem;flex-wrap:wrap}
 .net-col{flex:1 1 280px;background:var(--panel);border:1px solid var(--filete);border-radius:var(--r);padding:1.35rem 1.45rem}
@@ -653,7 +651,7 @@ footer a:hover{color:var(--celeste)}
             <stop offset="0" stop-color="#2A3A55"/><stop offset="1" stop-color="#14273F"/>
           </linearGradient>
         </defs>
-        <g class="flota-red">
+        <g>
         <!-- sombras de los cables sobre el plano -->
         <g fill="none" stroke="#020B18" stroke-width="3" opacity=".55" transform="translate(0,7)">
           <path d="M190 78 C 330 78, 380 120, 452 158"/>
