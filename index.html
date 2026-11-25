@@ -493,6 +493,10 @@ footer a:hover{color:var(--celeste)}
         "Willi Barbershop": { url: "https://www.willibarbershop.com" },
         "Botánica Cuatro Caminos — Demo": { url: "https://botanicacuatrocamino.com", titulo: "Botánica Cuatro Caminos" }
       };
+      /* Tarjetas de clientes que aún no están en los datos de Supabase. */
+      var EXTRA_EN_LINEA = [
+        { titulo: "Maya Travel Company", tag: "Agencia de viajes", descripcion: "Agencia de viajes en Cancún; sus traslados se reservan en línea.", url: "https://mayatravelcompany.com", region: "mx" }
+      ];
       function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
       var btn = document.getElementById('portafolio-toggle');
       var cuerpo = document.getElementById('portafolio-cuerpo');
@@ -527,6 +531,15 @@ footer a:hover{color:var(--celeste)}
                   + (enLinea ? '<span class="go vivo">Ver página \u2192</span></a>' : '<span class="go">Ver demo \u2192</span></a>');
                 if (enLinea) htmlC += tarjeta; else htmlD += tarjeta;
               });
+            });
+            EXTRA_EN_LINEA.forEach(function(e){
+              var cortaE = e.url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+              htmlC += '<a class="demo" data-region="' + e.region + '" href="' + esc(e.url) + '" target="_blank" rel="noopener">'
+                + '<div class="tag">' + esc(e.tag) + '</div>'
+                + '<h3>' + esc(e.titulo) + '</h3>'
+                + '<p>' + esc(e.descripcion) + '</p>'
+                + '<div class="url">' + esc(cortaE) + '</div>'
+                + '<span class="go vivo">Ver página \u2192</span></a>';
             });
             gridC.innerHTML = htmlC;
             gridD.innerHTML = htmlD || '<p class="muted" style="text-align:center;grid-column:1/-1">No hay demos publicados por ahora.</p>';
