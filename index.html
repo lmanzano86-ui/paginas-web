@@ -179,6 +179,7 @@ nav.principal a:hover{color:var(--celeste)}
 .grupo-titulo{display:flex;align-items:center;gap:.6rem;margin:2.2rem 0 1rem;font-family:var(--display);font-size:1.25rem;font-weight:700;text-align:left}
 .grupo-titulo .punto{width:9px;height:9px;border-radius:50%;background:var(--verde);flex:none}
 .grupo-titulo .punto.demo{background:var(--celeste)}
+.grupo-titulo .punto.desarrollo{background:#FBBF24}
 .grupo-titulo .conteo{color:var(--tenue);font-family:var(--cuerpo);font-size:.88rem;font-weight:600}
 .demo .go.vivo{color:var(--verde)}
 /* ---------- consola de sistemas ---------- */
@@ -470,6 +471,10 @@ footer a:hover{color:var(--celeste)}
       <h3 class="grupo-titulo"><span class="punto"></span> Páginas en línea de clientes <span class="conteo">negocios reales, en su propio dominio</span></h3>
       <div class="demo-grid" id="grid-clientes"></div>
     </div>
+    <div class="portafolio-grupo" id="grupo-desarrollo">
+      <h3 class="grupo-titulo"><span class="punto desarrollo"></span> En desarrollo <span class="conteo">trabajos en curso</span></h3>
+      <div class="demo-grid" id="grid-desarrollo"></div>
+    </div>
     <div class="portafolio-grupo" id="grupo-demos">
       <h3 class="grupo-titulo"><span class="punto demo"></span> Demos <span class="conteo">ejemplos creados para mostrar el trabajo</span></h3>
       <div class="demo-grid" id="demo-grid"></div>
@@ -497,12 +502,21 @@ footer a:hover{color:var(--celeste)}
       var EXTRA_EN_LINEA = [
         { titulo: "Maya Travel Company", tag: "Agencia de viajes", descripcion: "Agencia de viajes en Cancún; sus traslados se reservan en línea.", url: "https://mayatravelcompany.com", region: "mx" }
       ];
+      /* Grupo «En desarrollo» (Lester, 2026-11-25): trabajos en curso que
+         salen del grupo de demos. Se clasifican por título, como los de
+         EN_LINEA, y Nuvora entra como tarjeta extra porque su demo no está
+         en los datos de Supabase. */
+      var EN_DESARROLLO = { "Havana Go Travel": 1, "Maikel's Kitchen": 1, "Latin Fresh Market": 1, "Demo Inkbass Tattoo": 1, "Maikel's Florida Bakery": 1 };
+      var EXTRA_DESARROLLO = [
+        { titulo: "Nuvora Furniture", tag: "Mueblería", descripcion: "Mueblería en Tampa; su página y su tienda están en desarrollo.", url: "https://lmanzano86-ui.github.io/demo-nuvora-furniture/", region: "us" }
+      ];
       function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
       var btn = document.getElementById('portafolio-toggle');
       var cuerpo = document.getElementById('portafolio-cuerpo');
       var cargando = document.getElementById('portafolio-cargando');
       var gridC = document.getElementById('grid-clientes');
       var gridD = document.getElementById('demo-grid');
+      var gridDes = document.getElementById('grid-desarrollo');
       var cargado = false;
       function reaplicarFiltro(){
         var on = document.querySelector('.filters button.on');
@@ -514,7 +528,7 @@ footer a:hover{color:var(--celeste)}
           { headers: { apikey: K, Authorization: "Bearer " + K } })
           .then(function(r){ if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
           .then(function(secs){
-            var htmlC = '', htmlD = '';
+            var htmlC = '', htmlD = '', htmlDes = '';
             secs.forEach(function(s){
               var region = REGION[s.slug] || 'us';
               (s.demo_paginas || []).forEach(function(p){
@@ -529,7 +543,7 @@ footer a:hover{color:var(--celeste)}
                   + '<p>' + esc(p.descripcion || '') + '</p>'
                   + '<div class="url">' + esc(corta) + '</div>'
                   + (enLinea ? '<span class="go vivo">Ver página \u2192</span></a>' : '<span class="go">Ver demo \u2192</span></a>');
-                if (enLinea) htmlC += tarjeta; else htmlD += tarjeta;
+                if (enLinea) htmlC += tarjeta; else if (EN_DESARROLLO[p.titulo]) htmlDes += tarjeta.replace('Ver demo \u2192', 'Ver avance \u2192'); else htmlD += tarjeta;
               });
             });
             EXTRA_EN_LINEA.forEach(function(e){
@@ -541,6 +555,17 @@ footer a:hover{color:var(--celeste)}
                 + '<div class="url">' + esc(cortaE) + '</div>'
                 + '<span class="go vivo">Ver página \u2192</span></a>';
             });
+            EXTRA_DESARROLLO.forEach(function(e){
+              var cortaX = e.url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+              htmlDes += '<a class="demo" data-region="' + e.region + '" href="' + esc(e.url) + '" target="_blank" rel="noopener">'
+                + '<div class="tag">' + esc(e.tag) + '</div>'
+                + '<h3>' + esc(e.titulo) + '</h3>'
+                + '<p>' + esc(e.descripcion) + '</p>'
+                + '<div class="url">' + esc(cortaX) + '</div>'
+                + '<span class="go">Ver avance \u2192</span></a>';
+            });
+            gridDes.innerHTML = htmlDes;
+            document.getElementById('grupo-desarrollo').style.display = htmlDes ? '' : 'none';
             gridC.innerHTML = htmlC;
             gridD.innerHTML = htmlD || '<p class="muted" style="text-align:center;grid-column:1/-1">No hay demos publicados por ahora.</p>';
             document.getElementById('grupo-clientes').style.display = htmlC ? '' : 'none';
