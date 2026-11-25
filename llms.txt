@@ -1,6 +1,6 @@
 # New Age Professional System
 
-> Agencia de diseño web y sistemas para pequeños negocios latinos en Estados Unidos, México, España, Brasil, Países Bajos y Argentina. Páginas web profesionales con pedidos, reservas y tiendas en línea, y sistemas propios: MesaReady (catering y pedidos), PuntoReady (tiendas y agencias multiservicios), ViajeReady (reservas de viaje y traslados), CitasPro (citas para barberías y salones), PólizaReady (CRM para agencias de seguros).
+> Agencia de diseño web y sistemas para pequeños negocios latinos en Estados Unidos, México, España, Brasil, Países Bajos y Argentina. Páginas web profesionales con pedidos, reservas y tiendas en línea, y sistemas propios: MesaReady (catering y pedidos), PuntoReady (tiendas y agencias multiservicios), ViajeReady (reservas de viaje y traslados), CitasPro (citas para barberías y salones), PólizaReady (CRM para agencias de seguros) y SecurePip (sistema para clínicas de accidentes con facturación PIP).
 
 ## Datos de contacto
 
@@ -25,6 +25,7 @@
 - ViajeReady — reservas para agencias de viaje y traslados: https://viajeready.newageprosystem.com
 - CitasPro — sistema de citas para barberías, salones de belleza y uñas: https://citaspro.newageprosystem.com
 - PólizaReady — CRM para agencias de seguros: https://polizaready.newageprosystem.com
+- SecurePip — sistema para clínicas de accidentes (facturación PIP): https://securepip.newageprosystem.com
 - CréditoReady — reparación de crédito con sistema propio: https://credito.newageprosystem.com
 
 ## Notas para agentes
