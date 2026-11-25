@@ -174,8 +174,8 @@ nav.principal a:hover{color:var(--celeste)}
 .demo .go{color:var(--celeste);font-weight:700}
 .muted{color:var(--tenue)}
 .portafolio-toggle{margin-top:1.6rem}
-.portafolio-toggle .chev{display:inline-block;color:var(--celeste);transition:transform .2s ease}
-.portafolio-toggle[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.portafolio-toggle .chev{width:9px;height:9px;flex:none;border-right:2px solid var(--celeste);border-bottom:2px solid var(--celeste);transform:rotate(45deg);transition:transform .2s ease}
+.portafolio-toggle[aria-expanded="true"] .chev{transform:rotate(225deg)}
 .grupo-titulo{display:flex;align-items:center;gap:.6rem;margin:2.2rem 0 1rem;font-family:var(--display);font-size:1.25rem;font-weight:700;text-align:left}
 .grupo-titulo .punto{width:9px;height:9px;border-radius:50%;background:var(--verde);flex:none}
 .grupo-titulo .punto.demo{background:var(--celeste)}
@@ -456,7 +456,7 @@ footer a:hover{color:var(--celeste)}
     <span class="etiqueta">Portafolio</span>
     <h2>Trabajos reales, no plantillas vacías</h2>
     <p class="sub">Explora ejemplos de páginas que hemos creado para negocios como el tuyo.</p>
-    <button class="btn btn-contorno portafolio-toggle" id="portafolio-toggle" aria-expanded="false" aria-controls="portafolio-cuerpo">Ver el portafolio <span class="chev" aria-hidden="true">\u25be</span></button>
+    <button class="btn btn-contorno portafolio-toggle" id="portafolio-toggle" aria-expanded="false" aria-controls="portafolio-cuerpo">Ver el portafolio <span class="chev" aria-hidden="true"></span></button>
     <div id="portafolio-cuerpo" hidden>
     <div class="filters">
       <button class="on" data-filter="all">Todos</button>
